@@ -1,0 +1,707 @@
+{
+  "privacy": {
+    "es": {
+      "title": "Política de privacidad",
+      "intro": "Esta política explica qué datos trata {{appName}}, para qué los usa y qué derechos tenés sobre ellos. Última actualización: {{lastUpdated}}.",
+      "sections": [
+        {
+          "h": "1. Quién es el responsable",
+          "p": [
+            "{{appName}} es una aplicación que te avisa cuando estás por llegar a tu destino en transporte público. El responsable del tratamiento de tus datos es {{owner}}, con domicilio en {{address}}. Podés escribirnos a {{contactEmail}}."
+          ]
+        },
+        {
+          "h": "2. Qué datos tratamos",
+          "p": [
+            "Tratamos solo los datos necesarios para que la app funcione:"
+          ],
+          "ul": [
+            "Cuenta: tu email y contraseña si te registrás con email; tu nombre, email y foto de perfil si ingresás con Google o Apple (según lo que ese proveedor comparta). La contraseña la gestiona el servicio de autenticación y no la vemos. Si elegís “Continuar sin cuenta”, se crea un identificador anónimo, sin email ni nombre.",
+            "Viajes: el destino (nombre o dirección y coordenadas), la línea de colectivo si la elegís, el modo de aviso, el estado del viaje (en curso, llegada, parada perdida o cancelado), la fecha y hora de inicio y de fin, y los avisos que se dispararon junto con la distancia al destino en ese momento.",
+            "Lugares favoritos: el nombre, la dirección y las coordenadas que guardás.",
+            "Preferencias de alertas que configurás en la app.",
+            "Ubicación del dispositivo: durante un viaje activo, y solo si das permiso, usamos tu ubicación precisa para calcular la distancia al destino, en primer plano y también en segundo plano con la pantalla apagada. Este cálculo se hace en tu teléfono: no guardamos tu recorrido ni enviamos tu posición a nuestros servidores. Lo único que guardamos es la distancia al destino cuando se dispara cada aviso.",
+            "Datos que quedan solo en tu dispositivo: idioma, tema, tus mejores puntajes en los minijuegos, la canción de alarma que elijas (se copia dentro de la app y no se sube) y tu sesión."
+          ]
+        },
+        {
+          "h": "3. Qué no hacemos",
+          "ul": [
+            "No vendemos ni alquilamos tus datos.",
+            "No mostramos publicidad ni usamos identificadores publicitarios.",
+            "No usamos herramientas de analítica ni de seguimiento de terceros.",
+            "No accedemos a tus contactos, fotos ni micrófono."
+          ]
+        },
+        {
+          "h": "4. Para qué usamos los datos",
+          "ul": [
+            "Prestarte el servicio: calcular la distancia, avisarte cuando estés cerca y mostrar tu historial (base: ejecución del servicio que pedís).",
+            "Mantener tu cuenta y tus lugares guardados entre dispositivos.",
+            "Proteger el servicio y prevenir usos abusivos.",
+            "Cumplir obligaciones legales."
+          ]
+        },
+        {
+          "h": "5. Con quién compartimos datos",
+          "p": [
+            "Usamos proveedores que tratan datos en nuestro nombre o que prestan funciones que vos activás:"
+          ],
+          "ul": [
+            "Supabase: base de datos y autenticación. Tus datos de cuenta, viajes, lugares y preferencias se almacenan allí, en la región {{dataRegion}}.",
+            "Google y Apple: si ingresás con ellos, reciben ese inicio de sesión. Los mapas usan Google Maps en Android y Apple Maps en iOS, que pueden recibir tu dirección IP y datos del dispositivo según sus propias políticas.",
+            "OpenStreetMap (Nominatim): para buscar direcciones enviamos el texto que escribís y tu dirección IP, sin tu identidad.",
+            "Servicios de geocodificación del sistema operativo (Google o Apple), como alternativa para ubicar una dirección.",
+            "Autoridades, cuando una ley o una orden judicial lo exija."
+          ]
+        },
+        {
+          "h": "6. Transferencias internacionales",
+          "p": [
+            "Algunos proveedores pueden tratar datos fuera de tu país. Elegimos proveedores que aplican medidas de seguridad razonables y contratos de tratamiento de datos."
+          ]
+        },
+        {
+          "h": "7. Cuánto tiempo conservamos los datos",
+          "p": [
+            "Conservamos tus datos mientras tu cuenta exista. Podés eliminar tu cuenta en cualquier momento desde Perfil > Eliminar cuenta: se borran tu cuenta y los datos asociados (viajes, avisos, lugares favoritos y preferencias). Las copias de seguridad del proveedor pueden conservarse por un período limitado hasta que se renuevan."
+          ]
+        },
+        {
+          "h": "8. Tus derechos",
+          "p": [
+            "Podés acceder a tus datos, rectificarlos, actualizarlos, pedir su supresión y oponerte a su tratamiento. Muchos de estos derechos los ejercés directamente en la app (editar lugares, eliminar la cuenta). Para el resto escribinos a {{contactEmail}}.",
+            "Si estás en Argentina: el titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto (Ley 25.326, art. 14, inc. 3). La Agencia de Acceso a la Información Pública, en su carácter de órgano de control de la Ley 25.326, tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales.",
+            "Si estás en la Unión Europea, el Reino Unido o Brasil, también tenés los derechos que reconocen el RGPD y la LGPD, incluido el de reclamar ante tu autoridad de control."
+          ]
+        },
+        {
+          "h": "9. Permisos del dispositivo",
+          "ul": [
+            "Ubicación (mientras usás la app): para calcular la distancia al destino durante el viaje.",
+            "Ubicación en segundo plano (“Siempre”): para avisarte aunque la pantalla esté apagada o uses otra app. Solo se usa durante un viaje activo y se detiene al terminar. Es opcional, pero sin ella la app solo avisa con la pantalla encendida.",
+            "Notificaciones: para mostrar los avisos cuando la app no está en pantalla. Son notificaciones locales.",
+            "Vibración y sonido: para que el aviso se note.",
+            "En Android se muestra una notificación permanente mientras el viaje está activo, porque el seguimiento en segundo plano corre como servicio en primer plano.",
+            "Podés revocar cualquier permiso en los ajustes de tu teléfono."
+          ]
+        },
+        {
+          "h": "10. Seguridad",
+          "p": [
+            "Las comunicaciones con nuestros servidores usan conexión cifrada (HTTPS) y cada usuario solo puede acceder a sus propios datos mediante reglas de seguridad a nivel de fila. Ningún sistema es infalible, pero trabajamos para proteger tus datos."
+          ]
+        },
+        {
+          "h": "11. Menores de edad",
+          "p": [
+            "{{appName}} no está dirigida a menores de {{minAge}} años y no recopilamos intencionalmente sus datos. Si creés que un menor nos dio datos, escribinos para eliminarlos."
+          ]
+        },
+        {
+          "h": "12. Cambios en esta política",
+          "p": [
+            "Podemos actualizar esta política. Si el cambio es importante, te lo vamos a avisar en la app. La fecha de arriba indica la última versión."
+          ]
+        },
+        {
+          "h": "13. Contacto",
+          "p": [
+            "Para consultas sobre privacidad o para ejercer tus derechos: {{contactEmail}}."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "title": "Privacy Policy",
+      "intro": "This policy explains what data {{appName}} processes, why, and what rights you have over it. Last updated: {{lastUpdated}}.",
+      "sections": [
+        {
+          "h": "1. Who is responsible",
+          "p": [
+            "{{appName}} is an app that alerts you when you are about to reach your destination on public transport. The controller of your data is {{owner}}, located at {{address}}. You can contact us at {{contactEmail}}."
+          ]
+        },
+        {
+          "h": "2. What data we process",
+          "p": [
+            "We only process the data needed for the app to work:"
+          ],
+          "ul": [
+            "Account: your email and password if you sign up with email; your name, email and profile photo if you sign in with Google or Apple (depending on what that provider shares). The password is handled by the authentication service and we cannot see it. If you choose “Continue without an account”, an anonymous identifier is created, with no email or name.",
+            "Trips: the destination (name or address and coordinates), the bus line if you choose one, the alert mode, the trip status (in progress, arrived, missed stop or cancelled), start and end date and time, and the alerts that fired together with the distance to the destination at that moment.",
+            "Favorite places: the name, address and coordinates you save.",
+            "Alert preferences you set in the app.",
+            "Device location: during an active trip, and only if you grant permission, we use your precise location to calculate the distance to the destination, in the foreground and also in the background with the screen off. This calculation happens on your phone: we do not store your route or send your position to our servers. The only thing we store is the distance to the destination when each alert fires.",
+            "Data that stays only on your device: language, theme, your best mini-game scores, the alarm song you choose (it is copied into the app and not uploaded) and your session."
+          ]
+        },
+        {
+          "h": "3. What we do not do",
+          "ul": [
+            "We do not sell or rent your data.",
+            "We do not show ads or use advertising identifiers.",
+            "We do not use third-party analytics or tracking tools.",
+            "We do not access your contacts, photos or microphone."
+          ]
+        },
+        {
+          "h": "4. Why we use the data",
+          "ul": [
+            "To provide the service: calculate distance, alert you when you are close and show your history (basis: performing the service you request).",
+            "To keep your account and saved places across devices.",
+            "To protect the service and prevent abuse.",
+            "To comply with legal obligations."
+          ]
+        },
+        {
+          "h": "5. Who we share data with",
+          "p": [
+            "We use providers that process data on our behalf or that provide features you turn on:"
+          ],
+          "ul": [
+            "Supabase: database and authentication. Your account, trips, places and preferences are stored there, in the {{dataRegion}} region.",
+            "Google and Apple: if you sign in with them, they receive that sign-in. Maps use Google Maps on Android and Apple Maps on iOS, which may receive your IP address and device data under their own policies.",
+            "OpenStreetMap (Nominatim): to search addresses we send the text you type and your IP address, without your identity.",
+            "Operating system geocoding services (Google or Apple), as a fallback to locate an address.",
+            "Authorities, when required by law or a court order."
+          ]
+        },
+        {
+          "h": "6. International transfers",
+          "p": [
+            "Some providers may process data outside your country. We choose providers that apply reasonable security measures and data processing agreements."
+          ]
+        },
+        {
+          "h": "7. How long we keep data",
+          "p": [
+            "We keep your data while your account exists. You can delete your account at any time from Profile > Delete account: your account and associated data (trips, alerts, favorite places and preferences) are deleted. Provider backups may be kept for a limited period until they are rotated."
+          ]
+        },
+        {
+          "h": "8. Your rights",
+          "p": [
+            "You can access, correct, update and request deletion of your data, and object to its processing. Many of these rights can be exercised directly in the app (editing places, deleting the account). For the rest, write to {{contactEmail}}.",
+            "If you are in Argentina: the data subject may exercise the right of access free of charge at intervals of no less than six months, unless a legitimate interest is shown (Law 25,326, art. 14, para. 3). The Agency for Access to Public Information, as the supervisory authority of Law 25,326, has the power to handle complaints about non-compliance with personal data protection rules.",
+            "If you are in the European Union, the United Kingdom or Brazil, you also have the rights recognized by the GDPR and the LGPD, including the right to lodge a complaint with your supervisory authority."
+          ]
+        },
+        {
+          "h": "9. Device permissions",
+          "ul": [
+            "Location (while using the app): to calculate the distance to the destination during the trip.",
+            "Background location (“Always”): to alert you even with the screen off or while using another app. It is only used during an active trip and stops when it ends. It is optional, but without it the app can only alert you while the screen is on.",
+            "Notifications: to show alerts when the app is not on screen. These are local notifications.",
+            "Vibration and sound: so the alert is noticeable.",
+            "On Android a persistent notification is shown while the trip is active, because background tracking runs as a foreground service.",
+            "You can revoke any permission in your phone settings."
+          ]
+        },
+        {
+          "h": "10. Security",
+          "p": [
+            "Communications with our servers use encrypted connections (HTTPS) and each user can only access their own data through row-level security rules. No system is infallible, but we work to protect your data."
+          ]
+        },
+        {
+          "h": "11. Children",
+          "p": [
+            "{{appName}} is not directed to children under {{minAge}} and we do not knowingly collect their data. If you believe a child has given us data, write to us so we can delete it."
+          ]
+        },
+        {
+          "h": "12. Changes to this policy",
+          "p": [
+            "We may update this policy. If the change is important, we will let you know in the app. The date above shows the latest version."
+          ]
+        },
+        {
+          "h": "13. Contact",
+          "p": [
+            "For privacy questions or to exercise your rights: {{contactEmail}}."
+          ]
+        }
+      ]
+    },
+    "pt": {
+      "title": "Política de privacidade",
+      "intro": "Esta política explica quais dados o {{appName}} trata, para que os usa e quais são os seus direitos. Última atualização: {{lastUpdated}}.",
+      "sections": [
+        {
+          "h": "1. Quem é o responsável",
+          "p": [
+            "O {{appName}} é um aplicativo que avisa quando você está para chegar ao seu destino no transporte público. O responsável pelo tratamento dos seus dados é {{owner}}, com endereço em {{address}}. Você pode escrever para {{contactEmail}}."
+          ]
+        },
+        {
+          "h": "2. Quais dados tratamos",
+          "p": [
+            "Tratamos apenas os dados necessários para o app funcionar:"
+          ],
+          "ul": [
+            "Conta: seu e-mail e senha se você se cadastrar com e-mail; seu nome, e-mail e foto de perfil se entrar com Google ou Apple (conforme o que esse provedor compartilhar). A senha é gerenciada pelo serviço de autenticação e não temos acesso a ela. Se você escolher “Continuar sem conta”, é criado um identificador anônimo, sem e-mail nem nome.",
+            "Viagens: o destino (nome ou endereço e coordenadas), a linha de ônibus se você escolher uma, o modo de aviso, o estado da viagem (em andamento, chegada, ponto perdido ou cancelada), data e hora de início e de fim, e os avisos disparados junto com a distância ao destino naquele momento.",
+            "Lugares favoritos: o nome, o endereço e as coordenadas que você salvar.",
+            "Preferências de alertas que você configurar no app.",
+            "Localização do dispositivo: durante uma viagem ativa, e somente se você permitir, usamos sua localização precisa para calcular a distância até o destino, em primeiro plano e também em segundo plano com a tela apagada. Esse cálculo é feito no seu celular: não guardamos seu trajeto nem enviamos sua posição aos nossos servidores. Só guardamos a distância ao destino quando cada aviso é disparado.",
+            "Dados que ficam apenas no seu dispositivo: idioma, tema, suas melhores pontuações nos minijogos, a música de alarme escolhida (é copiada para dentro do app e não é enviada) e sua sessão."
+          ]
+        },
+        {
+          "h": "3. O que não fazemos",
+          "ul": [
+            "Não vendemos nem alugamos seus dados.",
+            "Não exibimos anúncios nem usamos identificadores de publicidade.",
+            "Não usamos ferramentas de análise ou rastreamento de terceiros.",
+            "Não acessamos seus contatos, fotos nem microfone."
+          ]
+        },
+        {
+          "h": "4. Para que usamos os dados",
+          "ul": [
+            "Prestar o serviço: calcular a distância, avisar quando você estiver perto e mostrar seu histórico (base: execução do serviço que você solicita).",
+            "Manter sua conta e seus lugares salvos entre dispositivos.",
+            "Proteger o serviço e prevenir usos abusivos.",
+            "Cumprir obrigações legais."
+          ]
+        },
+        {
+          "h": "5. Com quem compartilhamos dados",
+          "p": [
+            "Usamos provedores que tratam dados em nosso nome ou que oferecem funções que você ativa:"
+          ],
+          "ul": [
+            "Supabase: banco de dados e autenticação. Os dados da conta, viagens, lugares e preferências ficam armazenados lá, na região {{dataRegion}}.",
+            "Google e Apple: se você entrar com eles, recebem esse login. Os mapas usam Google Maps no Android e Apple Maps no iOS, que podem receber seu endereço IP e dados do dispositivo conforme suas próprias políticas.",
+            "OpenStreetMap (Nominatim): para buscar endereços enviamos o texto que você digita e seu endereço IP, sem sua identidade.",
+            "Serviços de geocodificação do sistema operacional (Google ou Apple), como alternativa para localizar um endereço.",
+            "Autoridades, quando a lei ou uma ordem judicial exigir."
+          ]
+        },
+        {
+          "h": "6. Transferências internacionais",
+          "p": [
+            "Alguns provedores podem tratar dados fora do seu país. Escolhemos provedores que aplicam medidas de segurança razoáveis e contratos de tratamento de dados."
+          ]
+        },
+        {
+          "h": "7. Por quanto tempo guardamos os dados",
+          "p": [
+            "Guardamos seus dados enquanto sua conta existir. Você pode excluir sua conta a qualquer momento em Perfil > Excluir conta: sua conta e os dados associados (viagens, avisos, lugares favoritos e preferências) são apagados. Backups do provedor podem ser mantidos por um período limitado até serem renovados."
+          ]
+        },
+        {
+          "h": "8. Seus direitos",
+          "p": [
+            "Você pode acessar, corrigir, atualizar e solicitar a exclusão dos seus dados, e se opor ao tratamento. Muitos desses direitos podem ser exercidos diretamente no app (editar lugares, excluir a conta). Para os demais, escreva para {{contactEmail}}.",
+            "Se você está na Argentina: o titular dos dados pessoais pode exercer o direito de acesso gratuitamente em intervalos não inferiores a seis meses, salvo interesse legítimo comprovado (Lei 25.326, art. 14, inc. 3). A Agência de Acesso à Informação Pública, como órgão de controle da Lei 25.326, tem a atribuição de atender denúncias e reclamações sobre o descumprimento das normas de proteção de dados pessoais.",
+            "Se você está na União Europeia, no Reino Unido ou no Brasil, também tem os direitos reconhecidos pelo GDPR e pela LGPD, inclusive o de reclamar à sua autoridade de controle."
+          ]
+        },
+        {
+          "h": "9. Permissões do dispositivo",
+          "ul": [
+            "Localização (enquanto usa o app): para calcular a distância até o destino durante a viagem.",
+            "Localização em segundo plano (“Sempre”): para avisar mesmo com a tela apagada ou usando outro app. Só é usada durante uma viagem ativa e para quando ela termina. É opcional, mas sem ela o app só avisa com a tela ligada.",
+            "Notificações: para mostrar os avisos quando o app não está na tela. São notificações locais.",
+            "Vibração e som: para que o aviso seja percebido.",
+            "No Android é exibida uma notificação permanente enquanto a viagem está ativa, porque o acompanhamento em segundo plano roda como serviço em primeiro plano.",
+            "Você pode revogar qualquer permissão nas configurações do celular."
+          ]
+        },
+        {
+          "h": "10. Segurança",
+          "p": [
+            "As comunicações com nossos servidores usam conexão criptografada (HTTPS) e cada usuário só acessa os próprios dados por meio de regras de segurança em nível de linha. Nenhum sistema é infalível, mas trabalhamos para proteger seus dados."
+          ]
+        },
+        {
+          "h": "11. Menores de idade",
+          "p": [
+            "O {{appName}} não é destinado a menores de {{minAge}} anos e não coletamos intencionalmente seus dados. Se você acredita que um menor nos forneceu dados, escreva para que os excluamos."
+          ]
+        },
+        {
+          "h": "12. Alterações nesta política",
+          "p": [
+            "Podemos atualizar esta política. Se a mudança for importante, avisaremos no app. A data acima indica a última versão."
+          ]
+        },
+        {
+          "h": "13. Contato",
+          "p": [
+            "Para dúvidas sobre privacidade ou para exercer seus direitos: {{contactEmail}}."
+          ]
+        }
+      ]
+    }
+  },
+  "terms": {
+    "es": {
+      "title": "Términos y condiciones",
+      "intro": "Al usar {{appName}} aceptás estos términos. Última actualización: {{lastUpdated}}.",
+      "sections": [
+        {
+          "h": "1. Qué es el servicio",
+          "p": [
+            "{{appName}} es una herramienta que usa la ubicación de tu teléfono para avisarte cuando estás cerca del destino que elegiste. El servicio lo presta {{owner}}, con domicilio en {{address}}."
+          ]
+        },
+        {
+          "h": "2. Importante: es una ayuda, no una garantía",
+          "p": [
+            "Los avisos dependen de factores que no controlamos: la señal de GPS, la batería, la conexión, los ajustes de ahorro de energía y las restricciones del sistema operativo de tu teléfono. Por eso {{appName}} puede avisar tarde, avisar de forma imprecisa o no avisar. No garantizamos que los avisos lleguen a tiempo.",
+            "{{appName}} no reemplaza tu atención. Seguí prestando atención a tu recorrido y no dependas únicamente de la app para bajar en tu parada. No uses la app mientras conducís."
+          ]
+        },
+        {
+          "h": "3. Tu cuenta",
+          "ul": [
+            "Podés usar la app con una cuenta o sin cuenta (modo invitado). Si usás una cuenta, los datos que ingreses tienen que ser verdaderos.",
+            "Sos responsable de la seguridad de tu contraseña y de lo que ocurra en tu cuenta.",
+            "Para usar {{appName}} tenés que tener al menos {{minAge}} años."
+          ]
+        },
+        {
+          "h": "4. Uso aceptable",
+          "p": [
+            "No podés usar la app para fines ilegales, para interferir con el servicio o con sus servidores, para intentar acceder a datos de otras personas, ni para copiar, descompilar o revender la app salvo lo que permita la ley."
+          ]
+        },
+        {
+          "h": "5. Permisos y segundo plano",
+          "p": [
+            "Para avisarte con la pantalla apagada necesitamos el permiso de ubicación “Siempre” y de notificaciones. Podés usar la app sin ellos, pero los avisos pueden no funcionar fuera de la app. Cómo tratamos tus datos se explica en la Política de privacidad."
+          ]
+        },
+        {
+          "h": "6. Servicios de terceros",
+          "p": [
+            "La app usa servicios de terceros (por ejemplo mapas, búsqueda de direcciones e inicio de sesión con Google o Apple). Su uso también está sujeto a las condiciones de esos proveedores, de los que no somos responsables. Los datos de mapas y direcciones pueden ser inexactos."
+          ]
+        },
+        {
+          "h": "7. Propiedad intelectual",
+          "p": [
+            "{{appName}}, su diseño, marca y código pertenecen a {{owner}} o a sus licenciantes. Te damos una licencia personal, limitada, no exclusiva y revocable para usar la app. El software de código abierto que incluimos se rige por sus propias licencias."
+          ]
+        },
+        {
+          "h": "8. Disponibilidad y cambios",
+          "p": [
+            "Podemos modificar, suspender o dejar de ofrecer funciones del servicio. Intentamos que funcione de forma continua, pero no garantizamos que esté siempre disponible ni libre de errores."
+          ]
+        },
+        {
+          "h": "9. Limitación de responsabilidad",
+          "p": [
+            "En la máxima medida que permita la ley, {{owner}} no será responsable por daños indirectos o por perjuicios derivados de que un aviso no llegue, llegue tarde o sea impreciso, incluido haber pasado tu parada. Esto no limita los derechos irrenunciables que tenés como consumidor ni la responsabilidad que la ley no permita excluir."
+          ]
+        },
+        {
+          "h": "10. Terminación",
+          "p": [
+            "Podés dejar de usar la app y eliminar tu cuenta en cualquier momento desde Perfil > Eliminar cuenta. Podemos suspender o cerrar cuentas que incumplan estos términos."
+          ]
+        },
+        {
+          "h": "11. Ley aplicable y jurisdicción",
+          "p": [
+            "Estos términos se rigen por las leyes de la República Argentina. Para cualquier controversia serán competentes los tribunales de {{jurisdiction}}, sin perjuicio de los derechos del consumidor de acudir a los tribunales de su domicilio cuando la ley lo permita."
+          ]
+        },
+        {
+          "h": "12. Cambios en los términos",
+          "p": [
+            "Podemos actualizar estos términos. Si el cambio es importante, te lo vamos a avisar en la app. Si seguís usando {{appName}} después del cambio, lo aceptás."
+          ]
+        },
+        {
+          "h": "13. Contacto",
+          "p": [
+            "Consultas sobre estos términos: {{contactEmail}}."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "title": "Terms and Conditions",
+      "intro": "By using {{appName}} you accept these terms. Last updated: {{lastUpdated}}.",
+      "sections": [
+        {
+          "h": "1. What the service is",
+          "p": [
+            "{{appName}} is a tool that uses your phone’s location to alert you when you are close to the destination you chose. The service is provided by {{owner}}, located at {{address}}."
+          ]
+        },
+        {
+          "h": "2. Important: it is an aid, not a guarantee",
+          "p": [
+            "Alerts depend on factors we do not control: GPS signal, battery, connection, power-saving settings and your phone’s operating system restrictions. As a result, {{appName}} may alert late, imprecisely or not at all. We do not guarantee that alerts will arrive on time.",
+            "{{appName}} does not replace your attention. Keep paying attention to your route and do not rely only on the app to get off at your stop. Do not use the app while driving."
+          ]
+        },
+        {
+          "h": "3. Your account",
+          "ul": [
+            "You can use the app with an account or without one (guest mode). If you use an account, the data you provide must be true.",
+            "You are responsible for the security of your password and for what happens in your account.",
+            "To use {{appName}} you must be at least {{minAge}} years old."
+          ]
+        },
+        {
+          "h": "4. Acceptable use",
+          "p": [
+            "You may not use the app for illegal purposes, to interfere with the service or its servers, to try to access other people’s data, or to copy, decompile or resell the app except as permitted by law."
+          ]
+        },
+        {
+          "h": "5. Permissions and background use",
+          "p": [
+            "To alert you with the screen off we need the “Always” location permission and notifications permission. You can use the app without them, but alerts may not work outside the app. How we handle your data is explained in the Privacy Policy."
+          ]
+        },
+        {
+          "h": "6. Third-party services",
+          "p": [
+            "The app uses third-party services (for example maps, address search and sign-in with Google or Apple). Their use is also subject to those providers’ terms, for which we are not responsible. Map and address data may be inaccurate."
+          ]
+        },
+        {
+          "h": "7. Intellectual property",
+          "p": [
+            "{{appName}}, its design, brand and code belong to {{owner}} or its licensors. We grant you a personal, limited, non-exclusive, revocable license to use the app. Open-source software we include is governed by its own licenses."
+          ]
+        },
+        {
+          "h": "8. Availability and changes",
+          "p": [
+            "We may modify, suspend or stop offering features of the service. We try to keep it running continuously, but we do not guarantee it will always be available or error-free."
+          ]
+        },
+        {
+          "h": "9. Limitation of liability",
+          "p": [
+            "To the maximum extent permitted by law, {{owner}} will not be liable for indirect damages or losses resulting from an alert not arriving, arriving late or being inaccurate, including missing your stop. This does not limit your non-waivable rights as a consumer or any liability that the law does not allow to be excluded."
+          ]
+        },
+        {
+          "h": "10. Termination",
+          "p": [
+            "You can stop using the app and delete your account at any time from Profile > Delete account. We may suspend or close accounts that breach these terms."
+          ]
+        },
+        {
+          "h": "11. Governing law and jurisdiction",
+          "p": [
+            "These terms are governed by the laws of the Argentine Republic. The courts of {{jurisdiction}} will have jurisdiction over any dispute, without prejudice to the consumer’s right to go to the courts of their place of residence where the law allows."
+          ]
+        },
+        {
+          "h": "12. Changes to the terms",
+          "p": [
+            "We may update these terms. If the change is important, we will let you know in the app. If you keep using {{appName}} after the change, you accept it."
+          ]
+        },
+        {
+          "h": "13. Contact",
+          "p": [
+            "Questions about these terms: {{contactEmail}}."
+          ]
+        }
+      ]
+    },
+    "pt": {
+      "title": "Termos e condições",
+      "intro": "Ao usar o {{appName}} você aceita estes termos. Última atualização: {{lastUpdated}}.",
+      "sections": [
+        {
+          "h": "1. O que é o serviço",
+          "p": [
+            "O {{appName}} é uma ferramenta que usa a localização do seu celular para avisar quando você está perto do destino escolhido. O serviço é prestado por {{owner}}, com endereço em {{address}}."
+          ]
+        },
+        {
+          "h": "2. Importante: é uma ajuda, não uma garantia",
+          "p": [
+            "Os avisos dependem de fatores que não controlamos: sinal de GPS, bateria, conexão, configurações de economia de energia e restrições do sistema operacional do seu celular. Por isso o {{appName}} pode avisar tarde, de forma imprecisa ou não avisar. Não garantimos que os avisos cheguem a tempo.",
+            "O {{appName}} não substitui a sua atenção. Continue atento ao seu trajeto e não dependa apenas do app para descer no seu ponto. Não use o app enquanto dirige."
+          ]
+        },
+        {
+          "h": "3. Sua conta",
+          "ul": [
+            "Você pode usar o app com conta ou sem conta (modo convidado). Se usar uma conta, os dados informados devem ser verdadeiros.",
+            "Você é responsável pela segurança da sua senha e pelo que acontece na sua conta.",
+            "Para usar o {{appName}} você precisa ter pelo menos {{minAge}} anos."
+          ]
+        },
+        {
+          "h": "4. Uso aceitável",
+          "p": [
+            "Você não pode usar o app para fins ilegais, para interferir no serviço ou nos servidores, para tentar acessar dados de outras pessoas, nem para copiar, descompilar ou revender o app, exceto quando a lei permitir."
+          ]
+        },
+        {
+          "h": "5. Permissões e segundo plano",
+          "p": [
+            "Para avisar com a tela apagada precisamos da permissão de localização “Sempre” e de notificações. Você pode usar o app sem elas, mas os avisos podem não funcionar fora do app. Como tratamos seus dados está explicado na Política de privacidade."
+          ]
+        },
+        {
+          "h": "6. Serviços de terceiros",
+          "p": [
+            "O app usa serviços de terceiros (por exemplo mapas, busca de endereços e login com Google ou Apple). O uso deles também está sujeito às condições desses provedores, pelos quais não somos responsáveis. Dados de mapas e endereços podem ser imprecisos."
+          ]
+        },
+        {
+          "h": "7. Propriedade intelectual",
+          "p": [
+            "O {{appName}}, seu design, marca e código pertencem a {{owner}} ou a seus licenciantes. Concedemos a você uma licença pessoal, limitada, não exclusiva e revogável para usar o app. O software de código aberto incluído é regido por suas próprias licenças."
+          ]
+        },
+        {
+          "h": "8. Disponibilidade e alterações",
+          "p": [
+            "Podemos modificar, suspender ou deixar de oferecer funções do serviço. Procuramos mantê-lo funcionando continuamente, mas não garantimos que esteja sempre disponível nem livre de erros."
+          ]
+        },
+        {
+          "h": "9. Limitação de responsabilidade",
+          "p": [
+            "Na máxima medida permitida pela lei, {{owner}} não será responsável por danos indiretos ou prejuízos decorrentes de um aviso que não chega, chega tarde ou é impreciso, inclusive perder o seu ponto. Isso não limita os direitos irrenunciáveis que você tem como consumidor nem a responsabilidade que a lei não permite excluir."
+          ]
+        },
+        {
+          "h": "10. Encerramento",
+          "p": [
+            "Você pode deixar de usar o app e excluir sua conta a qualquer momento em Perfil > Excluir conta. Podemos suspender ou encerrar contas que descumpram estes termos."
+          ]
+        },
+        {
+          "h": "11. Lei aplicável e foro",
+          "p": [
+            "Estes termos são regidos pelas leis da República Argentina. Para qualquer controvérsia serão competentes os tribunais de {{jurisdiction}}, sem prejuízo do direito do consumidor de recorrer aos tribunais do seu domicílio quando a lei permitir."
+          ]
+        },
+        {
+          "h": "12. Alterações nos termos",
+          "p": [
+            "Podemos atualizar estes termos. Se a mudança for importante, avisaremos no app. Se continuar usando o {{appName}} após a mudança, você a aceita."
+          ]
+        },
+        {
+          "h": "13. Contato",
+          "p": [
+            "Dúvidas sobre estes termos: {{contactEmail}}."
+          ]
+        }
+      ]
+    }
+  },
+  "deletion": {
+    "es": {
+      "title": "Eliminar tu cuenta y tus datos",
+      "intro": "Podés eliminar tu cuenta de {{appName}} y los datos asociados en cualquier momento.",
+      "sections": [
+        {
+          "h": "Desde la app",
+          "ul": [
+            "Abrí {{appName}} e ingresá a la pestaña Perfil.",
+            "Tocá “Eliminar cuenta” y confirmá.",
+            "Tu cuenta y tus datos se eliminan en el momento."
+          ]
+        },
+        {
+          "h": "Si no podés acceder a la app",
+          "p": [
+            "Escribí a {{contactEmail}} desde el email de tu cuenta con el asunto “Eliminar cuenta”. Vamos a eliminarla y confirmarte por el mismo medio."
+          ]
+        },
+        {
+          "h": "Qué se elimina",
+          "ul": [
+            "Tu cuenta (email, nombre y foto si los había) o tu identificador de invitado.",
+            "Tus viajes y los avisos asociados.",
+            "Tus lugares favoritos y tus preferencias de alertas."
+          ]
+        },
+        {
+          "h": "Qué puede quedar",
+          "p": [
+            "Las copias de seguridad del proveedor de base de datos pueden conservarse por un período limitado hasta que se renuevan. Los datos que solo están en tu teléfono (idioma, tema, canción de alarma) se borran al desinstalar la app."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "title": "Delete your account and data",
+      "intro": "You can delete your {{appName}} account and associated data at any time.",
+      "sections": [
+        {
+          "h": "From the app",
+          "ul": [
+            "Open {{appName}} and go to the Profile tab.",
+            "Tap “Delete account” and confirm.",
+            "Your account and data are deleted immediately."
+          ]
+        },
+        {
+          "h": "If you cannot access the app",
+          "p": [
+            "Write to {{contactEmail}} from your account email with the subject “Delete account”. We will delete it and confirm by the same means."
+          ]
+        },
+        {
+          "h": "What is deleted",
+          "ul": [
+            "Your account (email, name and photo if any) or your guest identifier.",
+            "Your trips and associated alerts.",
+            "Your favorite places and alert preferences."
+          ]
+        },
+        {
+          "h": "What may remain",
+          "p": [
+            "Database provider backups may be kept for a limited period until they are rotated. Data that is only on your phone (language, theme, alarm song) is removed when you uninstall the app."
+          ]
+        }
+      ]
+    },
+    "pt": {
+      "title": "Excluir sua conta e seus dados",
+      "intro": "Você pode excluir sua conta do {{appName}} e os dados associados a qualquer momento.",
+      "sections": [
+        {
+          "h": "Pelo app",
+          "ul": [
+            "Abra o {{appName}} e vá para a aba Perfil.",
+            "Toque em “Excluir conta” e confirme.",
+            "Sua conta e seus dados são excluídos na hora."
+          ]
+        },
+        {
+          "h": "Se você não consegue acessar o app",
+          "p": [
+            "Escreva para {{contactEmail}} a partir do e-mail da sua conta com o assunto “Excluir conta”. Vamos excluí-la e confirmar pelo mesmo meio."
+          ]
+        },
+        {
+          "h": "O que é excluído",
+          "ul": [
+            "Sua conta (e-mail, nome e foto, se houver) ou seu identificador de convidado.",
+            "Suas viagens e os avisos associados.",
+            "Seus lugares favoritos e suas preferências de alertas."
+          ]
+        },
+        {
+          "h": "O que pode permanecer",
+          "p": [
+            "Backups do provedor de banco de dados podem ser mantidos por um período limitado até serem renovados. Os dados que ficam só no seu celular (idioma, tema, música de alarme) são removidos ao desinstalar o app."
+          ]
+        }
+      ]
+    }
+  }
+}

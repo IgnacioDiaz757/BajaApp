@@ -30,7 +30,8 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
+# local env files (claves de Supabase y Google Maps: no se suben al repositorio)
+.env
 .env*.local
 
 # typescript
@@ -39,3 +40,11 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Originales de los minijuegos y archivos sueltos: quedan en la carpeta local, no se publican
+# (la versión de la app está en assets/games/ y src/games/)
+/game/
+/gamebatman.html
+/flappybird.html
+/snake.html
+/project.json

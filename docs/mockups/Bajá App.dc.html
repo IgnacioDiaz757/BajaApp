@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="./translations.js"></script>
+<style>
+body{margin:0;background:#09090b;font-family:'Inter',system-ui,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh}
+a,a:hover{color:#10b981}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-4px)}20%,40%,60%,80%{transform:translateX(4px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+<div style="width:375px;height:812px;border-radius:44px;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);position:relative;background:#000">
+<!-- Status bar -->
+<div style="position:absolute;top:0;left:0;right:0;z-index:100;padding:14px 24px 0;display:flex;justify-content:space-between;align-items:center">
+<div style="font-size:13px;font-weight:600;color:{{ statusColor }}">9:41</div>
+<div style="display:flex;gap:5px;align-items:center">
+<svg width="16" height="12" viewBox="0 0 16 12" fill="{{ statusColor }}"><rect x="0" y="4" width="3" height="8" rx="1"></rect><rect x="4.5" y="2" width="3" height="10" rx="1"></rect><rect x="9" y="0" width="3" height="12" rx="1"></rect></svg>
+<svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="2" stroke="{{ statusColor }}" stroke-opacity="0.35"></rect><rect x="2" y="2" width="16" height="8" rx="1" fill="{{ statusColor }}"></rect><path d="M23 4v4a2 2 0 0 0 0-4z" fill="{{ statusColor }}" opacity="0.4"></path></svg>
+</div>
+</div>
+
+<!-- SPLASH -->
+<sc-if value="{{ screen === 'splash' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#09090b;align-items:center;justify-content:center">
+<div style="width:80px;height:80px;border-radius:20px;background:#10b981;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="font-size:28px;font-weight:800;color:#fafafa;letter-spacing:-0.5px">Bajá</div>
+<div style="font-size:13px;color:#71717a;margin-top:4px">{{ splashSub }}</div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 1 -->
+<sc-if value="{{ screen === 'onboard1' }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#09090b;overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px">
+<div style="width:100px;height:100px;border-radius:24px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="font-size:24px;font-weight:700;color:#fafafa;text-align:center;letter-spacing:-0.3px">{{ ob1Title }}</div>
+<div style="font-size:14px;color:#a1a1aa;text-align:center;line-height:1.6;margin-top:8px;max-width:280px">{{ ob1Desc }}</div>
+</div>
+<div style="padding:0 24px 48px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:center;gap:6px;margin-bottom:12px">
+<div style="width:24px;height:4px;border-radius:2px;background:#10b981"></div>
+<div style="width:8px;height:4px;border-radius:2px;background:#27272a"></div>
+<div style="width:8px;height:4px;border-radius:2px;background:#27272a"></div>
+</div>
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ nextOnboard }}">{{ next }}</div>
+<div style="text-align:center;font-size:13px;color:#71717a;padding:8px;cursor:pointer" onClick="{{ skipOnboard }}">{{ skip }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 2 -->
+<sc-if value="{{ screen === 'onboard2' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#09090b;overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px">
+<div style="width:100px;height:100px;border-radius:24px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+</div>
+<div style="font-size:24px;font-weight:700;color:#fafafa;text-align:center;letter-spacing:-0.3px">{{ ob2Title }}</div>
+<div style="font-size:14px;color:#a1a1aa;text-align:center;line-height:1.6;margin-top:8px;max-width:280px">{{ ob2Desc }}</div>
+</div>
+<div style="padding:0 24px 48px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:center;gap:6px;margin-bottom:12px">
+<div style="width:8px;height:4px;border-radius:2px;background:#27272a"></div>
+<div style="width:24px;height:4px;border-radius:2px;background:#10b981"></div>
+<div style="width:8px;height:4px;border-radius:2px;background:#27272a"></div>
+</div>
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ nextOnboard2 }}">{{ next }}</div>
+<div style="text-align:center;font-size:13px;color:#71717a;padding:8px;cursor:pointer" onClick="{{ skipOnboard }}">{{ skip }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 3 -->
+<sc-if value="{{ screen === 'onboard3' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#09090b;overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px">
+<div style="width:100px;height:100px;border-radius:24px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+</div>
+<div style="font-size:24px;font-weight:700;color:#fafafa;text-align:center;letter-spacing:-0.3px">{{ ob3Title }}</div>
+<div style="font-size:14px;color:#a1a1aa;text-align:center;line-height:1.6;margin-top:8px;max-width:280px">{{ ob3Desc }}</div>
+</div>
+<div style="padding:0 24px 48px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:center;gap:6px;margin-bottom:12px">
+<div style="width:8px;height:4px;border-radius:2px;background:#27272a"></div>
+<div style="width:8px;height:4px;border-radius:2px;background:#27272a"></div>
+<div style="width:24px;height:4px;border-radius:2px;background:#10b981"></div>
+</div>
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ skipOnboard }}">{{ start }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- LOGIN -->
+<sc-if value="{{ screen === 'login' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }};overflow-y:auto">
+<div style="flex:1;display:flex;flex-direction:column;padding:60px 24px 16px">
+<div style="margin-bottom:32px">
+<div style="font-size:24px;font-weight:700;color:{{ text }};letter-spacing:-0.3px">Bajá</div>
+<div style="font-size:14px;color:{{ muted }};margin-top:4px">{{ splashSub }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer">
+<svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"></path><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"></path><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"></path><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"></path></svg>
+<span style="font-size:14px;font-weight:500;color:{{ text }}">{{ continueGoogle }}</span>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="{{ text }}"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"></path></svg>
+<span style="font-size:14px;font-weight:500;color:{{ text }}">{{ continueApple }}</span>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;margin:4px 0 16px">
+<div style="flex:1;height:1px;background:{{ border }}"></div>
+<span style="font-size:12px;color:{{ muted }}">{{ orEmail }}</span>
+<div style="flex:1;height:1px;background:{{ border }}"></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div>
+<div style="font-size:13px;font-weight:500;color:{{ text }};margin-bottom:6px">{{ email }}</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:11px 12px;font-size:14px;color:{{ muted }}">hola@email.com</div>
+</div>
+<div>
+<div style="font-size:13px;font-weight:500;color:{{ text }};margin-bottom:6px">{{ password }}</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:11px 12px;font-size:14px;color:{{ muted }}">••••••••</div>
+</div>
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer;margin-top:4px" onClick="{{ goLogin }}">{{ login }}</div>
+</div>
+<div style="text-align:center;margin-top:12px">
+<span style="font-size:13px;color:{{ muted }};cursor:pointer" onClick="{{ goForgotPass }}">{{ forgotPass }}</span>
+</div>
+</div>
+<div style="padding:16px 24px 36px;text-align:center">
+<div style="font-size:13px;color:{{ muted }}">{{ noAccount }} <span style="color:#10b981;font-weight:600;cursor:pointer">{{ register }}</span></div>
+<div style="margin-top:12px;padding:10px;border:1px solid {{ border }};border-radius:8px;font-size:13px;font-weight:500;color:{{ sub }};cursor:pointer" onClick="{{ goLogin }}">{{ continueWithout }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- GPS PERMISSIONS -->
+<sc-if value="{{ screen === 'gpsPermission' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }};overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px">
+<div style="width:80px;height:80px;border-radius:20px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="font-size:20px;font-weight:700;color:{{ text }};text-align:center;letter-spacing:-0.3px">{{ gpsTitle }}</div>
+<div style="font-size:13px;color:{{ muted }};text-align:center;line-height:1.6;margin-top:8px;max-width:260px">{{ gpsDesc }}, <strong style="color:#10b981">{{ gpsEvenOff }}</strong>.</div>
+<div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-top:20px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ gpsBg }}</div><div style="font-size:11px;color:{{ muted }};margin-top:1px">{{ gpsBgDesc }}</div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ gpsNotif }}</div><div style="font-size:11px;color:{{ muted }};margin-top:1px">{{ gpsNotifDesc }}</div></div>
+</div>
+<!-- iOS Critical Alerts -->
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ criticalAlerts }}</div><div style="font-size:11px;color:{{ muted }};margin-top:1px">{{ criticalAlertsDesc }}</div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.05);display:flex;align-items:center;justify-content:center">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ gpsPrivacy }}</div><div style="font-size:11px;color:{{ muted }};margin-top:1px">{{ gpsPrivacyDesc }}</div></div>
+</div>
+</div>
+</div>
+<div style="padding:0 24px 36px;display:flex;flex-direction:column;gap:8px">
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ grantGPS }}">{{ gpsAllow }}</div>
+<div style="text-align:center;font-size:13px;color:{{ muted }};padding:8px;cursor:pointer" onClick="{{ acceptPermAlways }}">{{ gpsLater }}</div>
+</div>
+<!-- Android Permission Dialog -->
+<sc-if value="{{ showPermDialog }}">
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:flex-end;z-index:200">
+<div style="background:{{ card }};border-radius:16px 16px 0 0;padding:24px;width:100%;animation:slideUp 0.3s ease-out">
+<div style="font-size:15px;font-weight:600;color:{{ text }};margin-bottom:8px">{{ gpsDialogTitle }}</div>
+<div style="font-size:13px;color:{{ muted }};line-height:1.5;margin-bottom:20px">{{ gpsDialogDesc }}</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="padding:14px;font-size:14px;font-weight:500;color:#10b981;cursor:pointer;border-radius:8px" style-hover="background:rgba(16,185,129,0.05)" onClick="{{ acceptPermAlways }}">{{ gpsAlways }}</div>
+<div style="padding:14px;font-size:14px;color:{{ sub }};cursor:pointer;border-radius:8px" onClick="{{ acceptPermAlways }}">{{ gpsWhileUsing }}</div>
+<div style="padding:14px;font-size:14px;color:{{ muted }};cursor:pointer;border-radius:8px" onClick="{{ acceptPermAlways }}">{{ gpsDeny }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- BATTERY OPTIMIZATION GUIDE (Android) -->
+<sc-if value="{{ screen === 'batteryOpt' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ batteryOptTitle }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px 32px">
+<div style="font-size:13px;color:{{ muted }};line-height:1.6;margin-bottom:20px">{{ batteryOptDesc }}</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:flex-start;gap:12px">
+<div style="width:24px;height:24px;border-radius:6px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#10b981">1</div>
+<div style="font-size:13px;color:{{ text }};line-height:1.5">{{ batteryOptStep1 }}</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:flex-start;gap:12px">
+<div style="width:24px;height:24px;border-radius:6px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#10b981">2</div>
+<div style="font-size:13px;color:{{ text }};line-height:1.5">{{ batteryOptStep2 }}</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:flex-start;gap:12px">
+<div style="width:24px;height:24px;border-radius:6px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#10b981">3</div>
+<div style="font-size:13px;color:{{ text }};line-height:1.5">{{ batteryOptStep3 }}</div>
+</div>
+</div>
+<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:12px 14px;margin-bottom:24px">
+<div style="font-size:12px;font-weight:500;color:#f59e0b;line-height:1.5">⚠️ {{ batteryOptBrands }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ goHome }}">{{ openSettings }}</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:500;color:{{ text }};cursor:pointer" onClick="{{ goHome }}">{{ alreadyDone }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- HOME -->
+<sc-if value="{{ screen === 'home' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }};overflow-y:auto">
+<div style="padding:54px 20px 0">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+<div>
+<div style="font-size:14px;color:{{ muted }}">{{ hello }}</div>
+<div style="font-size:20px;font-weight:700;color:{{ text }};letter-spacing:-0.3px">{{ whereGoing }}</div>
+</div>
+<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;cursor:pointer" onClick="{{ goProfile }}">M</div>
+</div>
+<!-- Search -->
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:20px" onClick="{{ goSearch }}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<span style="font-size:14px;color:{{ muted }}">{{ searchPlaceholder }}</span>
+</div>
+<!-- Offline banner -->
+<sc-if value="{{ showOffline }}">
+<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 12px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path></svg>
+<span style="font-size:11px;color:#f59e0b;font-weight:500">{{ offlineWarning }}</span>
+</div>
+</sc-if>
+<!-- Favorites -->
+<div style="font-size:12px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">{{ favorites }}</div>
+<div style="display:flex;gap:8px;margin-bottom:20px">
+<div style="flex:1;background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;text-align:center;cursor:pointer" onClick="{{ selectFav1 }}">
+<div style="font-size:20px;margin-bottom:4px">🏠</div>
+<div style="font-size:12px;font-weight:600;color:{{ text }}">{{ home }}</div>
+</div>
+<div style="flex:1;background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;text-align:center;cursor:pointer" onClick="{{ selectFav2 }}">
+<div style="font-size:20px;margin-bottom:4px">💼</div>
+<div style="font-size:12px;font-weight:600;color:{{ text }}">{{ work }}</div>
+</div>
+<div style="flex:1;background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;text-align:center;cursor:pointer">
+<div style="font-size:20px;margin-bottom:4px">📚</div>
+<div style="font-size:12px;font-weight:600;color:{{ text }}">{{ university }}</div>
+</div>
+</div>
+<!-- Recent -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+<div style="font-size:12px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px">{{ recentTrips }}</div>
+<div style="font-size:12px;color:#10b981;font-weight:500;cursor:pointer" onClick="{{ goHistory }}">{{ viewAll }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;padding-bottom:80px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ selectResult1 }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Av. Colón 4500</div><div style="font-size:11px;color:{{ muted }};margin-top:1px">{{ today }}, 18:30 · {{ arrivedOk }}</div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ selectResult1 }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Cabildo 1200</div><div style="font-size:11px;color:{{ muted }};margin-top:1px">{{ yesterday }}, 08:15 · {{ arrivedOk }}</div></div>
+</div>
+</div>
+</div>
+<!-- Bottom nav -->
+<div style="position:absolute;bottom:0;left:0;right:0;background:{{ card }};border-top:1px solid {{ border }};padding:8px 0 28px;display:flex;justify-content:space-around">
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+<span style="font-size:10px;font-weight:600;color:#10b981">{{ tabHome }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onClick="{{ goHistory }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+<span style="font-size:10px;color:{{ muted }}">{{ tabHistory }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+<span style="font-size:10px;color:{{ muted }}">{{ tabProfile }}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- SEARCH -->
+<sc-if value="{{ screen === 'search' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:10px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goHome }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="flex:1;background:{{ card }};border:1px solid #10b981;border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:8px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<span style="font-size:14px;color:{{ text }}">Av. Colón</span>
+</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:0 20px">
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ suggestions }}</div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<div style="padding:12px;display:flex;align-items:center;gap:10px;border-radius:8px;cursor:pointer" style-hover="background:{{ card }}" onClick="{{ selectResult1 }}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<div><div style="font-size:14px;font-weight:500;color:{{ text }}">Av. Colón 4500</div><div style="font-size:12px;color:{{ muted }}">Nueva Córdoba</div></div>
+</div>
+<div style="padding:12px;display:flex;align-items:center;gap:10px;border-radius:8px;cursor:pointer" style-hover="background:{{ card }}" onClick="{{ selectResult1 }}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<div><div style="font-size:14px;font-weight:500;color:{{ text }}">Av. Colón 1100</div><div style="font-size:12px;color:{{ muted }}">Centro</div></div>
+</div>
+</div>
+<div style="margin-top:16px;padding:12px;display:flex;align-items:center;gap:10px;border-radius:8px;cursor:pointer;border:1px dashed {{ border }}" onClick="{{ goMapPick }}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon></svg>
+<span style="font-size:13px;font-weight:500;color:#10b981">{{ chooseOnMap }}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- CONFIRM DESTINATION -->
+<sc-if value="{{ screen === 'confirm' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }};overflow:hidden">
+<!-- Map area -->
+<div style="flex:1;position:relative;background:{{ mapBg }};display:flex;align-items:center;justify-content:center;overflow:hidden">
+<div style="position:absolute;inset:0;opacity:0.3">
+<svg width="100%" height="100%" viewBox="0 0 400 300"><line x1="0" y1="100" x2="400" y2="100" stroke="{{ mapLine }}" stroke-width="1"></line><line x1="0" y1="200" x2="400" y2="200" stroke="{{ mapLine }}" stroke-width="1"></line><line x1="150" y1="0" x2="150" y2="300" stroke="{{ mapLine }}" stroke-width="1"></line><line x1="280" y1="0" x2="280" y2="300" stroke="{{ mapLine }}" stroke-width="1"></line><path d="M0 50 Q100 80 200 50 T400 60" stroke="{{ mapLine }}" stroke-width="0.5" fill="none"></path></svg>
+</div>
+<div style="position:absolute;top:54px;left:20px;cursor:pointer;z-index:10" onClick="{{ goHome }}">
+<div style="width:36px;height:36px;border-radius:8px;background:{{ card }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+</div>
+<div style="width:40px;height:40px;border-radius:50%;background:#ef4444;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(239,68,68,0.4);z-index:5">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path></svg>
+</div>
+</div>
+<!-- Config panel -->
+<div style="background:{{ card }};border-top:1px solid {{ border }};border-radius:16px 16px 0 0;padding:20px;margin-top:-16px;position:relative;z-index:10">
+<div style="width:32px;height:4px;border-radius:2px;background:{{ border }};margin:0 auto 16px"></div>
+<div style="font-size:15px;font-weight:600;color:{{ text }};margin-bottom:2px">Av. Colón 4500</div>
+<div style="font-size:12px;color:{{ muted }};margin-bottom:16px">Nueva Córdoba, Córdoba</div>
+<!-- Alert mode toggle -->
+<div style="display:flex;background:{{ inputBg }};border-radius:8px;padding:3px;margin-bottom:12px;border:1px solid {{ border }}">
+<div style="flex:1;padding:8px;text-align:center;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;color:{{ distModeColor }};background:{{ distModeBg }}" onClick="{{ setDistMode }}">{{ distanceMode }}</div>
+<div style="flex:1;padding:8px;text-align:center;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;color:{{ timeModeColor }};background:{{ timeModeBg }}" onClick="{{ setTimeMode }}">{{ timeMode }}</div>
+</div>
+<!-- Time mode alerts -->
+<sc-if value="{{ alertMode === 'time' }}">
+<div style="display:flex;gap:6px;margin-bottom:12px">
+<div style="flex:1;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:600;color:#10b981;cursor:pointer">{{ min5Before }}</div>
+<div style="flex:1;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:600;color:#f59e0b;cursor:pointer">{{ min3Before }}</div>
+<div style="flex:1;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:600;color:#ef4444;cursor:pointer">{{ min1Before }}</div>
+</div>
+</sc-if>
+<!-- Distance mode alerts -->
+<sc-if value="{{ alertMode === 'distance' }}">
+<div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
+<div style="flex:1;min-width:70px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:8px 6px;text-align:center">
+<div style="font-size:13px;font-weight:700;color:#10b981">2 km</div>
+<div style="font-size:9px;color:{{ muted }};margin-top:1px">{{ notification }}</div>
+</div>
+<div style="flex:1;min-width:70px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:8px 6px;text-align:center">
+<div style="font-size:13px;font-weight:700;color:#f59e0b">1 km</div>
+<div style="font-size:9px;color:{{ muted }};margin-top:1px">{{ vibration }}</div>
+</div>
+<div style="flex:1;min-width:70px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:8px 6px;text-align:center">
+<div style="font-size:13px;font-weight:700;color:#ef4444">500 m</div>
+<div style="font-size:9px;color:{{ muted }};margin-top:1px">{{ vibAndSound }}</div>
+</div>
+<div style="flex:1;min-width:70px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);border-radius:8px;padding:8px 6px;text-align:center">
+<div style="font-size:13px;font-weight:700;color:#ef4444">200 m</div>
+<div style="font-size:9px;color:{{ muted }};margin-top:1px">{{ strongAlert }}</div>
+</div>
+</div>
+</sc-if>
+<!-- Bus line optional -->
+<div style="background:{{ inputBg }};border:1px solid {{ border }};border-radius:8px;padding:11px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:12px" onClick="{{ goSelectBus }}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path></svg>
+<span style="font-size:13px;color:{{ sub }};flex:1">{{ selectBusLine }}</span>
+<span style="font-size:11px;color:{{ muted }}">{{ optional }}</span>
+</div>
+<!-- Start trip -->
+<div style="background:#10b981;border-radius:8px;padding:14px;text-align:center;font-size:15px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px" onClick="{{ startTrip }}">{{ startTrip }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- MAP PICK -->
+<sc-if value="{{ screen === 'mapPick' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ mapBg }};overflow:hidden">
+<div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center">
+<div style="position:absolute;inset:0;opacity:0.3">
+<svg width="100%" height="100%" viewBox="0 0 400 600"><line x1="0" y1="150" x2="400" y2="150" stroke="{{ mapLine }}" stroke-width="1"></line><line x1="0" y1="300" x2="400" y2="300" stroke="{{ mapLine }}" stroke-width="1"></line><line x1="0" y1="450" x2="400" y2="450" stroke="{{ mapLine }}" stroke-width="1"></line><line x1="130" y1="0" x2="130" y2="600" stroke="{{ mapLine }}" stroke-width="1"></line><line x1="270" y1="0" x2="270" y2="600" stroke="{{ mapLine }}" stroke-width="1"></line></svg>
+</div>
+<div style="position:absolute;top:54px;left:20px;cursor:pointer;z-index:10" onClick="{{ goSearch }}">
+<div style="width:36px;height:36px;border-radius:8px;background:{{ card }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;z-index:5">
+<svg width="40" height="52" viewBox="0 0 40 52" fill="none"><path d="M20 0C9 0 0 9 0 20c0 15 20 32 20 32s20-17 20-32C40 9 31 0 20 0z" fill="#ef4444"></path><circle cx="20" cy="19" r="7" fill="#fff"></circle></svg>
+<div style="width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.2);margin-top:4px"></div>
+</div>
+</div>
+<div style="background:{{ card }};border-top:1px solid {{ border }};padding:16px 20px 36px;border-radius:16px 16px 0 0;margin-top:-16px;position:relative;z-index:10">
+<div style="text-align:center;font-size:13px;color:{{ muted }};margin-bottom:12px">{{ moveMapToChoose }}</div>
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ confirmMapPick }}">{{ confirmLocation }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ACTIVE TRIP -->
+<sc-if value="{{ screen === 'trip' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#09090b;overflow:hidden">
+<!-- Map area -->
+<div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#0c1219 0%,#09090b 100%)">
+<div style="position:absolute;inset:0;opacity:0.15">
+<svg width="100%" height="100%" viewBox="0 0 400 400"><line x1="0" y1="100" x2="400" y2="100" stroke="#3f3f46" stroke-width="0.5"></line><line x1="0" y1="200" x2="400" y2="200" stroke="#3f3f46" stroke-width="0.5"></line><line x1="0" y1="300" x2="400" y2="300" stroke="#3f3f46" stroke-width="0.5"></line><line x1="150" y1="0" x2="150" y2="400" stroke="#3f3f46" stroke-width="0.5"></line><line x1="280" y1="0" x2="280" y2="400" stroke="#3f3f46" stroke-width="0.5"></line></svg>
+</div>
+<!-- GPS Adaptive indicator -->
+<div style="position:absolute;top:54px;left:20px;right:20px;display:flex;gap:8px;z-index:10">
+<div style="background:rgba(24,24,27,0.9);border:1px solid #27272a;border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px">
+<div style="width:6px;height:6px;border-radius:50%;background:#10b981;animation:pulse 2s infinite"></div>
+<span style="font-size:10px;color:#a1a1aa;font-weight:500">{{ gpsAdaptive }}</span>
+</div>
+<!-- Headphones indicator -->
+<sc-if value="{{ headphonesConnected }}">
+<div style="background:rgba(24,24,27,0.9);border:1px solid #27272a;border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+<span style="font-size:10px;color:#8b5cf6;font-weight:500">{{ headphonesOn }}</span>
+</div>
+</sc-if>
+</div>
+<!-- GPS Lost overlay -->
+<sc-if value="{{ gpsLostVisible }}">
+<div style="position:absolute;top:100px;left:20px;right:20px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:12px 14px;z-index:10;display:flex;align-items:center;gap:10px;animation:fadeIn 0.3s ease-out">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" style="animation:spin 2s linear infinite;flex-shrink:0"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+<div><div style="font-size:12px;font-weight:600;color:#f59e0b">{{ gpsLost }}</div><div style="font-size:10px;color:#a1a1aa;margin-top:1px">{{ waitingGps }}</div></div>
+</div>
+</sc-if>
+<!-- Blue dot user -->
+<div style="position:absolute;left:35%;top:55%">
+<div style="width:14px;height:14px;border-radius:50%;background:#3b82f6;border:3px solid rgba(59,130,246,0.3);box-shadow:0 0 12px rgba(59,130,246,0.5)"></div>
+</div>
+<!-- Red destination -->
+<div style="position:absolute;right:30%;top:30%;display:flex;flex-direction:column;align-items:center">
+<div style="width:12px;height:12px;border-radius:50%;background:#ef4444;border:2px solid rgba(239,68,68,0.3)"></div>
+</div>
+<!-- Path -->
+<div style="position:absolute;inset:0;z-index:2;pointer-events:none">
+<svg width="100%" height="100%" viewBox="0 0 375 400"><path d="M130 220 Q200 180 260 120" stroke="#10b981" stroke-width="3" stroke-dasharray="8,4" fill="none" stroke-linecap="round"></path></svg>
+</div>
+</div>
+<!-- Trip info panel -->
+<div style="background:#18181b;border-top:1px solid #27272a;border-radius:16px 16px 0 0;padding:16px 20px 32px;margin-top:-16px;position:relative;z-index:10">
+<!-- Status -->
+<div style="background:{{ tripStatusBg }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:12px;animation:{{ tripPulseAnim }}">
+<span style="font-size:20px">{{ tripEmoji }}</span>
+<div style="flex:1">
+<div style="font-size:14px;font-weight:600;color:#fafafa">{{ tripStatusText }}</div>
+<div style="font-size:12px;color:#a1a1aa">{{ destination }}: Av. Colón 4500</div>
+</div>
+<div style="text-align:right">
+<div style="font-size:18px;font-weight:700;color:{{ tripDistColor }}">{{ tripDistText }}</div>
+<div style="font-size:10px;color:#71717a">{{ remaining }}</div>
+</div>
+</div>
+<!-- Progress bar -->
+<div style="height:4px;background:#27272a;border-radius:2px;margin-bottom:14px;overflow:hidden">
+<div style="height:100%;width:{{ tripProgress }};background:{{ tripProgressColor }};border-radius:2px;transition:width 0.5s ease"></div>
+</div>
+<!-- Actions -->
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:600;color:#10b981;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px" onClick="{{ goShareTrip }}">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+{{ share }}
+</div>
+<div style="flex:1;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:600;color:#ef4444;cursor:pointer" onClick="{{ cancelTrip }}">{{ cancelTrip }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- MISSED STOP -->
+<sc-if value="{{ screen === 'missedStop' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#09090b;align-items:center;justify-content:center;padding:32px">
+<div style="width:100px;height:100px;border-radius:24px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:24px;animation:shake 0.5s ease-in-out infinite">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+</div>
+<div style="font-size:22px;font-weight:700;color:#fafafa;text-align:center;margin-bottom:8px">{{ missedStop }}</div>
+<div style="font-size:14px;color:#a1a1aa;text-align:center;line-height:1.6;margin-bottom:24px;max-width:260px">{{ missedStopDesc }}</div>
+<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:14px 16px;width:100%;margin-bottom:24px">
+<div style="font-size:13px;font-weight:600;color:#f59e0b;margin-bottom:4px">{{ howToGoBack }}</div>
+<div style="font-size:12px;color:#a1a1aa;line-height:1.5">{{ nearestStop }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;width:100%">
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ goHome }}">{{ newTrip }}</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:500;color:#fafafa;cursor:pointer" onClick="{{ goHome }}">{{ backToHome }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ALARM SCREEN (swipe/hold to dismiss) -->
+<sc-if value="{{ screen === 'alarmFiring' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#09090b;align-items:center;justify-content:center;padding:32px">
+<div style="width:140px;height:140px;border-radius:50%;background:rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:28px;animation:pulse 0.4s ease-in-out infinite;box-shadow:0 0 60px rgba(239,68,68,0.3)">
+<div style="width:100px;height:100px;border-radius:50%;background:rgba(239,68,68,0.3);display:flex;align-items:center;justify-content:center">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+</div>
+</div>
+<div style="font-size:28px;font-weight:800;color:#ef4444;text-align:center;letter-spacing:-0.5px;margin-bottom:4px">¡BAJÁ AHORA!</div>
+<div style="font-size:14px;color:#a1a1aa;text-align:center;margin-bottom:40px">Av. Colón 4500</div>
+<!-- Swipe to dismiss -->
+<div style="width:100%;background:#18181b;border:1px solid #27272a;border-radius:50px;padding:6px;position:relative;overflow:hidden;cursor:pointer" onClick="{{ dismissAlarm }}">
+<div style="display:flex;align-items:center;justify-content:center;padding:14px">
+<div style="width:44px;height:44px;border-radius:50%;background:#ef4444;display:flex;align-items:center;justify-content:center;position:absolute;left:6px;animation:pulse 0.6s ease-in-out infinite">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<span style="font-size:14px;font-weight:600;color:#71717a;margin-left:24px">{{ swipeToDismiss }}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ARRIVED -->
+<sc-if value="{{ screen === 'arrived' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }};align-items:center;justify-content:center;padding:32px">
+<div style="width:80px;height:80px;border-radius:20px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<div style="font-size:24px;font-weight:700;color:{{ text }};text-align:center;letter-spacing:-0.3px;margin-bottom:4px">{{ youArrived }}</div>
+<div style="font-size:13px;color:{{ muted }};margin-bottom:24px">{{ tripDuration }}</div>
+<!-- Rating -->
+<div style="font-size:13px;color:{{ sub }};margin-bottom:12px">{{ didYouArrive }}</div>
+<div style="display:flex;gap:10px;margin-bottom:24px">
+<div style="width:48px;height:48px;border-radius:8px;background:{{ ratingGoodBg }};border:1px solid {{ ratingGoodBorder }};display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer" onClick="{{ rateGood }}">👍</div>
+<div style="width:48px;height:48px;border-radius:8px;background:{{ ratingBadBg }};border:1px solid {{ ratingBadBorder }};display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer" onClick="{{ rateBad }}">👎</div>
+</div>
+<sc-if value="{{ ratingDone }}">
+<div style="font-size:12px;color:#10b981;margin-bottom:16px">{{ thanksFeedback }}</div>
+</sc-if>
+<div style="width:100%">
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ goHome }}">{{ backToHome }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- BATTERY LOW -->
+<sc-if value="{{ screen === 'batteryLow' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }};align-items:center;justify-content:center;padding:32px">
+<div style="width:80px;height:80px;border-radius:20px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;animation:pulse 2s ease-in-out infinite">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="6" width="18" height="12" rx="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line></svg>
+</div>
+<div style="font-size:22px;font-weight:700;color:{{ text }};text-align:center;margin-bottom:4px">{{ lowBattery }}</div>
+<div style="font-size:32px;font-weight:800;color:#ef4444;text-align:center;margin-bottom:8px">12%</div>
+<div style="font-size:13px;color:{{ muted }};text-align:center;line-height:1.6;max-width:260px;margin-bottom:16px">{{ batteryDesc }}</div>
+<div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 14px;margin-bottom:24px">
+<div style="font-size:12px;font-weight:500;color:#f59e0b;text-align:center">{{ batteryTip }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;width:100%">
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ startTripAnyway }}">{{ startAnyway }}</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:500;color:{{ text }};cursor:pointer" onClick="{{ goHome }}">{{ cancel }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- EDIT FAVORITES -->
+<sc-if value="{{ screen === 'editFavs' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="flex:1;font-size:16px;font-weight:600;color:{{ text }}">{{ favDestinations }}</div>
+<div style="font-size:13px;font-weight:600;color:#10b981;cursor:pointer" onClick="{{ addNewFav }}">{{ addNew }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px">
+<div style="font-size:22px">🏠</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ text }}">{{ home }}</div><div style="font-size:12px;color:{{ muted }}">Av. Colón 4500</div></div>
+<div style="display:flex;gap:4px">
+<div style="width:28px;height:28px;border-radius:6px;background:{{ inputBg }};display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div>
+<div style="width:28px;height:28px;border-radius:6px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></div>
+</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px">
+<div style="font-size:22px">💼</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ text }}">{{ work }}</div><div style="font-size:12px;color:{{ muted }}">Cabildo 1200</div></div>
+<div style="display:flex;gap:4px">
+<div style="width:28px;height:28px;border-radius:6px;background:{{ inputBg }};display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div>
+<div style="width:28px;height:28px;border-radius:6px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></div>
+</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px">
+<div style="font-size:22px">📚</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ text }}">{{ university }}</div><div style="font-size:12px;color:{{ muted }}">Haya de la Torre s/n</div></div>
+<div style="display:flex;gap:4px">
+<div style="width:28px;height:28px;border-radius:6px;background:{{ inputBg }};display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div>
+<div style="width:28px;height:28px;border-radius:6px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></div>
+</div>
+</div>
+</div>
+<div style="margin-top:12px;border:1px dashed {{ border }};border-radius:8px;padding:16px;text-align:center;cursor:pointer" onClick="{{ addNewFav }}">
+<div style="font-size:13px;font-weight:600;color:#10b981">{{ addNewDest }}</div>
+<div style="font-size:11px;color:{{ muted }};margin-top:2px">{{ addNewDesc }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ADD FAV -->
+<sc-if value="{{ screen === 'addFav' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goEditFavs }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ newFav }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px 32px">
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:500;color:{{ text }};margin-bottom:6px">{{ name }}</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:11px 12px;font-size:14px;color:{{ muted }}">{{ namePlaceholder }}</div>
+</div>
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:500;color:{{ text }};margin-bottom:6px">{{ address }}</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:11px 12px;font-size:14px;color:{{ muted }}">{{ searchAddress }}</div>
+</div>
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:500;color:{{ text }};margin-bottom:6px">{{ icon }}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<div style="width:40px;height:40px;border-radius:8px;background:rgba(16,185,129,0.1);border:2px solid #10b981;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer">🏠</div>
+<div style="width:40px;height:40px;border-radius:8px;background:{{ inputBg }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer">💼</div>
+<div style="width:40px;height:40px;border-radius:8px;background:{{ inputBg }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer">📚</div>
+<div style="width:40px;height:40px;border-radius:8px;background:{{ inputBg }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer">🏥</div>
+<div style="width:40px;height:40px;border-radius:8px;background:{{ inputBg }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer">🏋️</div>
+<div style="width:40px;height:40px;border-radius:8px;background:{{ inputBg }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer">⭐</div>
+</div>
+</div>
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer;margin-top:16px" onClick="{{ goEditFavs }}">{{ saveFav }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- SELECT BUS -->
+<sc-if value="{{ screen === 'selectBus' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goConfirmFromBus }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ selectLine }}</div>
+</div>
+<div style="padding:0 20px 12px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:8px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<span style="font-size:14px;color:{{ muted }}">{{ searchLine }}</span>
+</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:0 20px">
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ frequentLines }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:36px;height:36px;border-radius:8px;background:#10b981;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff">10</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Línea 10</div><div style="font-size:11px;color:{{ muted }}">Centro → Argüello</div></div>
+<span style="font-size:10px;color:#10b981;font-weight:600;background:rgba(16,185,129,0.1);padding:3px 6px;border-radius:4px">{{ frequent }}</span>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:36px;height:36px;border-radius:8px;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff">13</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Línea 13</div><div style="font-size:11px;color:{{ muted }}">Terminal → Ciudad Universitaria</div></div>
+</div>
+</div>
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ allLines }}</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:36px;height:36px;border-radius:8px;background:#8b5cf6;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff">19</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Línea 19</div><div style="font-size:11px;color:{{ muted }}">B° San Martín → Centro</div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:36px;height:36px;border-radius:8px;background:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff">24</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Línea 24</div><div style="font-size:11px;color:{{ muted }}">Villa Belgrano → Terminal</div></div>
+</div>
+</div>
+<div style="text-align:center;padding:16px;font-size:12px;color:{{ muted }}">{{ skipStep }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- SHARE TRIP -->
+<sc-if value="{{ screen === 'shareTrip' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goTripFromShare }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ shareTrip }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px 32px">
+<div style="text-align:center;margin-bottom:20px">
+<div style="font-size:13px;color:{{ muted }};line-height:1.5;max-width:240px;margin:0 auto">{{ shareDesc }}</div>
+</div>
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ recentContacts }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#f472b6);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff">M</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Mamá</div><div style="font-size:11px;color:{{ muted }}">+54 351 555-1234</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#60a5fa);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff">P</div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Papá</div><div style="font-size:11px;color:{{ muted }}">+54 351 555-5678</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+</div>
+</div>
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">{{ shareVia }}</div>
+<div style="display:flex;gap:12px;justify-content:center">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:44px;height:44px;border-radius:8px;background:#25D366;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg></div>
+<div style="font-size:10px;font-weight:500;color:{{ muted }}">WhatsApp</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:44px;height:44px;border-radius:8px;background:#0088cc;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.17.17 0 0 0-.07-.2c-.08-.06-.19-.04-.27-.02-.12.03-1.98 1.26-5.59 3.7-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.81-1.6 4.6-1.88 5.12-1.89.11 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"></path></svg></div>
+<div style="font-size:10px;font-weight:500;color:{{ muted }}">Telegram</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:44px;height:44px;border-radius:8px;background:{{ inputBg }};border:1px solid {{ border }};display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></div>
+<div style="font-size:10px;font-weight:500;color:{{ muted }}">{{ other }}</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- TEST ALARM -->
+<sc-if value="{{ screen === 'testAlarm' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }};align-items:center;justify-content:center;padding:32px">
+<div style="width:120px;height:120px;border-radius:50%;background:{{ testAlarmBg }};display:flex;align-items:center;justify-content:center;margin-bottom:24px;animation:{{ testAlarmAnim }};cursor:pointer;box-shadow:{{ testAlarmShadow }}" onClick="{{ toggleTestAlarm }}">
+<span style="font-size:48px">{{ testAlarmIcon }}</span>
+</div>
+<div style="font-size:20px;font-weight:700;color:{{ text }};text-align:center;margin-bottom:6px">{{ testAlarmTitle }}</div>
+<div style="font-size:13px;color:{{ muted }};text-align:center;line-height:1.5;margin-bottom:28px;max-width:240px">{{ testAlarmDesc }}</div>
+<div style="width:100%">
+<div style="background:{{ testAlarmBtnBg }};border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:{{ testAlarmBtnColor }};cursor:pointer;margin-bottom:8px" onClick="{{ toggleTestAlarm }}">{{ testAlarmBtnText }}</div>
+<div style="text-align:center;padding:8px;font-size:13px;color:{{ muted }};cursor:pointer" onClick="{{ goAlertConfig }}">{{ backToConfig }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- HISTORY -->
+<sc-if value="{{ screen === 'history' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px">
+<div style="font-size:20px;font-weight:700;color:{{ text }};letter-spacing:-0.3px">{{ tripHistory }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:0 20px 80px">
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ thisWeek }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Av. Colón 4500</div><div style="font-size:11px;color:{{ muted }}">{{ today }}, 18:30</div></div>
+<div style="font-size:11px;font-weight:500;color:#10b981">{{ arrived }}</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Cabildo 1200</div><div style="font-size:11px;color:{{ muted }}">{{ yesterday }}, 08:15</div></div>
+<div style="font-size:11px;font-weight:500;color:#10b981">{{ arrived }}</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">Haya de la Torre s/n</div><div style="font-size:11px;color:{{ muted }}">Lun, 07:45</div></div>
+<div style="font-size:11px;font-weight:500;color:#ef4444">{{ cancelled }}</div>
+</div>
+</div>
+<!-- Summary -->
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ summary }}</div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;text-align:center">
+<div style="font-size:22px;font-weight:700;color:{{ text }}">12</div>
+<div style="font-size:11px;color:{{ muted }};margin-top:2px">{{ trips }}</div>
+</div>
+<div style="flex:1;background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;text-align:center">
+<div style="font-size:22px;font-weight:700;color:#10b981">11</div>
+<div style="font-size:11px;color:{{ muted }};margin-top:2px">{{ arrivals }}</div>
+</div>
+<div style="flex:1;background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;text-align:center">
+<div style="font-size:22px;font-weight:700;color:{{ text }}">25m</div>
+<div style="font-size:11px;color:{{ muted }};margin-top:2px">{{ average }}</div>
+</div>
+</div>
+</div>
+<!-- Bottom nav -->
+<div style="position:absolute;bottom:0;left:0;right:0;background:{{ card }};border-top:1px solid {{ border }};padding:8px 0 28px;display:flex;justify-content:space-around">
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onClick="{{ goHome }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+<span style="font-size:10px;color:{{ muted }}">{{ tabHome }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+<span style="font-size:10px;font-weight:600;color:#10b981">{{ tabHistory }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+<span style="font-size:10px;color:{{ muted }}">{{ tabProfile }}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- PROFILE -->
+<sc-if value="{{ screen === 'profile' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff">M</div>
+<div><div style="font-size:16px;font-weight:600;color:{{ text }}">Martín</div><div style="font-size:12px;color:{{ muted }}">martin@email.com</div></div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px 80px">
+<div style="display:flex;flex-direction:column;gap:2px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:4px" onClick="{{ goAlertConfig }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ configAlertsMenu }}</div><div style="font-size:11px;color:{{ muted }}">{{ configAlertsDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:4px" onClick="{{ goEditFavs }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ favDestinations }}</div><div style="font-size:11px;color:{{ muted }}">{{ favDestDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:4px" onClick="{{ goApariencia }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ appearance }}</div><div style="font-size:11px;color:{{ muted }}">{{ appearanceDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:4px" onClick="{{ goLanguage }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(59,130,246,0.1);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ language }}</div><div style="font-size:11px;color:{{ muted }}">{{ languageDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<!-- Android battery opt -->
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:4px" onClick="{{ goBatteryOpt }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><rect x="1" y="6" width="18" height="12" rx="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ batteryOptTitle }}</div><div style="font-size:11px;color:{{ muted }}">Android</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer;margin-bottom:4px" onClick="{{ goTerms }}">
+<div style="width:32px;height:32px;border-radius:8px;background:{{ inputBg }};display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ legal }}</div><div style="font-size:11px;color:{{ muted }}">{{ legalDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="padding:14px;text-align:center;font-size:13px;font-weight:500;color:#ef4444;cursor:pointer;margin-top:8px" onClick="{{ goSplash }}">{{ logout }}</div>
+</div>
+</div>
+<!-- Bottom nav -->
+<div style="position:absolute;bottom:0;left:0;right:0;background:{{ card }};border-top:1px solid {{ border }};padding:8px 0 28px;display:flex;justify-content:space-around">
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onClick="{{ goHome }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+<span style="font-size:10px;color:{{ muted }}">{{ tabHome }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer" onClick="{{ goHistory }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ muted }}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+<span style="font-size:10px;color:{{ muted }}">{{ tabHistory }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+<span style="font-size:10px;font-weight:600;color:#10b981">{{ tabProfile }}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ALERT CONFIG -->
+<sc-if value="{{ screen === 'alertConfig' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ configAlerts }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:0 20px 32px">
+<!-- Alert type -->
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ alertType }}</div>
+<div style="display:flex;background:{{ inputBg }};border-radius:8px;padding:3px;margin-bottom:16px;border:1px solid {{ border }}">
+<div style="flex:1;padding:8px;text-align:center;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;color:{{ alarmTypeColor }};background:{{ alarmTypeBg }}" onClick="{{ setAlertTypeAlarm }}">{{ alarm }}</div>
+<div style="flex:1;padding:8px;text-align:center;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;color:{{ vibTypeColor }};background:{{ vibTypeBg }}" onClick="{{ setAlertTypeVib }}">{{ vibration }}</div>
+<div style="flex:1;padding:8px;text-align:center;font-size:12px;font-weight:600;border-radius:6px;cursor:pointer;color:{{ bothTypeColor }};background:{{ bothTypeBg }}" onClick="{{ setAlertTypeBoth }}">{{ both }}</div>
+</div>
+<!-- Distances -->
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ alertsByDist }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="width:8px;height:8px;border-radius:50%;background:#10b981"></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">2 km</div><div style="font-size:11px;color:{{ muted }}">{{ firstAlert }}</div></div>
+<div style="width:36px;height:20px;border-radius:10px;background:{{ alert2kmToggleBg }};position:relative;cursor:pointer" onClick="{{ toggleAlert2km }}"><div style="width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:{{ alert2kmTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="width:8px;height:8px;border-radius:50%;background:#f59e0b"></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">1 km</div><div style="font-size:11px;color:{{ muted }}">{{ mediumAlert }}</div></div>
+<div style="width:36px;height:20px;border-radius:10px;background:{{ alert1kmToggleBg }};position:relative;cursor:pointer" onClick="{{ toggleAlert1km }}"><div style="width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:{{ alert1kmTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="width:8px;height:8px;border-radius:50%;background:#ef4444"></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">500 m</div><div style="font-size:11px;color:{{ muted }}">{{ strongAlertDesc }}</div></div>
+<div style="width:36px;height:20px;border-radius:10px;background:{{ alert500mToggleBg }};position:relative;cursor:pointer" onClick="{{ toggleAlert500m }}"><div style="width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:{{ alert500mTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="width:8px;height:8px;border-radius:50%;background:#ef4444"></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">200 m</div><div style="font-size:11px;color:{{ muted }}">{{ maxAlert }}</div></div>
+<div style="width:36px;height:20px;border-radius:10px;background:{{ alert200mToggleBg }};position:relative;cursor:pointer" onClick="{{ toggleAlert200m }}"><div style="width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:{{ alert200mTogglePos }};transition:left 0.2s"></div></div>
+</div>
+</div>
+<!-- Options -->
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ options }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ vibrateOnSilent }}</div><div style="font-size:11px;color:{{ muted }}">{{ vibrateOnSilentDesc }}</div></div>
+<div style="width:36px;height:20px;border-radius:10px;background:#10b981;position:relative"><div style="width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:18px"></div></div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ repeatFinalAlert }}</div><div style="font-size:11px;color:{{ muted }}">{{ repeatFinalDesc }}</div></div>
+<div style="width:36px;height:20px;border-radius:10px;background:#10b981;position:relative"><div style="width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:2px;left:18px"></div></div>
+</div>
+<!-- Headphones -->
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px">
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ headphonesOn }}</div><div style="font-size:11px;color:{{ muted }}">{{ headphonesDesc }}</div></div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+</div>
+</div>
+<!-- Test alarm -->
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px" onClick="{{ goTestAlarm }}">{{ testAlarm }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- APPEARANCE -->
+<sc-if value="{{ screen === 'apariencia' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ appearance }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px 32px">
+<div style="font-size:11px;font-weight:600;color:{{ muted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">{{ theme }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">
+<div style="background:{{ card }};border:2px solid {{ lightBorderActive }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onClick="{{ setLight }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ lightMode }}</div><div style="font-size:11px;color:{{ muted }}">{{ lightDesc }}</div></div>
+<div style="width:18px;height:18px;border-radius:50%;border:2px solid {{ lightRadioBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ !dark }}"><div style="width:10px;height:10px;border-radius:50%;background:#10b981"></div></sc-if>
+</div>
+</div>
+<div style="background:{{ card }};border:2px solid {{ darkBorderActive }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onClick="{{ setDark }}">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:600;color:{{ text }}">{{ darkMode }}</div><div style="font-size:11px;color:{{ muted }}">{{ darkDesc }}</div></div>
+<div style="width:18px;height:18px;border-radius:50%;border:2px solid {{ darkRadioBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ dark }}"><div style="width:10px;height:10px;border-radius:50%;background:#10b981"></div></sc-if>
+</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- LANGUAGE -->
+<sc-if value="{{ screen === 'language' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ langTitle }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="background:{{ card }};border:2px solid {{ langEsBorder }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onClick="{{ setLangEs }}">
+<span style="font-size:22px">🇦🇷</span>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ text }}">{{ spanish }}</div><div style="font-size:11px;color:{{ muted }}">{{ spanishDesc }}</div></div>
+<div style="width:18px;height:18px;border-radius:50%;border:2px solid {{ langEsBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ langEsRadio }}"><div style="width:10px;height:10px;border-radius:50%;background:#10b981"></div></sc-if>
+</div>
+</div>
+<div style="background:{{ card }};border:2px solid {{ langEnBorder }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onClick="{{ setLangEn }}">
+<span style="font-size:22px">🇺🇸</span>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ text }}">{{ english }}</div><div style="font-size:11px;color:{{ muted }}">{{ englishDesc }}</div></div>
+<div style="width:18px;height:18px;border-radius:50%;border:2px solid {{ langEnBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ langEnRadio }}"><div style="width:10px;height:10px;border-radius:50%;background:#10b981"></div></sc-if>
+</div>
+</div>
+<div style="background:{{ card }};border:2px solid {{ langPtBorder }};border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;cursor:pointer" onClick="{{ setLangPt }}">
+<span style="font-size:22px">🇧🇷</span>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ text }}">{{ portuguese }}</div><div style="font-size:11px;color:{{ muted }}">{{ portugueseDesc }}</div></div>
+<div style="width:18px;height:18px;border-radius:50%;border:2px solid {{ langPtBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ langPtRadio }}"><div style="width:10px;height:10px;border-radius:50%;background:#10b981"></div></sc-if>
+</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- TERMS -->
+<sc-if value="{{ screen === 'terms' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ legal }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:8px 20px 32px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px">
+<div style="font-size:13px;font-weight:600;color:{{ text }}">{{ termsTitle }}</div>
+<div style="font-size:11px;color:{{ muted }};margin-top:2px">{{ termsDate }}</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px">
+<div style="font-size:13px;font-weight:600;color:{{ text }}">{{ privacyPolicy }}</div>
+<div style="font-size:11px;color:{{ muted }};margin-top:2px">{{ privacyDesc }}</div>
+</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:14px">
+<div style="font-size:13px;font-weight:600;color:{{ text }}">{{ openSource }}</div>
+<div style="font-size:11px;color:{{ muted }};margin-top:2px">{{ openSourceDesc }}</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- FORGOT PASSWORD -->
+<sc-if value="{{ screen === 'forgotPass' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ bg }}">
+<div style="padding:54px 20px 12px;display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goLoginScreen }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ text }}" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:16px;font-weight:600;color:{{ text }}">{{ recoverPassword }}</div>
+</div>
+<div style="flex:1;padding:20px">
+<div style="font-size:13px;color:{{ muted }};line-height:1.6;margin-bottom:20px">{{ recoverDesc }}</div>
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:500;color:{{ text }};margin-bottom:6px">{{ email }}</div>
+<div style="background:{{ card }};border:1px solid {{ border }};border-radius:8px;padding:11px 12px;font-size:14px;color:{{ muted }}">hola@email.com</div>
+</div>
+<div style="background:#10b981;border-radius:8px;padding:12px;text-align:center;font-size:14px;font-weight:600;color:#fff;cursor:pointer" onClick="{{ sendRecovery }}">{{ sendLink }}</div>
+<sc-if value="{{ recoverySent }}">
+<div style="margin-top:16px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:12px;font-size:13px;color:#10b981;text-align:center">{{ emailSent }}</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:375,&quot;height&quot;:812},&quot;darkMode&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true},&quot;language&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;es&quot;,&quot;options&quot;:[&quot;es&quot;,&quot;en&quot;,&quot;pt&quot;]}}">
+class Component extends DCLogic {
+  state = {
+    screen: 'splash',
+    dark: true,
+    lang: 'es',
+    tripPhase: 0,
+    tripTimer: null,
+    a2km: true, a1km: true, a500m: true, a200m: true,
+    alertType: 'both',
+    alertMode: 'distance',
+    showPermDialog: false,
+    testingAlarm: false,
+    recoverySent: false,
+    ratingDone: false,
+    ratingGood: null,
+    headphonesConnected: true,
+    gpsLostVisible: false,
+    showOffline: false,
+  };
+  componentWillUnmount() { if (this.state.tripTimer) clearInterval(this.state.tripTimer); }
+  componentDidMount() { setTimeout(() => this.setState({ screen: 'onboard1' }), 2000); }
+  renderVals() {
+    const s = this.state;
+    const { screen, dark: dk } = s;
+    const phase = s.tripPhase || 0;
+    // Theme
+    const bg = dk ? '#09090b' : '#ffffff';
+    const card = dk ? '#18181b' : '#ffffff';
+    const border = dk ? '#27272a' : '#e4e4e7';
+    const text = dk ? '#fafafa' : '#09090b';
+    const sub = dk ? '#a1a1aa' : '#52525b';
+    const muted = dk ? '#71717a' : '#a1a1aa';
+    const inputBg = dk ? '#27272a' : '#f4f4f5';
+    const mapBg = dk ? '#18181b' : '#f4f4f5';
+    const mapLine = dk ? '#3f3f46' : '#d4d4d8';
+    const statusColor = ['splash','trip','alarmFiring','missedStop'].includes(screen) ? '#fff' : text;
+    const phases = [
+      { emoji:'😴', text:'Viajando tranquilo...', dist:'4.2 km', color:'#10b981', progress:'15%', bg: dk?'rgba(16,185,129,0.1)':'rgba(16,185,129,0.05)' },
+      { emoji:'😴', text:'Viajando tranquilo...', dist:'2.8 km', color:'#10b981', progress:'35%', bg: dk?'rgba(16,185,129,0.1)':'rgba(16,185,129,0.05)' },
+      { emoji:'🔔', text:'¡A menos de 2 km!', dist:'1.8 km', color:'#f59e0b', progress:'50%', bg: dk?'rgba(245,158,11,0.1)':'rgba(245,158,11,0.05)' },
+      { emoji:'📳', text:'¡Preparate para bajar!', dist:'900 m', color:'#f59e0b', progress:'70%', bg: dk?'rgba(245,158,11,0.1)':'rgba(245,158,11,0.05)' },
+      { emoji:'📣', text:'¡Ya casi llegás!', dist:'450 m', color:'#ef4444', progress:'85%', bg: dk?'rgba(239,68,68,0.1)':'rgba(239,68,68,0.05)' },
+      { emoji:'🚨', text:'¡BAJÁ AHORA!', dist:'180 m', color:'#ef4444', progress:'93%', bg: dk?'rgba(239,68,68,0.1)':'rgba(239,68,68,0.05)' },
+    ];
+    const p = phases[Math.min(phase, phases.length-1)];
+    // Alert type segmented
+    const ats = (type, dk) => {
+      const active = s.alertType === type;
+      return { bg: active ? (dk?'#fafafa':'#09090b') : 'transparent', color: active ? (dk?'#09090b':'#fafafa') : muted };
+    };
+    // Alert mode
+    const distActive = s.alertMode === 'distance';
+    const t = (window.BAJA_TRANSLATIONS || {})[s.lang] || {};
+    return {
+      screen, dark: dk,
+      statusColor,
+      bg, card, border, text, sub, muted, inputBg, mapBg, mapLine,
+      // Appearance
+      lightBorderActive: !dk ? '#10b981' : border,
+      darkBorderActive: dk ? '#10b981' : border,
+      lightRadioBorder: !dk ? '#10b981' : (dk ? '#3f3f46' : '#d4d4d8'),
+      darkRadioBorder: dk ? '#10b981' : (!dk ? '#d4d4d8' : '#3f3f46'),
+      setLight: () => this.setState({ dark: false }),
+      setDark: () => this.setState({ dark: true }),
+      goApariencia: () => this.setState({ screen: 'apariencia' }),
+      goAlertConfig: () => this.setState({ screen: 'alertConfig' }),
+      goMapPick: () => this.setState({ screen: 'mapPick' }),
+      confirmMapPick: () => this.setState({ screen: 'confirm' }),
+      // Alert mode
+      alertMode: s.alertMode,
+      setDistMode: () => this.setState({ alertMode: 'distance' }),
+      setTimeMode: () => this.setState({ alertMode: 'time' }),
+      distModeColor: distActive ? (dk?'#09090b':'#fafafa') : muted,
+      distModeBg: distActive ? (dk?'#fafafa':'#09090b') : 'transparent',
+      timeModeColor: !distActive ? (dk?'#09090b':'#fafafa') : muted,
+      timeModeBg: !distActive ? (dk?'#fafafa':'#09090b') : 'transparent',
+      // Alert type segmented
+      alarmTypeBg: ats('alarm', dk).bg,
+      alarmTypeColor: ats('alarm', dk).color,
+      vibTypeBg: ats('vib', dk).bg,
+      vibTypeColor: ats('vib', dk).color,
+      bothTypeBg: ats('both', dk).bg,
+      bothTypeColor: ats('both', dk).color,
+      setAlertTypeAlarm: () => this.setState({ alertType: 'alarm' }),
+      setAlertTypeVib: () => this.setState({ alertType: 'vib' }),
+      setAlertTypeBoth: () => this.setState({ alertType: 'both' }),
+      // Toggles
+      toggleAlert2km: () => this.setState(p => ({ a2km: !p.a2km })),
+      toggleAlert1km: () => this.setState(p => ({ a1km: !p.a1km })),
+      toggleAlert500m: () => this.setState(p => ({ a500m: !p.a500m })),
+      toggleAlert200m: () => this.setState(p => ({ a200m: !p.a200m })),
+      alert2kmToggleBg: s.a2km ? '#10b981' : '#3f3f46',
+      alert2kmTogglePos: s.a2km ? '18px' : '2px',
+      alert1kmToggleBg: s.a1km ? '#10b981' : '#3f3f46',
+      alert1kmTogglePos: s.a1km ? '18px' : '2px',
+      alert500mToggleBg: s.a500m ? '#10b981' : '#3f3f46',
+      alert500mTogglePos: s.a500m ? '18px' : '2px',
+      alert200mToggleBg: s.a200m ? '#10b981' : '#3f3f46',
+      alert200mTogglePos: s.a200m ? '18px' : '2px',
+      // Nav
+      nextOnboard: () => this.setState({ screen: 'onboard2' }),
+      nextOnboard2: () => this.setState({ screen: 'onboard3' }),
+      skipOnboard: () => this.setState({ screen: 'login' }),
+      showPermDialog: s.showPermDialog,
+      grantGPS: () => this.setState({ showPermDialog: true }),
+      acceptPermAlways: () => this.setState({ screen: 'home', showPermDialog: false }),
+      goHome: () => { if (s.tripTimer) clearInterval(s.tripTimer); this.setState({ screen: 'home', tripPhase: 0, tripTimer: null, showPermDialog: false }); },
+      goLogin: () => this.setState({ screen: 'gpsPermission' }),
+      goSearch: () => this.setState({ screen: 'search' }),
+      goHistory: () => this.setState({ screen: 'history' }),
+      goProfile: () => this.setState({ screen: 'profile' }),
+      selectFav1: () => this.setState({ screen: 'confirm' }),
+      selectFav2: () => this.setState({ screen: 'confirm' }),
+      selectResult1: () => this.setState({ screen: 'confirm' }),
+      // Trip
+      startTrip: () => {
+        this.setState({ screen: 'trip', tripPhase: 0 });
+        const timer = setInterval(() => {
+          this.setState(prev => {
+            if (prev.tripPhase >= 5) { clearInterval(prev.tripTimer); return { screen: 'arrived', tripTimer: null }; }
+            return { tripPhase: prev.tripPhase + 1 };
+          });
+        }, 2500);
+        this.setState({ tripTimer: timer });
+      },
+      cancelTrip: () => { if (s.tripTimer) clearInterval(s.tripTimer); this.setState({ screen: 'home', tripPhase: 0, tripTimer: null }); },
+      tripEmoji: p.emoji, tripStatusText: p.text, tripDistText: p.dist,
+      tripDistColor: p.color, tripProgress: p.progress,
+      tripProgressColor: phase >= 4 ? '#ef4444' : phase >= 2 ? '#f59e0b' : '#10b981',
+      tripStatusBg: p.bg,
+      tripPulseAnim: phase >= 4 ? 'pulse 0.8s ease-in-out infinite' : phase >= 2 ? 'pulse 1.5s ease-in-out infinite' : 'none',
+      // Splash
+      goSplash: () => { this.setState({ screen: 'splash' }); setTimeout(() => this.setState({ screen: 'onboard1' }), 2000); },
+      // Forgot pass
+      goForgotPass: () => this.setState({ screen: 'forgotPass', recoverySent: false }),
+      goLoginScreen: () => this.setState({ screen: 'login' }),
+      sendRecovery: () => this.setState({ recoverySent: true }),
+      recoverySent: s.recoverySent,
+      // Rating
+      ratingDone: s.ratingDone,
+      ratingGoodBg: s.ratingGood === true ? 'rgba(16,185,129,0.15)' : inputBg,
+      ratingGoodBorder: s.ratingGood === true ? '#10b981' : 'transparent',
+      ratingBadBg: s.ratingGood === false && s.ratingDone ? 'rgba(239,68,68,0.15)' : inputBg,
+      ratingBadBorder: s.ratingGood === false && s.ratingDone ? '#ef4444' : 'transparent',
+      rateGood: () => this.setState({ ratingGood: true, ratingDone: true }),
+      rateBad: () => this.setState({ ratingGood: false, ratingDone: true }),
+      // Favs
+      goEditFavs: () => this.setState({ screen: 'editFavs' }),
+      addNewFav: () => this.setState({ screen: 'addFav' }),
+      goEditFavs: () => this.setState({ screen: 'editFavs' }),
+      // Bus
+      goSelectBus: () => this.setState({ screen: 'selectBus' }),
+      selectBusLine: () => this.setState({ screen: 'confirm' }),
+      goConfirmFromBus: () => this.setState({ screen: 'confirm' }),
+      // Share
+      goShareTrip: () => this.setState({ screen: 'shareTrip' }),
+      goTripFromShare: () => this.setState({ screen: 'trip' }),
+      shareWithContact: () => this.setState({ screen: 'trip' }),
+      // Test alarm
+      goTestAlarm: () => this.setState({ screen: 'testAlarm', testingAlarm: false }),
+      toggleTestAlarm: () => this.setState(p => ({ testingAlarm: !p.testingAlarm })),
+      testAlarmBg: s.testingAlarm ? (dk?'rgba(239,68,68,0.2)':'rgba(239,68,68,0.1)') : (dk?'rgba(16,185,129,0.1)':'rgba(16,185,129,0.05)'),
+      testAlarmAnim: s.testingAlarm ? 'pulse 0.5s ease-in-out infinite' : 'none',
+      testAlarmShadow: s.testingAlarm ? '0 0 40px rgba(239,68,68,0.3)' : '0 8px 30px rgba(0,0,0,0.05)',
+      testAlarmIcon: s.testingAlarm ? '🔊' : '🔔',
+      testAlarmTitle: s.testingAlarm ? (t.testAlarmPlaying||'¡Alarma sonando!') : (t.testAlarmTitle||'Probar alarma'),
+      testAlarmDesc: s.testingAlarm ? (t.testAlarmPlayingDesc||'Así sonaría tu alarma.') : (t.testAlarmDesc||'Tocá para probar.'),
+      testAlarmBtnBg: s.testingAlarm ? '#ef4444' : '#10b981',
+      testAlarmBtnColor: '#fff',
+      testAlarmBtnText: s.testingAlarm ? (t.stop||'Detener') : (t.testNow||'Probar ahora'),
+      // New screens
+      goBatteryOpt: () => this.setState({ screen: 'batteryOpt' }),
+      goMissedStop: () => this.setState({ screen: 'missedStop' }),
+      goAlarmFiring: () => this.setState({ screen: 'alarmFiring' }),
+      dismissAlarm: () => this.setState({ screen: 'arrived' }),
+      // GPS lost
+      headphonesConnected: s.headphonesConnected,
+      gpsLostVisible: s.gpsLostVisible,
+      showOffline: s.showOffline,
+      // Language
+      goLanguage: () => this.setState({ screen: 'language' }),
+      setLangEs: () => this.setState({ lang: 'es' }),
+      setLangEn: () => this.setState({ lang: 'en' }),
+      setLangPt: () => this.setState({ lang: 'pt' }),
+      langEsBorder: s.lang === 'es' ? '#10b981' : border,
+      langEnBorder: s.lang === 'en' ? '#10b981' : border,
+      langPtBorder: s.lang === 'pt' ? '#10b981' : border,
+      langEsRadio: s.lang === 'es',
+      langEnRadio: s.lang === 'en',
+      langPtRadio: s.lang === 'pt',
+      // Terms
+      goTerms: () => this.setState({ screen: 'terms' }),
+      // Translations
+      ...t,
+    };
+  }
+}
+</script>
+</body>
+</html>

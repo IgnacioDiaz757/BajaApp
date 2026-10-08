@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Sky Flap</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #4ec0ca;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .score {
+      position: fixed;
+      top: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      font-size: clamp(48px, 9vh, 80px);
+      font-weight: 900;
+      color: #fff;
+      -webkit-text-stroke: 3px #3b2a1a;
+      paint-order: stroke fill;
+      text-shadow: 0 4px 0 #3b2a1a;
+      pointer-events: none;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -58%);
+      width: min(340px, 88vw);
+      padding: 24px;
+      text-align: center;
+      background: #ded895;
+      border: 4px solid #543847;
+      border-radius: 18px;
+      box-shadow: 0 6px 0 #543847, 0 20px 40px rgba(0, 0, 0, .25);
+      color: #543847;
+    }
+
+    /* Sin animación de salida: opacity/visibility con transición podían quedar dibujadas en algunos WebView */
+    .panel[hidden] {
+      display: none;
+    }
+
+    /* Panel de inicio arriba: deja ver al pájaro y las tuberías (en vertical el mundo es angosto) */
+    #start-panel {
+      top: 5%;
+      padding: 14px 18px;
+      transform: translateX(-50%);
+    }
+
+
+    .panel h1 {
+      margin: 0 0 8px;
+      font-size: clamp(34px, 6vw, 46px);
+      font-weight: 900;
+      color: #fff;
+      -webkit-text-stroke: 3px #543847;
+      paint-order: stroke fill;
+      letter-spacing: 1px;
+    }
+
+    .panel p {
+      margin: 6px 0;
+      font-weight: 600;
+    }
+
+    .hint {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px !important;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    kbd {
+      padding: 2px 8px;
+      border: 2px solid #543847;
+      border-bottom-width: 4px;
+      border-radius: 6px;
+      background: #fff;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 16px 0;
+    }
+
+    .stats > div:not(.medal) {
+      display: grid;
+      gap: 2px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .stats strong {
+      font-size: 32px;
+      color: #fff;
+      -webkit-text-stroke: 2px #543847;
+      paint-order: stroke fill;
+    }
+
+    .medal {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      font-size: 32px;
+      background: #c9c07a;
+      border: 3px solid #543847;
+    }
+
+    button {
+      padding: 12px 28px;
+      font: inherit;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      background: #e86101;
+      border: 3px solid #543847;
+      border-radius: 12px;
+      box-shadow: 0 4px 0 #543847;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #543847;
+    }
+
+    .new-record {
+      color: #e86101;
+    }
+
+    body.touch .desktop-only { display: none; }
+
+    @keyframes pulse {
+      50% {
+        opacity: .5;
+      }
+    }
+  </style>
+</head>
+
+  <body>
+  <canvas></canvas>
+  <p class="score" id="score" hidden>0</p>
+
+  <section class="panel" id="start-panel">
+    <h1>Sky Flap</h1>
+    <p data-t="Esquivá las tuberías sin tocar el suelo">Esquivá las tuberías sin tocar el suelo</p>
+    <p class="hint"><span class="desktop-only"><kbd>Espacio</kbd> <span data-t="o">o</span></span> <span data-t="Tocá la pantalla para aletear">tocá la pantalla</span></p>
+    <p><span data-t="Récord">Récord</span>: <strong id="start-best">0</strong></p>
+  </section>
+
+  <section class="panel" id="over-panel" hidden>
+    <h1 data-t="FIN DEL JUEGO">Game Over</h1>
+    <div class="stats">
+      <div class="medal" id="medal">🥚</div>
+      <div><span data-t="Puntos">Puntos</span> <strong id="final-score">0</strong></div>
+      <div><span data-t="Récord">Récord</span> <strong id="final-best">0</strong></div>
+    </div>
+    <p class="new-record" id="new-record" hidden data-t="¡Nuevo récord!">¡Nuevo récord!</p>
+    <button id="restart" data-t="Jugar de nuevo">Jugar de nuevo</button>
+  </section>
+
+<!--__SCRIPTS__-->
+</body>
+</html>

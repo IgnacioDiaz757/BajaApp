@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#09090b;font-family:'Inter',system-ui,sans-serif}
+a,a:hover{color:#10b981}
+</style>
+</helmet>
+<div style="max-width:900px;margin:0 auto;padding:40px 24px">
+<!-- Header -->
+<div style="margin-bottom:40px">
+<div style="font-size:32px;font-weight:800;color:#fafafa;letter-spacing:-0.5px;margin-bottom:4px">Arquitectura Bajá</div>
+<div style="font-size:14px;color:#71717a">Supabase + React Native / Flutter</div>
+</div>
+
+<!-- Architecture Diagram -->
+<div style="background:#18181b;border:1px solid #27272a;border-radius:12px;padding:32px;margin-bottom:32px;overflow-x:auto">
+<svg viewBox="0 0 800 520" width="100%" style="min-width:700px">
+<!-- Device -->
+<rect x="20" y="20" width="220" height="480" rx="12" fill="#27272a" stroke="#3f3f46" stroke-width="1.5"></rect>
+<text x="130" y="52" text-anchor="middle" fill="#fafafa" font-size="13" font-weight="700">📱 DEVICE (App Nativa)</text>
+<rect x="36" y="68" width="188" height="36" rx="6" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.3"></rect>
+<text x="130" y="91" text-anchor="middle" fill="#10b981" font-size="11" font-weight="600">React Native / Flutter</text>
+<rect x="36" y="116" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="135" text-anchor="middle" fill="#a1a1aa" font-size="10">GPS Background Service</text>
+<rect x="36" y="152" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="171" text-anchor="middle" fill="#a1a1aa" font-size="10">Haversine Distance Calc</text>
+<rect x="36" y="188" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="207" text-anchor="middle" fill="#a1a1aa" font-size="10">Alert Manager (Vibration/Sound)</text>
+<rect x="36" y="224" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="243" text-anchor="middle" fill="#a1a1aa" font-size="10">Notification Service</text>
+<rect x="36" y="260" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="279" text-anchor="middle" fill="#a1a1aa" font-size="10">Battery Monitor</text>
+<rect x="36" y="296" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="315" text-anchor="middle" fill="#a1a1aa" font-size="10">Headphone Detection</text>
+<rect x="36" y="332" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="351" text-anchor="middle" fill="#a1a1aa" font-size="10">Offline Cache (SQLite)</text>
+<rect x="36" y="368" width="188" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="130" y="387" text-anchor="middle" fill="#a1a1aa" font-size="10">Missed Stop Detection</text>
+<rect x="36" y="404" width="90" height="28" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-opacity="0.3"></rect>
+<text x="81" y="423" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="600">Android</text>
+<rect x="134" y="404" width="90" height="28" rx="6" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-opacity="0.3"></rect>
+<text x="179" y="423" text-anchor="middle" fill="#3b82f6" font-size="9" font-weight="600">iOS</text>
+<text x="81" y="453" text-anchor="middle" fill="#71717a" font-size="8">Foreground Svc</text>
+<text x="81" y="463" text-anchor="middle" fill="#71717a" font-size="8">Batt Optimization</text>
+<text x="179" y="453" text-anchor="middle" fill="#71717a" font-size="8">Background Modes</text>
+<text x="179" y="463" text-anchor="middle" fill="#71717a" font-size="8">Critical Alerts</text>
+
+<!-- Arrows to Supabase -->
+<line x1="240" y1="140" x2="310" y2="140" stroke="#3f3f46" stroke-width="1.5" stroke-dasharray="6,3"></line>
+<polygon points="310,136 318,140 310,144" fill="#3f3f46"></polygon>
+<text x="275" y="132" text-anchor="middle" fill="#71717a" font-size="8">HTTPS</text>
+
+<line x1="240" y1="280" x2="310" y2="280" stroke="#10b981" stroke-width="1.5"></line>
+<polygon points="310,276 318,280 310,284" fill="#10b981"></polygon>
+<text x="275" y="272" text-anchor="middle" fill="#10b981" font-size="8">Realtime</text>
+
+<line x1="240" y1="360" x2="310" y2="360" stroke="#3f3f46" stroke-width="1.5" stroke-dasharray="6,3"></line>
+<polygon points="310,356 318,360 310,364" fill="#3f3f46"></polygon>
+<text x="275" y="352" text-anchor="middle" fill="#71717a" font-size="8">REST API</text>
+
+<!-- Supabase -->
+<rect x="320" y="20" width="240" height="480" rx="12" fill="#27272a" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.5"></rect>
+<text x="440" y="52" text-anchor="middle" fill="#10b981" font-size="13" font-weight="700">⚡ SUPABASE</text>
+<rect x="336" y="68" width="208" height="36" rx="6" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-opacity="0.3"></rect>
+<text x="440" y="91" text-anchor="middle" fill="#10b981" font-size="11" font-weight="600">Auth (Google/Apple/Email)</text>
+<rect x="336" y="116" width="208" height="36" rx="6" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-opacity="0.3"></rect>
+<text x="440" y="139" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="600">PostgreSQL Database</text>
+<rect x="344" y="164" width="192" height="20" rx="4" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="440" y="178" text-anchor="middle" fill="#a1a1aa" font-size="9">profiles · favorites · trips</text>
+<rect x="344" y="190" width="192" height="20" rx="4" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="440" y="204" text-anchor="middle" fill="#a1a1aa" font-size="9">alert_configs · trip_alerts</text>
+<rect x="344" y="216" width="192" height="20" rx="4" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="440" y="230" text-anchor="middle" fill="#a1a1aa" font-size="9">shared_trips · dnd_schedules</text>
+<rect x="344" y="242" width="192" height="20" rx="4" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="440" y="256" text-anchor="middle" fill="#a1a1aa" font-size="9">bus_lines · location_logs</text>
+<rect x="336" y="276" width="208" height="28" rx="6" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-opacity="0.3"></rect>
+<text x="440" y="295" text-anchor="middle" fill="#f59e0b" font-size="10" font-weight="600">RLS Policies (seguridad)</text>
+<rect x="336" y="316" width="208" height="28" rx="6" fill="#8b5cf6" fill-opacity="0.1" stroke="#8b5cf6" stroke-opacity="0.3"></rect>
+<text x="440" y="335" text-anchor="middle" fill="#8b5cf6" font-size="10" font-weight="600">Realtime (shared trips)</text>
+<rect x="336" y="356" width="208" height="28" rx="6" fill="#ec4899" fill-opacity="0.1" stroke="#ec4899" stroke-opacity="0.3"></rect>
+<text x="440" y="375" text-anchor="middle" fill="#ec4899" font-size="10" font-weight="600">Edge Functions</text>
+<rect x="344" y="394" width="192" height="20" rx="4" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="440" y="408" text-anchor="middle" fill="#a1a1aa" font-size="9">Push Notifications</text>
+<rect x="344" y="420" width="192" height="20" rx="4" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="440" y="434" text-anchor="middle" fill="#a1a1aa" font-size="9">Share Link Generator</text>
+<rect x="336" y="452" width="208" height="28" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="440" y="471" text-anchor="middle" fill="#a1a1aa" font-size="10">Storage (avatars)</text>
+
+<!-- External services -->
+<rect x="600" y="20" width="180" height="480" rx="12" fill="#27272a" stroke="#3f3f46" stroke-width="1.5"></rect>
+<text x="690" y="52" text-anchor="middle" fill="#fafafa" font-size="13" font-weight="700">🌐 SERVICIOS</text>
+<rect x="616" y="68" width="148" height="44" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="690" y="88" text-anchor="middle" fill="#ef4444" font-size="11" font-weight="600">Google Maps API</text>
+<text x="690" y="102" text-anchor="middle" fill="#71717a" font-size="8">Geocoding + Places</text>
+<rect x="616" y="124" width="148" height="44" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="690" y="144" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="600">FCM / APNs</text>
+<text x="690" y="158" text-anchor="middle" fill="#71717a" font-size="8">Push Notifications</text>
+<rect x="616" y="180" width="148" height="44" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="690" y="200" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="600">Sentry / Crashlytics</text>
+<text x="690" y="214" text-anchor="middle" fill="#71717a" font-size="8">Error Tracking</text>
+<rect x="616" y="236" width="148" height="44" rx="6" fill="#18181b" stroke="#3f3f46"></rect>
+<text x="690" y="256" text-anchor="middle" fill="#10b981" font-size="11" font-weight="600">Analytics</text>
+<text x="690" y="270" text-anchor="middle" fill="#71717a" font-size="8">Mixpanel / PostHog</text>
+
+<!-- Arrows from Supabase to Services -->
+<line x1="560" y1="90" x2="616" y2="90" stroke="#3f3f46" stroke-width="1" stroke-dasharray="4,3"></line>
+<line x1="560" y1="146" x2="616" y2="146" stroke="#3f3f46" stroke-width="1" stroke-dasharray="4,3"></line>
+
+<!-- Viewer (shared trip) -->
+<rect x="616" y="320" width="148" height="68" rx="6" fill="#8b5cf6" fill-opacity="0.1" stroke="#8b5cf6" stroke-opacity="0.3"></rect>
+<text x="690" y="344" text-anchor="middle" fill="#8b5cf6" font-size="11" font-weight="600">🔗 Share Viewer</text>
+<text x="690" y="360" text-anchor="middle" fill="#71717a" font-size="9">Web público (Next.js)</text>
+<text x="690" y="374" text-anchor="middle" fill="#71717a" font-size="8">Mapa en tiempo real</text>
+
+<line x1="560" y1="340" x2="616" y2="340" stroke="#8b5cf6" stroke-width="1.5" stroke-opacity="0.5"></line>
+<polygon points="616,336 624,340 616,344" fill="#8b5cf6" fill-opacity="0.5"></polygon>
+<text x="588" y="332" text-anchor="middle" fill="#71717a" font-size="7">Realtime</text>
+</svg>
+</div>
+
+<!-- Data Flow -->
+<div style="font-size:18px;font-weight:700;color:#fafafa;margin-bottom:16px;letter-spacing:-0.3px">Flujo de datos</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:32px">
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px;display:flex;gap:12px;align-items:flex-start">
+<div style="width:28px;height:28px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#10b981">1</div>
+<div><div style="font-size:13px;font-weight:600;color:#fafafa">Inicio de viaje</div><div style="font-size:12px;color:#71717a;margin-top:2px;line-height:1.5">App crea registro en <code style="background:#27272a;padding:1px 5px;border-radius:4px;font-size:11px;color:#a1a1aa">trips</code> → activa GPS background service → inicia cálculo Haversine local cada N segundos (adaptativo: 30s lejos, 3s cerca)</div></div>
+</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px;display:flex;gap:12px;align-items:flex-start">
+<div style="width:28px;height:28px;border-radius:8px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#f59e0b">2</div>
+<div><div style="font-size:13px;font-weight:600;color:#fafafa">Monitoreo</div><div style="font-size:12px;color:#71717a;margin-top:2px;line-height:1.5">GPS local calcula distancia → si cruza umbral, dispara alerta nativa (vibración/sonido/notificación) → loguea en <code style="background:#27272a;padding:1px 5px;border-radius:4px;font-size:11px;color:#a1a1aa">trip_alerts</code> → si compartió viaje, actualiza <code style="background:#27272a;padding:1px 5px;border-radius:4px;font-size:11px;color:#a1a1aa">shared_trips</code> via Realtime</div></div>
+</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px;display:flex;gap:12px;align-items:flex-start">
+<div style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#ef4444">3</div>
+<div><div style="font-size:13px;font-weight:600;color:#fafafa">Detección de parada pasada</div><div style="font-size:12px;color:#71717a;margin-top:2px;line-height:1.5">Si la distancia empieza a crecer después de haber bajado de 500m → activa pantalla "Te pasaste" → trip.status = 'missed'</div></div>
+</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px;display:flex;gap:12px;align-items:flex-start">
+<div style="width:28px;height:28px;border-radius:8px;background:rgba(139,92,246,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#8b5cf6">4</div>
+<div><div style="font-size:13px;font-weight:600;color:#fafafa">Llegada</div><div style="font-size:12px;color:#71717a;margin-top:2px;line-height:1.5">Distancia &lt; 50m → alarma final (swipe to dismiss) → <code style="background:#27272a;padding:1px 5px;border-radius:4px;font-size:11px;color:#a1a1aa">end_trip('arrived')</code> → pide rating → desactiva shared_trips</div></div>
+</div>
+</div>
+
+<!-- Tech Stack -->
+<div style="font-size:18px;font-weight:700;color:#fafafa;margin-bottom:16px;letter-spacing:-0.3px">Stack recomendado</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:32px">
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px">
+<div style="font-size:12px;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Frontend</div>
+<div style="font-size:13px;color:#fafafa;font-weight:500">React Native + Expo</div>
+<div style="font-size:11px;color:#71717a;margin-top:4px;line-height:1.5">expo-location · expo-notifications · expo-haptics · expo-av (alarma)</div>
+</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px">
+<div style="font-size:12px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Backend</div>
+<div style="font-size:13px;color:#fafafa;font-weight:500">Supabase</div>
+<div style="font-size:11px;color:#71717a;margin-top:4px;line-height:1.5">Auth · PostgreSQL · Realtime · Edge Functions · Storage</div>
+</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px">
+<div style="font-size:12px;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Maps</div>
+<div style="font-size:13px;color:#fafafa;font-weight:500">Google Maps SDK</div>
+<div style="font-size:11px;color:#71717a;margin-top:4px;line-height:1.5">Places API · Geocoding · Maps SDK for React Native</div>
+</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px">
+<div style="font-size:12px;font-weight:700;color:#8b5cf6;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Share Viewer</div>
+<div style="font-size:13px;color:#fafafa;font-weight:500">Next.js (web)</div>
+<div style="font-size:11px;color:#71717a;margin-top:4px;line-height:1.5">Página pública donde el contacto ve la ubicación en tiempo real via Supabase Realtime</div>
+</div>
+</div>
+
+<!-- Files -->
+<div style="font-size:18px;font-weight:700;color:#fafafa;margin-bottom:16px;letter-spacing:-0.3px">Archivos SQL</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px;display:flex;align-items:center;gap:12px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(16,185,129,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">📄</div>
+<div><div style="font-size:13px;font-weight:600;color:#fafafa">supabase/schema.sql</div><div style="font-size:11px;color:#71717a">10 tablas + vistas + funciones + triggers</div></div>
+</div>
+<div style="background:#18181b;border:1px solid #27272a;border-radius:8px;padding:16px;display:flex;align-items:center;gap:12px">
+<div style="width:32px;height:32px;border-radius:8px;background:rgba(245,158,11,0.1);display:flex;align-items:center;justify-content:center;font-size:16px">🔒</div>
+<div><div style="font-size:13px;font-weight:600;color:#fafafa">supabase/rls_policies.sql</div><div style="font-size:11px;color:#71717a">Políticas de seguridad por tabla + Realtime</div></div>
+</div>
+</div>
+</div>
+</x-dc>
+</body>
+</html>

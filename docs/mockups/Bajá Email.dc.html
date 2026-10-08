@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./translations.js"></script>
+<style>
+body { margin: 0; background: #E8E0F0; font-family: 'Quicksand', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+a, a:hover { color: #059669; }
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes ripple { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+@keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.08); } 70% { transform: scale(0.95); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes dotPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+</style>
+</helmet>
+
+<x-import component-from-global-scope="AndroidDevice" from="./android-frame.jsx" dark="{{ dark }}" title="" hint-size="100%,100%">
+
+<!-- ONBOARDING 1 -->
+<sc-if value="{{ screen === 'onboard1' }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;height:100%;background:linear-gradient(170deg, #ECFDF5 0%, #D1FAE5 40%, #FEF9C3 100%);overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px">
+<div style="width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg, #059669, #10B981);display:flex;align-items:center;justify-content:center;margin-bottom:32px;box-shadow:0 20px 60px rgba(5,150,105,0.25);animation:float 3s ease-in-out infinite">
+<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="font-size:32px;font-weight:700;color:#064E3B;text-align:center;margin-bottom:12px">{{ ob1Title }}</div>
+<div style="font-size:15px;color:#065F46;text-align:center;line-height:1.6;opacity:0.7;max-width:260px">{{ ob1Desc }}</div>
+</div>
+<div style="padding:0 32px 16px">
+<div style="display:flex;justify-content:center;gap:8px;margin-bottom:24px">
+<div style="width:24px;height:6px;border-radius:3px;background:#059669"></div>
+<div style="width:6px;height:6px;border-radius:3px;background:rgba(5,150,105,0.2)"></div>
+<div style="width:6px;height:6px;border-radius:3px;background:rgba(5,150,105,0.2)"></div>
+</div>
+<div style="background:#059669;border-radius:16px;padding:16px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 20px rgba(5,150,105,0.3)" onClick="{{ nextOnboard }}">{{ next }}</div>
+<div style="text-align:center;padding:14px;font-size:14px;color:rgba(5,150,105,0.5);cursor:pointer;font-weight:600" onClick="{{ skipOnboard }}">{{ skip }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 2 -->
+<sc-if value="{{ screen === 'onboard2' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:linear-gradient(170deg, #FEF3C7 0%, #FDE68A 40%, #D1FAE5 100%);overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px">
+<div style="width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg, #F59E0B, #FBBF24);display:flex;align-items:center;justify-content:center;margin-bottom:32px;box-shadow:0 20px 60px rgba(245,158,11,0.25);animation:float 3s ease-in-out infinite">
+<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path><line x1="12" y1="2" x2="12" y2="1"></line></svg>
+</div>
+<div style="font-size:32px;font-weight:700;color:#78350F;text-align:center;margin-bottom:12px">{{ ob2Title }}</div>
+<div style="font-size:15px;color:#92400E;text-align:center;line-height:1.6;opacity:0.7;max-width:260px">{{ ob2Desc }}</div>
+</div>
+<div style="padding:0 32px 16px">
+<div style="display:flex;justify-content:center;gap:8px;margin-bottom:24px">
+<div style="width:6px;height:6px;border-radius:3px;background:rgba(245,158,11,0.3)"></div>
+<div style="width:24px;height:6px;border-radius:3px;background:#F59E0B"></div>
+<div style="width:6px;height:6px;border-radius:3px;background:rgba(245,158,11,0.3)"></div>
+</div>
+<div style="background:#F59E0B;border-radius:16px;padding:16px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,0.3)" onClick="{{ nextOnboard2 }}">{{ next }}</div>
+<div style="text-align:center;padding:14px;font-size:14px;color:rgba(245,158,11,0.5);cursor:pointer;font-weight:600" onClick="{{ skipOnboard }}">{{ skip }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ONBOARDING 3 -->
+<sc-if value="{{ screen === 'onboard3' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:linear-gradient(170deg, #EDE9FE 0%, #DDD6FE 40%, #ECFDF5 100%);overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px">
+<div style="width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg, #7C3AED, #8B5CF6);display:flex;align-items:center;justify-content:center;margin-bottom:32px;box-shadow:0 20px 60px rgba(124,58,237,0.25);animation:float 3s ease-in-out infinite">
+<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="font-size:32px;font-weight:700;color:#3B0764;text-align:center;margin-bottom:12px">{{ ob3Title }}</div>
+<div style="font-size:15px;color:#5B21B6;text-align:center;line-height:1.6;opacity:0.7;max-width:260px">{{ ob3Desc }}</div>
+</div>
+<div style="padding:0 32px 16px">
+<div style="display:flex;justify-content:center;gap:8px;margin-bottom:24px">
+<div style="width:6px;height:6px;border-radius:3px;background:rgba(124,58,237,0.3)"></div>
+<div style="width:6px;height:6px;border-radius:3px;background:rgba(124,58,237,0.3)"></div>
+<div style="width:24px;height:6px;border-radius:3px;background:#7C3AED"></div>
+</div>
+<div style="background:#7C3AED;border-radius:16px;padding:16px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 20px rgba(124,58,237,0.3)" onClick="{{ skipOnboard }}">{{ start }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- LOGIN -->
+<sc-if value="{{ screen === 'login' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};overflow-y:auto">
+<div style="flex:1;display:flex;flex-direction:column;padding:32px 24px 16px">
+<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:36px;margin-top:16px">
+<div style="width:72px;height:72px;border-radius:22px;background:linear-gradient(135deg, #059669, #10B981);display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 8px 30px rgba(5,150,105,0.2)">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="font-size:28px;font-weight:700;color:{{ tText }}">Bajá</div>
+<div style="font-size:13px;color:{{ tMuted }};margin-top:4px">{{ splashSub }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+<div style="background:{{ tCard }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;font-size:15px;font-weight:600;color:{{ tText }}">
+<svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+Continuar con Google
+</div>
+<div style="background:{{ tCard }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;font-size:15px;font-weight:600;color:{{ tText }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="{{ tText }}"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.32 2.32-2.12 4.53-3.74 4.25z"></path></svg>
+Continuar con Apple
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+<div style="flex:1;height:1px;background:{{ tBorder }}"></div>
+<span style="font-size:12px;color:{{ tMuted }};font-weight:600">{{ orEmail }}</span>
+<div style="flex:1;height:1px;background:{{ tBorder }}"></div>
+</div>
+<div style="margin-bottom:12px">
+<div style="font-size:13px;font-weight:600;color:{{ tSub }};margin-bottom:6px">{{ email }}</div>
+<div style="background:{{ tInput }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:14px 16px;font-size:15px;color:{{ tMuted }}">tu@email.com</div>
+</div>
+<div style="margin-bottom:24px">
+<div style="font-size:13px;font-weight:600;color:{{ tSub }};margin-bottom:6px">{{ password }}</div>
+<div style="background:{{ tInput }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:14px 16px;font-size:15px;color:{{ tMuted }}">••••••••</div>
+</div>
+<div style="background:#059669;border-radius:14px;padding:15px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.25);margin-bottom:16px" onClick="{{ goLogin }}">{{ login }}</div>
+<div style="text-align:center;font-size:13px;color:#059669;font-weight:600;cursor:pointer;margin-bottom:12px" onClick="{{ goForgotPass }}">{{ forgotPass }}</div>
+<div style="text-align:center;font-size:14px;color:{{ tMuted }}">¿No tenés cuenta? <span style="color:#059669;font-weight:700;cursor:pointer">{{ register }}</span></div>
+</div>
+</div>
+</sc-if>
+
+<!-- GPS PERMISSIONS -->
+<sc-if value="{{ screen === 'gpsPermission' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};overflow:hidden">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px">
+<!-- Illustration -->
+<div style="position:relative;margin-bottom:36px">
+<div style="width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg, rgba(5,150,105,0.1), rgba(5,150,105,0.05));display:flex;align-items:center;justify-content:center">
+<div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg, rgba(5,150,105,0.15), rgba(5,150,105,0.08));display:flex;align-items:center;justify-content:center">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path><circle cx="12" cy="12" r="8" stroke-dasharray="4 3"></circle></svg>
+</div>
+</div>
+<div style="position:absolute;top:8px;right:0;width:36px;height:36px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(5,150,105,0.3);animation:bounceIn 0.6s ease-out 0.3s both">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+</div>
+<div style="font-size:24px;font-weight:700;color:{{ tText }};text-align:center;margin-bottom:10px">{{ gpsTitle }}</div>
+<div style="font-size:14px;color:{{ tMuted }};text-align:center;line-height:1.6;margin-bottom:32px;max-width:280px">Para avisarte cuando llegás a tu destino, Bajá necesita acceder a tu ubicación <strong style="color:{{ tText }}">incluso con la pantalla apagada</strong>.</div>
+<!-- Permission cards -->
+<div style="width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:32px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }}">
+<div style="width:36px;height:36px;border-radius:10px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<div>
+<div style="font-size:13px;font-weight:700;color:{{ tText }}">{{ gpsBg }}</div>
+<div style="font-size:11px;color:{{ tMuted }};margin-top:1px">{{ gpsBgDesc }}</div>
+</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }}">
+<div style="width:36px;height:36px;border-radius:10px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<div>
+<div style="font-size:13px;font-weight:700;color:{{ tText }}">Notificaciones</div>
+<div style="font-size:11px;color:{{ tMuted }};margin-top:1px">{{ gpsNotifDesc }}</div>
+</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }}">
+<div style="width:36px;height:36px;border-radius:10px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<div>
+<div style="font-size:13px;font-weight:700;color:{{ tText }}">{{ gpsPrivacy }}</div>
+<div style="font-size:11px;color:{{ tMuted }};margin-top:1px">{{ gpsPrivacyDesc }}</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Buttons -->
+<div style="padding:0 24px 16px">
+<div style="background:#059669;border-radius:14px;padding:16px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.25);margin-bottom:10px" onClick="{{ grantGPS }}">{{ gpsAllow }}</div>
+<div style="text-align:center;padding:10px;font-size:13px;color:{{ tMuted }};cursor:pointer;font-weight:600" onClick="{{ grantGPS }}">{{ notNow }}</div>
+</div>
+<!-- Android permission dialog mockup -->
+<sc-if value="{{ showPermDialog }}">
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:flex-end;justify-content:center;z-index:10;padding:20px">
+<div style="background:{{ tCard }};border-radius:20px;padding:24px;width:100%;max-width:320px;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.3s ease-out">
+<div style="font-size:16px;font-weight:700;color:{{ tText }};margin-bottom:8px">{{ gpsDialogTitle }}</div>
+<div style="font-size:13px;color:{{ tMuted }};line-height:1.5;margin-bottom:20px">Bajá necesita acceder a tu ubicación todo el tiempo para avisarte cuando te acerques a tu destino, incluso con la app en segundo plano.</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="padding:12px;text-align:center;font-size:14px;font-weight:700;color:#059669;cursor:pointer;border-radius:10px;background:rgba(5,150,105,0.08)" onClick="{{ acceptPermAlways }}">{{ gpsAlways }}</div>
+<div style="padding:12px;text-align:center;font-size:14px;font-weight:600;color:#3B82F6;cursor:pointer;border-radius:10px" onClick="{{ acceptPermAlways }}">{{ gpsWhileUsing }}</div>
+<div style="padding:12px;text-align:center;font-size:14px;font-weight:600;color:{{ tMuted }};cursor:pointer;border-radius:10px" onClick="{{ acceptPermAlways }}">{{ gpsDeny }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- HOME SCREEN -->
+<sc-if value="{{ screen === 'home' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};overflow-y:auto">
+<div style="padding:20px 20px 0">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div>
+<div style="font-size:13px;font-weight:600;color:{{ tMuted }};letter-spacing:0.5px">{{ hello }}</div>
+<div style="font-size:24px;font-weight:700;color:{{ tText }};margin-top:2px">{{ whereGoing }}</div>
+</div>
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg, #059669, #10B981);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(5,150,105,0.2)" onClick="{{ goProfile }}">
+<span style="font-size:16px;font-weight:700;color:#fff">M</span>
+</div>
+</div>
+</div>
+<div style="padding:16px 20px">
+<div style="background:{{ tCard }};border:2px solid {{ tBorder }};border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 2px 8px {{ tShadow }}" onClick="{{ goSearch }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<span style="font-size:15px;color:{{ tMuted }};font-weight:500">{{ searchPlaceholder }}</span>
+</div>
+</div>
+<div style="padding:0 20px;margin-bottom:20px">
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px">Favoritos</div>
+<div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px">
+<div style="flex-shrink:0;background:{{ tFavGreenBg }};border:1.5px solid {{ tFavGreenBorder }};border-radius:14px;padding:14px 16px;cursor:pointer;min-width:130px" onClick="{{ selectFav1 }}">
+<div style="font-size:18px;margin-bottom:6px">🏠</div>
+<div style="font-size:14px;font-weight:700;color:{{ tFavGreenText }}">Casa</div>
+<div style="font-size:11px;color:#059669;margin-top:2px;opacity:0.7">Av. Colón 4500</div>
+</div>
+<div style="flex-shrink:0;background:{{ tFavYellowBg }};border:1.5px solid {{ tFavYellowBorder }};border-radius:14px;padding:14px 16px;cursor:pointer;min-width:130px" onClick="{{ selectFav2 }}">
+<div style="font-size:18px;margin-bottom:6px">💼</div>
+<div style="font-size:14px;font-weight:700;color:{{ tFavYellowText }}">Trabajo</div>
+<div style="font-size:11px;color:#B45309;margin-top:2px;opacity:0.7">Cabildo 1200</div>
+</div>
+<div style="flex-shrink:0;background:{{ tFavPurpleBg }};border:1.5px solid {{ tFavPurpleBorder }};border-radius:14px;padding:14px 16px;cursor:pointer;min-width:130px">
+<div style="font-size:18px;margin-bottom:6px">📚</div>
+<div style="font-size:14px;font-weight:700;color:{{ tFavPurpleText }}">Facultad</div>
+<div style="font-size:11px;color:#6D28D9;margin-top:2px;opacity:0.7">Haya de la Torre</div>
+</div>
+</div>
+</div>
+<div style="padding:0 20px;flex:1">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};text-transform:uppercase;letter-spacing:0.5px">{{ recentTrips }}</div>
+<div style="font-size:12px;font-weight:600;color:#059669;cursor:pointer" onClick="{{ goHistory }}">{{ viewAll }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid {{ tBorder }}" onClick="{{ selectFav1 }}">
+<div style="width:40px;height:40px;border-radius:12px;background:{{ tFavGreenBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font-size:14px;font-weight:700;color:{{ tText }}">Av. Colón 4500</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:2px">Hoy, 18:30 · Llegaste bien ✓</div>
+</div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid {{ tBorder }}">
+<div style="width:40px;height:40px;border-radius:12px;background:{{ tFavYellowBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font-size:14px;font-weight:700;color:{{ tText }}">Cabildo 1200</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:2px">Ayer, 08:15 · Llegaste bien ✓</div>
+</div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;border:1px solid {{ tBorder }}">
+<div style="width:40px;height:40px;border-radius:12px;background:{{ tFavPurpleBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="flex:1;min-width:0">
+<div style="font-size:14px;font-weight:700;color:{{ tText }}">Haya de la Torre s/n</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:2px">Lunes, 07:45 · Llegaste bien ✓</div>
+</div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+</div>
+</div>
+<!-- Bottom nav -->
+<div style="padding:12px 20px 8px;display:flex;align-items:center;justify-content:space-around;border-top:1px solid {{ tBorder }};background:{{ tCard }};margin-top:12px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="#059669" stroke="#059669" stroke-width="0"><path d="M12 2L3 9v11a2 2 0 0 0 2 2h4v-7h6v7h4a2 2 0 0 0 2-2V9l-9-7z"></path></svg>
+<span style="font-size:10px;font-weight:700;color:#059669">{{ tabHome }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer" onClick="{{ goHistory }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tMuted }}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+<span style="font-size:10px;font-weight:600;color:{{ tMuted }}">{{ tabHistory }}</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer" onClick="{{ goProfile }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tMuted }}" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+<span style="font-size:10px;font-weight:600;color:{{ tMuted }}">{{ tabProfile }}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- SEARCH SCREEN -->
+<sc-if value="{{ screen === 'search' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="cursor:pointer;padding:4px" onClick="{{ goHome }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="flex:1;background:{{ tInput }};border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tMuted }}" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<span style="font-size:14px;color:{{ tText }};font-weight:500">{{ searchText }}</span>
+<span style="animation:dotPulse 1s ease-in-out infinite;font-size:14px;color:#059669;font-weight:700">|</span>
+</div>
+</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:12px 20px">
+<div style="font-size:11px;font-weight:700;color:{{ tMuted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">{{ suggestions }}</div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<div style="padding:14px 0;display:flex;align-items:center;gap:14px;cursor:pointer;border-bottom:1px solid {{ tBorder }}" onClick="{{ selectResult1 }}">
+<div style="width:36px;height:36px;border-radius:10px;background:{{ tFavGreenBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div><div style="font-size:14px;font-weight:600;color:{{ tText }}">Av. Colón 4500</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Nueva Córdoba</div></div>
+</div>
+<div style="padding:14px 0;display:flex;align-items:center;gap:14px;cursor:pointer;border-bottom:1px solid {{ tBorder }}" onClick="{{ selectResult1 }}">
+<div style="width:36px;height:36px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div><div style="font-size:14px;font-weight:600;color:{{ tText }}">Av. Colón 2800</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Centro</div></div>
+</div>
+<div style="padding:14px 0;display:flex;align-items:center;gap:14px;cursor:pointer;border-bottom:1px solid {{ tBorder }}" onClick="{{ selectResult1 }}">
+<div style="width:36px;height:36px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div><div style="font-size:14px;font-weight:600;color:{{ tText }}">Av. Colón 1100</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Barrio Güemes</div></div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- CONFIRM DESTINATION -->
+<sc-if value="{{ screen === 'confirm' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tMapBg }};overflow:hidden">
+<div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
+<!-- Google Maps style map -->
+<div style="position:absolute;inset:0;background:#E8E0D8">
+<!-- Roads -->
+<div style="position:absolute;top:0;left:50%;width:28px;height:100%;background:#fff;transform:translateX(-50%)"></div>
+<div style="position:absolute;top:40%;left:0;width:100%;height:28px;background:#fff;transform:translateY(-50%)"></div>
+<div style="position:absolute;top:65%;left:0;width:100%;height:20px;background:#fff;transform:translateY(-50%) rotate(-15deg)"></div>
+<div style="position:absolute;top:20%;left:20%;width:70%;height:20px;background:#fff;transform:rotate(25deg)"></div>
+<!-- Road labels -->
+<div style="position:absolute;top:38%;left:8%;font-size:8px;font-weight:700;color:#666;letter-spacing:0.5px;transform:rotate(0deg)">AV. COLÓN</div>
+<div style="position:absolute;top:15%;left:52%;font-size:8px;font-weight:700;color:#666;letter-spacing:0.5px;transform:rotate(90deg)">CHACABUCO</div>
+<!-- Green areas -->
+<div style="position:absolute;top:8%;left:8%;width:60px;height:45px;background:#C5DCB0;border-radius:4px"></div>
+<div style="position:absolute;top:72%;left:65%;width:80px;height:55px;background:#C5DCB0;border-radius:4px"></div>
+<div style="position:absolute;bottom:8%;left:5%;width:50px;height:35px;background:#C5DCB0;border-radius:4px"></div>
+<!-- Buildings (blocks) -->
+<div style="position:absolute;top:8%;left:55%;width:70px;height:50px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:45%;left:8%;width:55px;height:40px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:48%;left:58%;width:65px;height:35px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:75%;left:10%;width:80px;height:30px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:20%;left:8%;width:40px;height:55px;background:#D9D0C4;border-radius:2px"></div>
+</div>
+<!-- Red destination pin -->
+<div style="display:flex;flex-direction:column;align-items:center;animation:bounceIn 0.5s ease-out;z-index:2;margin-top:-20px">
+<div style="width:40px;height:40px;border-radius:50% 50% 50% 0;background:#EF4444;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(239,68,68,0.4);transform:rotate(-45deg)">
+<div style="transform:rotate(45deg);width:14px;height:14px;border-radius:50%;background:#fff"></div>
+</div>
+<div style="width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.2);margin-top:4px"></div>
+</div>
+<!-- Back button -->
+<div style="position:absolute;top:16px;left:16px;width:40px;height:40px;border-radius:12px;background:{{ tCard }};display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15);z-index:3" onClick="{{ goSearch }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<!-- Map select button -->
+<div style="position:absolute;top:16px;right:16px;background:{{ tCard }};border-radius:10px;padding:8px 14px;box-shadow:0 2px 10px rgba(0,0,0,0.15);z-index:3;cursor:pointer" onClick="{{ goMapPick }}">
+<span style="font-size:11px;font-weight:700;color:#059669">{{ chooseOnMap }}</span>
+</div>
+<!-- Zoom controls -->
+<div style="position:absolute;bottom:16px;right:16px;display:flex;flex-direction:column;gap:4px;z-index:3">
+<div style="width:36px;height:36px;border-radius:8px;background:{{ tCard }};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);font-size:18px;font-weight:700;color:{{ tText }};cursor:pointer">+</div>
+<div style="width:36px;height:36px;border-radius:8px;background:{{ tCard }};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);font-size:18px;font-weight:700;color:{{ tText }};cursor:pointer">−</div>
+</div>
+</div>
+<div style="background:{{ tCard }};border-radius:24px 24px 0 0;padding:24px 20px 16px;box-shadow:0 -4px 30px rgba(0,0,0,0.08)">
+<div style="width:36px;height:4px;border-radius:2px;background:{{ tBorder }};margin:0 auto 20px"></div>
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+<div style="width:48px;height:48px;border-radius:14px;background:{{ tFavGreenBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div>
+<div style="font-size:17px;font-weight:700;color:{{ tText }}">Av. Colón 4500</div>
+<div style="font-size:13px;color:{{ tMuted }};margin-top:2px">Nueva Córdoba, Córdoba</div>
+</div>
+</div>
+<!-- Alert config -->
+<div style="background:{{ tInput }};border-radius:14px;padding:14px 16px;margin-bottom:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+<div style="font-size:12px;font-weight:700;color:{{ tSub }};text-transform:uppercase;letter-spacing:0.5px">Configurar alertas</div>
+<div style="font-size:11px;color:#059669;font-weight:600;cursor:pointer">{{ reset }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:#FEF9C3;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:14px">🔔</span></div>
+<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:{{ tText }}">2 km</div><div style="font-size:11px;color:{{ tMuted }}">Notificación</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert2kmToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert2km }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert2kmTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:14px">📳</span></div>
+<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:{{ tText }}">1 km</div><div style="font-size:11px;color:{{ tMuted }}">Vibración</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert1kmToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert1km }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert1kmTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:#FFEDD5;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:14px">📣</span></div>
+<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:{{ tText }}">500 m</div><div style="font-size:11px;color:{{ tMuted }}">Vibración + sonido</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert500mToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert500m }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert500mTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:14px">🚨</span></div>
+<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;color:{{ tText }}">200 m</div><div style="font-size:11px;color:{{ tMuted }}">Alerta fuerte</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert200mToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert200m }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert200mTogglePos }};transition:left 0.2s"></div></div>
+</div>
+</div>
+</div>
+<!-- Select bus line -->
+<div style="background:{{ tCard }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:10px" onClick="{{ goSelectBus }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M3 15h18M9 3v18"></path></svg>
+<span style="font-size:14px;font-weight:600;color:{{ tText }};flex:1">{{ selectBusLine }}</span>
+<span style="font-size:12px;color:{{ tMuted }}">{{ optional }}</span>
+</div>
+<div style="background:linear-gradient(135deg, #059669, #10B981);border-radius:16px;padding:18px;text-align:center;font-size:17px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 20px rgba(5,150,105,0.3);display:flex;align-items:center;justify-content:center;gap:10px" onClick="{{ startTrip }}">
+<span style="font-size:22px">😴</span> COMENZAR VIAJE
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- MAP PICK SCREEN -->
+<sc-if value="{{ screen === 'mapPick' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#E8E0D8;overflow:hidden">
+<!-- Full map -->
+<div style="flex:1;position:relative;overflow:hidden">
+<div style="position:absolute;inset:0;background:#E8E0D8">
+<!-- Roads -->
+<div style="position:absolute;top:0;left:35%;width:28px;height:100%;background:#fff"></div>
+<div style="position:absolute;top:0;left:65%;width:22px;height:100%;background:#fff"></div>
+<div style="position:absolute;top:25%;left:0;width:100%;height:28px;background:#fff"></div>
+<div style="position:absolute;top:50%;left:0;width:100%;height:28px;background:#fff"></div>
+<div style="position:absolute;top:75%;left:0;width:100%;height:22px;background:#fff"></div>
+<div style="position:absolute;top:10%;left:0;width:100%;height:18px;background:#fff;transform:rotate(-12deg)"></div>
+<!-- Road labels -->
+<div style="position:absolute;top:23%;left:8%;font-size:8px;font-weight:700;color:#666;letter-spacing:0.5px">AV. COLÓN</div>
+<div style="position:absolute;top:48%;left:8%;font-size:8px;font-weight:700;color:#666;letter-spacing:0.5px">BUENOS AIRES</div>
+<div style="position:absolute;top:15%;left:36%;font-size:7px;font-weight:700;color:#666;letter-spacing:0.3px;transform:rotate(90deg)">CHACABUCO</div>
+<div style="position:absolute;top:38%;left:66%;font-size:7px;font-weight:700;color:#666;letter-spacing:0.3px;transform:rotate(90deg)">ITUZAINGÓ</div>
+<!-- Green areas -->
+<div style="position:absolute;top:5%;left:5%;width:70px;height:50px;background:#C5DCB0;border-radius:4px"></div>
+<div style="position:absolute;top:55%;left:70%;width:65px;height:60px;background:#C5DCB0;border-radius:4px"></div>
+<div style="position:absolute;bottom:5%;left:40%;width:55px;height:40px;background:#C5DCB0;border-radius:4px"></div>
+<!-- Buildings -->
+<div style="position:absolute;top:5%;left:42%;width:55px;height:45px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:30%;left:8%;width:60px;height:40px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:30%;left:42%;width:50px;height:40px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:30%;left:70%;width:60px;height:40px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:55%;left:8%;width:60px;height:35px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:55%;left:42%;width:50px;height:35px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:80%;left:8%;width:60px;height:40px;background:#D9D0C4;border-radius:2px"></div>
+<div style="position:absolute;top:80%;left:70%;width:60px;height:40px;background:#D9D0C4;border-radius:2px"></div>
+</div>
+<!-- Center crosshair / pin -->
+<div style="position:absolute;top:50%;left:50%;transform:translate(-50%, -100%);z-index:2;display:flex;flex-direction:column;align-items:center;animation:float 2s ease-in-out infinite">
+<div style="width:44px;height:44px;border-radius:50% 50% 50% 0;background:#EF4444;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(239,68,68,0.4);transform:rotate(-45deg)">
+<div style="transform:rotate(45deg);width:16px;height:16px;border-radius:50%;background:#fff"></div>
+</div>
+</div>
+<div style="position:absolute;top:50%;left:50%;transform:translate(-50%, 4px);width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,0.15);z-index:1"></div>
+<!-- Header -->
+<div style="position:absolute;top:0;left:0;right:0;padding:12px 16px;z-index:3">
+<div style="background:{{ tCard }};border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,0.12)">
+<div style="cursor:pointer;padding:2px" onClick="{{ goSearch }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="flex:1;font-size:14px;font-weight:600;color:{{ tText }}">{{ moveMapToChoose }}</div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tMuted }}" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+</div>
+</div>
+<!-- Zoom -->
+<div style="position:absolute;bottom:16px;right:16px;display:flex;flex-direction:column;gap:4px;z-index:3">
+<div style="width:36px;height:36px;border-radius:8px;background:{{ tCard }};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);font-size:18px;font-weight:700;color:{{ tText }};cursor:pointer">+</div>
+<div style="width:36px;height:36px;border-radius:8px;background:{{ tCard }};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);font-size:18px;font-weight:700;color:{{ tText }};cursor:pointer">−</div>
+</div>
+<!-- My location button -->
+<div style="position:absolute;bottom:16px;left:16px;width:40px;height:40px;border-radius:12px;background:{{ tCard }};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;z-index:3">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path></svg>
+</div>
+</div>
+<!-- Bottom sheet -->
+<div style="background:{{ tCard }};padding:16px 20px;box-shadow:0 -4px 20px rgba(0,0,0,0.08)">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+<div style="width:40px;height:40px;border-radius:12px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="#EF4444" stroke="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3" fill="#fff"></circle></svg>
+</div>
+<div style="flex:1">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Av. Colón 4500</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:1px">-31.4201, -64.1888</div>
+</div>
+</div>
+<div style="background:linear-gradient(135deg, #059669, #10B981);border-radius:14px;padding:15px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.3)" onClick="{{ confirmMapPick }}">{{ confirmLocation }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- NO GPS / NO INTERNET -->
+<sc-if value="{{ screen === 'noSignal' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};align-items:center;justify-content:center;padding:32px">
+<div style="width:100px;height:100px;border-radius:50%;background:{{ noSignalIconBg }};display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="{{ noSignalIconColor }}" stroke-width="1.8" stroke-linecap="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path><path d="M10.71 5.05A16 16 0 0 1 22.56 9"></path><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+</div>
+<div style="font-size:22px;font-weight:700;color:{{ tText }};text-align:center;margin-bottom:8px">Sin conexión</div>
+<div style="font-size:14px;color:{{ tMuted }};text-align:center;line-height:1.6;margin-bottom:8px;max-width:260px">Verificá tu conexión a internet y que el GPS esté activado para usar Bajá.</div>
+<div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-top:24px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }}">
+<div style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:{{ tText }}">GPS</div><div style="font-size:11px;color:#EF4444">{{ disabled }}</div></div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }}">
+<div style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M21 21H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3"></path></svg></div>
+<div style="flex:1"><div style="font-size:13px;font-weight:700;color:{{ tText }}">Internet</div><div style="font-size:11px;color:#EF4444">Sin conexión</div></div>
+</div>
+</div>
+<div style="width:100%;margin-top:28px">
+<div style="background:#059669;border-radius:14px;padding:15px;text-align:center;font-size:15px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.25)" onClick="{{ goHome }}">{{ retry }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- BATTERY LOW WARNING -->
+<sc-if value="{{ screen === 'batteryLow' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};align-items:center;justify-content:center;padding:32px">
+<div style="width:100px;height:100px;border-radius:50%;background:#FEF3C7;display:flex;align-items:center;justify-content:center;margin-bottom:24px;animation:pulse 2s ease-in-out infinite">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line><rect x="3" y="9" width="5" height="6" rx="1" fill="#EF4444" opacity="0.3"></rect></svg>
+</div>
+<div style="font-size:22px;font-weight:700;color:{{ tText }};text-align:center;margin-bottom:8px">{{ lowBattery }}</div>
+<div style="font-size:36px;font-weight:800;color:#EF4444;text-align:center;margin-bottom:8px">12%</div>
+<div style="font-size:14px;color:{{ tMuted }};text-align:center;line-height:1.6;margin-bottom:4px;max-width:260px">Tu batería podría no alcanzar para completar el viaje. Recomendamos cargar el teléfono.</div>
+<div style="background:#FEF3C7;border-radius:10px;padding:10px 16px;margin-top:16px;margin-bottom:24px">
+<div style="font-size:12px;font-weight:600;color:#92400E;text-align:center">💡 Activá el ahorro de batería para que dure más</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;width:100%">
+<div style="background:#059669;border-radius:14px;padding:15px;text-align:center;font-size:15px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.25)" onClick="{{ startTripAnyway }}">{{ startAnyway }}</div>
+<div style="background:{{ tCard }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:15px;text-align:center;font-size:15px;font-weight:700;color:{{ tText }};cursor:pointer" onClick="{{ goHome }}">Cancelar</div>
+</div>
+</div>
+</sc-if>
+
+<!-- EDIT FAVORITES -->
+<sc-if value="{{ screen === 'editFavs' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="flex:1;font-size:18px;font-weight:700;color:{{ tText }}">Destinos favoritos</div>
+<div style="font-size:13px;font-weight:700;color:#059669;cursor:pointer" onClick="{{ addNewFav }}">{{ addNew }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:16px 20px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<!-- Fav 1 -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:44px;height:44px;border-radius:12px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">🏠</div>
+<div style="flex:1">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Casa</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Av. Colón 4500</div>
+</div>
+<div style="display:flex;gap:6px">
+<div style="width:32px;height:32px;border-radius:8px;background:{{ tInput }};display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+</div>
+<div style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Fav 2 -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:44px;height:44px;border-radius:12px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">💼</div>
+<div style="flex:1">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Trabajo</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Cabildo 1200</div>
+</div>
+<div style="display:flex;gap:6px">
+<div style="width:32px;height:32px;border-radius:8px;background:{{ tInput }};display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+</div>
+<div style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Fav 3 -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:44px;height:44px;border-radius:12px;background:#EDE9FE;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">📚</div>
+<div style="flex:1">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Facultad</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Haya de la Torre s/n</div>
+</div>
+<div style="display:flex;gap:6px">
+<div style="width:32px;height:32px;border-radius:8px;background:{{ tInput }};display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+</div>
+<div style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;cursor:pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Add new -->
+<div style="margin-top:16px;background:{{ tCard }};border:2px dashed {{ tBorder }};border-radius:14px;padding:20px;text-align:center;cursor:pointer" onClick="{{ addNewFav }}">
+<div style="font-size:28px;margin-bottom:6px">📍</div>
+<div style="font-size:14px;font-weight:700;color:#059669">{{ addNewDest }}</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:2px">{{ addNewDesc }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ADD NEW FAV -->
+<sc-if value="{{ screen === 'addFav' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goEditFavs }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">{{ newFav }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:600;color:{{ tSub }};margin-bottom:6px">{{ name }}</div>
+<div style="background:{{ tInput }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:14px 16px;font-size:15px;color:{{ tMuted }}">Ej: Gimnasio</div>
+</div>
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:600;color:{{ tSub }};margin-bottom:6px">{{ address }}</div>
+<div style="background:{{ tInput }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:14px 16px;font-size:15px;color:{{ tMuted }}">Buscá una dirección...</div>
+</div>
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:600;color:{{ tSub }};margin-bottom:6px">{{ icon }}</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<div style="width:44px;height:44px;border-radius:12px;background:rgba(5,150,105,0.12);border:2px solid #059669;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">🏠</div>
+<div style="width:44px;height:44px;border-radius:12px;background:{{ tInput }};border:2px solid {{ tBorder }};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">💼</div>
+<div style="width:44px;height:44px;border-radius:12px;background:{{ tInput }};border:2px solid {{ tBorder }};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">📚</div>
+<div style="width:44px;height:44px;border-radius:12px;background:{{ tInput }};border:2px solid {{ tBorder }};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">🏥</div>
+<div style="width:44px;height:44px;border-radius:12px;background:{{ tInput }};border:2px solid {{ tBorder }};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">🏋️</div>
+<div style="width:44px;height:44px;border-radius:12px;background:{{ tInput }};border:2px solid {{ tBorder }};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">🛒</div>
+<div style="width:44px;height:44px;border-radius:12px;background:{{ tInput }};border:2px solid {{ tBorder }};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">❤️</div>
+<div style="width:44px;height:44px;border-radius:12px;background:{{ tInput }};border:2px solid {{ tBorder }};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer">⭐</div>
+</div>
+</div>
+<div style="margin-bottom:16px">
+<div style="font-size:13px;font-weight:600;color:{{ tSub }};margin-bottom:6px">{{ color }}</div>
+<div style="display:flex;gap:10px">
+<div style="width:36px;height:36px;border-radius:50%;background:#ECFDF5;border:3px solid #059669;cursor:pointer"></div>
+<div style="width:36px;height:36px;border-radius:50%;background:#FEF3C7;border:3px solid transparent;cursor:pointer"></div>
+<div style="width:36px;height:36px;border-radius:50%;background:#EDE9FE;border:3px solid transparent;cursor:pointer"></div>
+<div style="width:36px;height:36px;border-radius:50%;background:#FCE7F3;border:3px solid transparent;cursor:pointer"></div>
+<div style="width:36px;height:36px;border-radius:50%;background:#DBEAFE;border:3px solid transparent;cursor:pointer"></div>
+</div>
+</div>
+<div style="background:#059669;border-radius:14px;padding:15px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.25);margin-top:24px" onClick="{{ goEditFavs }}">{{ saveFav }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- SELECT BUS LINE -->
+<sc-if value="{{ screen === 'selectBus' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goConfirmFromBus }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">{{ selectLine }}</div>
+</div>
+<div style="padding:16px 20px">
+<div style="background:{{ tInput }};border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tMuted }}" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<span style="font-size:14px;color:{{ tMuted }}">{{ searchLine }}</span>
+</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:0 20px">
+<div style="font-size:11px;font-weight:700;color:{{ tMuted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">{{ frequentLines }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:20px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:44px;height:44px;border-radius:12px;background:#059669;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;color:#fff">10</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">Línea 10</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Centro → Argüello</div></div>
+<div style="font-size:11px;color:#059669;font-weight:600;background:rgba(5,150,105,0.1);padding:4px 8px;border-radius:6px">{{ frequent }}</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:44px;height:44px;border-radius:12px;background:#3B82F6;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;color:#fff">13</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">Línea 13</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Terminal → Ciudad Universitaria</div></div>
+</div>
+</div>
+<div style="font-size:11px;font-weight:700;color:{{ tMuted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">{{ allLines }}</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:44px;height:44px;border-radius:12px;background:#8B5CF6;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;color:#fff">19</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">Línea 19</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">B° San Martín → Centro</div></div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:44px;height:44px;border-radius:12px;background:#F59E0B;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;color:#fff">24</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">Línea 24</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Villa Belgrano → Terminal</div></div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ selectBusLine }}">
+<div style="width:44px;height:44px;border-radius:12px;background:#EF4444;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;color:#fff">51</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">Línea 51</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">B° Los Platanos → Centro</div></div>
+</div>
+</div>
+<div style="text-align:center;padding:16px;font-size:13px;color:{{ tMuted }}">{{ skipStep }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- SHARE TRIP -->
+<sc-if value="{{ screen === 'shareTrip' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goTripFromShare }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">Compartir viaje</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<div style="text-align:center;margin-bottom:24px">
+<div style="width:80px;height:80px;border-radius:50%;background:rgba(5,150,105,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+</div>
+<div style="font-size:14px;color:{{ tMuted }};line-height:1.5;max-width:240px;margin:0 auto">Compartí tu ubicación en tiempo real para que alguien sepa que llegaste bien.</div>
+</div>
+<div style="font-size:11px;font-weight:700;color:{{ tMuted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Contactos recientes</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg, #F472B6, #EC4899);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff">M</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">Mamá</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">+54 351 555-1234</div></div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg, #60A5FA, #3B82F6);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff">P</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">Papá</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">+54 351 555-5678</div></div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+</div>
+</div>
+<!-- Share options -->
+<div style="font-size:11px;font-weight:700;color:{{ tMuted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Compartir vía</div>
+<div style="display:flex;gap:12px;justify-content:center;margin-bottom:20px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:48px;height:48px;border-radius:14px;background:#25D366;display:flex;align-items:center;justify-content:center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg>
+</div>
+<div style="font-size:10px;font-weight:600;color:{{ tSub }}">WhatsApp</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:48px;height:48px;border-radius:14px;background:#0088cc;display:flex;align-items:center;justify-content:center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.98 1.26-5.59 3.7-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.81-1.6 4.6-1.88 5.12-1.89.11 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"></path></svg>
+</div>
+<div style="font-size:10px;font-weight:600;color:{{ tSub }}">Telegram</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer" onClick="{{ shareWithContact }}">
+<div style="width:48px;height:48px;border-radius:14px;background:{{ tInput }};display:flex;align-items:center;justify-content:center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+</div>
+<div style="font-size:10px;font-weight:600;color:{{ tSub }}">Otro</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- TEST ALARM -->
+<sc-if value="{{ screen === 'testAlarm' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};align-items:center;justify-content:center;padding:32px">
+<div style="width:140px;height:140px;border-radius:50%;background:{{ testAlarmBg }};display:flex;align-items:center;justify-content:center;margin-bottom:28px;animation:{{ testAlarmAnim }};cursor:pointer;box-shadow:{{ testAlarmShadow }}" onClick="{{ toggleTestAlarm }}">
+<span style="font-size:56px">{{ testAlarmIcon }}</span>
+</div>
+<div style="font-size:22px;font-weight:700;color:{{ tText }};text-align:center;margin-bottom:8px">{{ testAlarmTitle }}</div>
+<div style="font-size:14px;color:{{ tMuted }};text-align:center;line-height:1.5;margin-bottom:32px;max-width:260px">{{ testAlarmDesc }}</div>
+<div style="width:100%">
+<div style="background:{{ testAlarmBtnBg }};border-radius:14px;padding:15px;text-align:center;font-size:15px;font-weight:700;color:{{ testAlarmBtnColor }};cursor:pointer;margin-bottom:10px" onClick="{{ toggleTestAlarm }}">{{ testAlarmBtnText }}</div>
+<div style="text-align:center;padding:10px;font-size:13px;color:{{ tMuted }};cursor:pointer;font-weight:600" onClick="{{ goAlertConfig }}">Volver a configuración</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ACTIVE TRIP -->
+<sc-if value="{{ screen === 'trip' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#101820;overflow:hidden">
+<div style="flex:1;background:linear-gradient(180deg, #1a2332 0%, #0f1923 100%);position:relative;display:flex;align-items:center;justify-content:center">
+<div style="position:absolute;inset:0;opacity:0.08;background:repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255,255,255,0.08) 30px, rgba(255,255,255,0.08) 31px),repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255,255,255,0.08) 30px, rgba(255,255,255,0.08) 31px)"></div>
+<div style="position:absolute;top:55%;left:40%">
+<div style="width:16px;height:16px;border-radius:50%;background:#3B82F6;border:3px solid #fff;box-shadow:0 0 20px rgba(59,130,246,0.5)"></div>
+<div style="position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(59,130,246,0.3);animation:ripple 2s ease-out infinite"></div>
+</div>
+<div style="position:absolute;top:30%;left:65%;display:flex;flex-direction:column;align-items:center">
+<div style="width:36px;height:36px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(5,150,105,0.5)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+</div>
+<div style="position:absolute;top:42%;left:45%;width:80px;border-top:2px dashed rgba(5,150,105,0.4);transform:rotate(-30deg)"></div>
+</div>
+<div style="background:{{ tCard }};border-radius:24px 24px 0 0;padding:20px 20px 16px;box-shadow:0 -4px 30px rgba(0,0,0,0.15)">
+<div style="width:36px;height:4px;border-radius:2px;background:{{ tBorder }};margin:0 auto 16px"></div>
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+<div style="width:44px;height:44px;border-radius:50%;background:{{ tripStatusBg }};display:flex;align-items:center;justify-content:center;animation:{{ tripPulseAnim }}">
+<span style="font-size:22px">{{ tripEmoji }}</span>
+</div>
+<div style="flex:1">
+<div style="font-size:16px;font-weight:700;color:{{ tText }}">{{ tripStatusText }}</div>
+<div style="font-size:13px;color:{{ tMuted }};margin-top:1px">Destino: Av. Colón 4500</div>
+</div>
+<div style="text-align:right">
+<div style="font-size:22px;font-weight:800;color:{{ tripDistColor }}">{{ tripDistText }}</div>
+<div style="font-size:11px;color:{{ tMuted }}">{{ remaining }}</div>
+</div>
+</div>
+<div style="background:{{ tInput }};border-radius:8px;height:8px;margin-bottom:16px;overflow:hidden">
+<div style="height:100%;border-radius:8px;background:linear-gradient(90deg, #059669, {{ tripProgressColor }});width:{{ tripProgress }};transition:width 0.5s ease"></div>
+</div>
+<div style="display:flex;justify-content:space-between;margin-bottom:20px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div style="width:28px;height:28px;border-radius:50%;background:{{ alert2kmBg }};display:flex;align-items:center;justify-content:center"><span style="font-size:11px">🔔</span></div>
+<span style="font-size:9px;font-weight:700;color:{{ alert2kmColor }}">2 km</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div style="width:28px;height:28px;border-radius:50%;background:{{ alert1kmBg }};display:flex;align-items:center;justify-content:center"><span style="font-size:11px">📳</span></div>
+<span style="font-size:9px;font-weight:700;color:{{ alert1kmColor }}">1 km</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div style="width:28px;height:28px;border-radius:50%;background:{{ alert500Bg }};display:flex;align-items:center;justify-content:center"><span style="font-size:11px">📣</span></div>
+<span style="font-size:9px;font-weight:700;color:{{ alert500Color }}">500 m</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div style="width:28px;height:28px;border-radius:50%;background:{{ alert200Bg }};display:flex;align-items:center;justify-content:center"><span style="font-size:11px">🚨</span></div>
+<span style="font-size:9px;font-weight:700;color:{{ alert200Color }}">200 m</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+<div style="width:28px;height:28px;border-radius:50%;background:{{ alertDestBg }};display:flex;align-items:center;justify-content:center"><span style="font-size:11px">🎯</span></div>
+<span style="font-size:9px;font-weight:700;color:{{ alertDestColor }}">{{ arrival }}</span>
+</div>
+</div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:rgba(5,150,105,0.08);border-radius:14px;padding:13px;text-align:center;font-size:13px;font-weight:700;color:#059669;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px" onClick="{{ goShareTrip }}">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+Compartir
+</div>
+<div style="flex:1;background:#FEE2E2;border-radius:14px;padding:13px;text-align:center;font-size:13px;font-weight:700;color:#DC2626;cursor:pointer" onClick="{{ cancelTrip }}">{{ cancelTrip }}</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- SPLASH SCREEN -->
+<sc-if value="{{ screen === 'splash' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:linear-gradient(170deg, #059669 0%, #10B981 50%, #34D399 100%);align-items:center;justify-content:center">
+<div style="width:100px;height:100px;border-radius:28px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;animation:bounceIn 0.6s ease-out">
+<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="font-size:36px;font-weight:700;color:#fff;margin-bottom:4px">Bajá</div>
+<div style="font-size:13px;color:rgba(255,255,255,0.7);font-weight:500">{{ splashSub }}</div>
+<div style="margin-top:40px;display:flex;gap:6px">
+<div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.8);animation:dotPulse 1s ease-in-out infinite"></div>
+<div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);animation:dotPulse 1s ease-in-out 0.2s infinite"></div>
+<div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);animation:dotPulse 1s ease-in-out 0.4s infinite"></div>
+</div>
+</div>
+</sc-if>
+
+<!-- ARRIVAL + RATING -->
+<sc-if value="{{ screen === 'arrived' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:linear-gradient(170deg, #ECFDF5 0%, #D1FAE5 50%, #A7F3D0 100%);align-items:center;justify-content:center;padding:32px">
+<div style="width:120px;height:120px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;margin-bottom:28px;box-shadow:0 20px 60px rgba(5,150,105,0.3);animation:bounceIn 0.6s ease-out">
+<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<div style="font-size:28px;font-weight:800;color:#064E3B;text-align:center;margin-bottom:8px">{{ youArrived }}</div>
+<div style="font-size:15px;color:#065F46;text-align:center;opacity:0.7;margin-bottom:4px">Av. Colón 4500</div>
+<div style="font-size:13px;color:#059669;text-align:center;opacity:0.6;margin-bottom:24px">{{ tripDuration }}</div>
+<!-- Rating -->
+<div style="background:rgba(255,255,255,0.8);border-radius:16px;padding:20px;width:100%;margin-bottom:16px;backdrop-filter:blur(10px)">
+<div style="font-size:14px;font-weight:700;color:#064E3B;text-align:center;margin-bottom:12px">{{ didYouArrive }}</div>
+<div style="display:flex;justify-content:center;gap:16px">
+<div style="width:56px;height:56px;border-radius:16px;background:{{ ratingGoodBg }};display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:28px;border:2px solid {{ ratingGoodBorder }}" onClick="{{ rateGood }}">👍</div>
+<div style="width:56px;height:56px;border-radius:16px;background:{{ ratingBadBg }};display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:28px;border:2px solid {{ ratingBadBorder }}" onClick="{{ rateBad }}">👎</div>
+</div>
+<sc-if value="{{ ratingDone }}">
+<div style="text-align:center;margin-top:10px;font-size:12px;color:#059669;font-weight:600;animation:fadeIn 0.3s ease-out">{{ thanksFeedback }}</div>
+</sc-if>
+</div>
+<div style="width:100%;background:#fff;border-radius:16px;padding:16px;text-align:center;font-size:16px;font-weight:700;color:#059669;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.08)" onClick="{{ goHome }}">{{ backToHome }}</div>
+</div>
+</sc-if>
+
+<!-- RATE APP POPUP -->
+<sc-if value="{{ screen === 'rateApp' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};align-items:center;justify-content:center;padding:32px">
+<div style="background:{{ tCard }};border-radius:24px;padding:32px 24px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.1);text-align:center">
+<div style="font-size:48px;margin-bottom:16px">⭐</div>
+<div style="font-size:22px;font-weight:700;color:{{ tText }};margin-bottom:8px">{{ likeApp }}</div>
+<div style="font-size:14px;color:{{ tMuted }};line-height:1.5;margin-bottom:8px">Ya completaste 12 viajes. ¡Nos encantaría que nos califiques!</div>
+<!-- Stars -->
+<div style="display:flex;justify-content:center;gap:8px;margin:20px 0">
+<div style="font-size:32px;cursor:pointer;filter:{{ star1Filter }}" onClick="{{ rateStar1 }}">⭐</div>
+<div style="font-size:32px;cursor:pointer;filter:{{ star2Filter }}" onClick="{{ rateStar2 }}">⭐</div>
+<div style="font-size:32px;cursor:pointer;filter:{{ star3Filter }}" onClick="{{ rateStar3 }}">⭐</div>
+<div style="font-size:32px;cursor:pointer;filter:{{ star4Filter }}" onClick="{{ rateStar4 }}">⭐</div>
+<div style="font-size:32px;cursor:pointer;filter:{{ star5Filter }}" onClick="{{ rateStar5 }}">⭐</div>
+</div>
+<div style="background:#059669;border-radius:14px;padding:15px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;margin-bottom:10px" onClick="{{ submitRating }}">{{ rateOnStore }}</div>
+<div style="font-size:13px;color:{{ tMuted }};cursor:pointer;padding:8px;font-weight:600" onClick="{{ goHome }}">{{ notNow }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- FORGOT PASSWORD -->
+<sc-if value="{{ screen === 'forgotPass' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goLoginScreen }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">Recuperar contraseña</div>
+</div>
+<div style="flex:1;padding:32px 24px;display:flex;flex-direction:column">
+<div style="text-align:center;margin-bottom:32px">
+<div style="width:72px;height:72px;border-radius:50%;background:{{ tFavGreenBg }};display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+</div>
+<div style="font-size:14px;color:{{ tMuted }};line-height:1.5;max-width:260px;margin:0 auto">Ingresá tu email y te enviaremos un enlace para restablecer tu contraseña.</div>
+</div>
+<div style="margin-bottom:20px">
+<div style="font-size:13px;font-weight:600;color:{{ tSub }};margin-bottom:6px">{{ email }}</div>
+<div style="background:{{ tInput }};border:1.5px solid {{ tBorder }};border-radius:14px;padding:14px 16px;font-size:15px;color:{{ tMuted }}">tu@email.com</div>
+</div>
+<div style="background:#059669;border-radius:14px;padding:15px;text-align:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.25)" onClick="{{ sendRecovery }}">{{ sendLink }}</div>
+<sc-if value="{{ recoverySent }}">
+<div style="background:{{ tFavGreenBg }};border-radius:12px;padding:14px;margin-top:16px;text-align:center;animation:fadeIn 0.3s ease-out">
+<div style="font-size:13px;font-weight:600;color:#059669">{{ emailSent }}</div>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<!-- NOTIFICATION PREVIEW -->
+<sc-if value="{{ screen === 'notifPreview' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:#1a1a2e">
+<!-- Lock screen -->
+<div style="flex:1;display:flex;flex-direction:column;padding:40px 20px 20px">
+<div style="text-align:center;margin-bottom:40px">
+<div style="font-size:48px;font-weight:200;color:#fff;letter-spacing:-1px">14:32</div>
+<div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px">Miércoles, 18 de septiembre</div>
+</div>
+<!-- Notification -->
+<div style="background:rgba(255,255,255,0.12);backdrop-filter:blur(20px);border-radius:16px;padding:14px 16px;margin-bottom:8px">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+<div style="width:22px;height:22px;border-radius:6px;background:#059669;display:flex;align-items:center;justify-content:center">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7)">Bajá</span>
+<span style="font-size:11px;color:rgba(255,255,255,0.4);margin-left:auto">ahora</span>
+</div>
+<div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">🔔 ¡A menos de 2 km!</div>
+<div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.4">Te estás acercando a Av. Colón 4500. Quedan aprox. 1.8 km.</div>
+</div>
+<div style="background:rgba(255,255,255,0.12);backdrop-filter:blur(20px);border-radius:16px;padding:14px 16px;margin-bottom:8px">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+<div style="width:22px;height:22px;border-radius:6px;background:#059669;display:flex;align-items:center;justify-content:center">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7)">Bajá · Viaje en curso</span>
+<span style="font-size:11px;color:rgba(255,255,255,0.4);margin-left:auto">14:05</span>
+</div>
+<div style="font-size:13px;color:rgba(255,255,255,0.6)">Monitoreando tu viaje a Av. Colón 4500</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:600;color:#fff;cursor:pointer">Ver mapa</div>
+<div style="background:rgba(239,68,68,0.2);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:600;color:#EF4444;cursor:pointer">Cancelar</div>
+</div>
+</div>
+</div>
+<!-- Bottom hint -->
+<div style="padding:16px 20px;text-align:center">
+<div style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:12px">{{ notifPreviewTitle }}</div>
+<div style="background:rgba(255,255,255,0.1);border-radius:14px;padding:14px;text-align:center;font-size:14px;font-weight:600;color:rgba(255,255,255,0.7);cursor:pointer" onClick="{{ goHome }}">{{ closePreview }}</div>
+</div>
+</div>
+</sc-if>
+
+<!-- LANGUAGE -->
+<sc-if value="{{ screen === 'language' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">Idioma</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:2px solid {{ langEsBorder }};cursor:pointer" onClick="{{ setLangEs }}">
+<span style="font-size:24px">🇦🇷</span>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ spanish }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ spanishDesc }}</div></div>
+<div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ langEsBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ langEsRadio }}"><div style="width:12px;height:12px;border-radius:50%;background:#059669"></div></sc-if>
+</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:2px solid {{ langEnBorder }};cursor:pointer" onClick="{{ setLangEn }}">
+<span style="font-size:24px">🇺🇸</span>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ english }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ englishDesc }}</div></div>
+<div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ langEnBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ langEnRadio }}"><div style="width:12px;height:12px;border-radius:50%;background:#059669"></div></sc-if>
+</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:2px solid {{ langPtBorder }};cursor:pointer" onClick="{{ setLangPt }}">
+<span style="font-size:24px">🇧🇷</span>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ portuguese }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ portugueseDesc }}</div></div>
+<div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ langPtBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ langPtRadio }}"><div style="width:12px;height:12px;border-radius:50%;background:#059669"></div></sc-if>
+</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- DO NOT DISTURB -->
+<sc-if value="{{ screen === 'dnd' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goAlertConfig }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">{{ dnd }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }};margin-bottom:16px">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ activateSchedules }}</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ dndDesc }}</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:#059669;position:relative;cursor:pointer"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:20px"></div></div>
+</div>
+<div style="height:1px;background:{{ tBorder }};margin-bottom:14px"></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ from }}</div>
+<div style="background:{{ tInput }};border-radius:10px;padding:10px 16px;font-size:15px;font-weight:700;color:#059669">23:00</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between">
+<div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ until }}</div>
+<div style="background:{{ tInput }};border-radius:10px;padding:10px 16px;font-size:15px;font-weight:700;color:#059669">06:00</div>
+</div>
+</div>
+</div>
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px">{{ activeDays }}</div>
+<div style="display:flex;gap:6px;margin-bottom:20px">
+<div style="width:38px;height:38px;border-radius:10px;background:#059669;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer">L</div>
+<div style="width:38px;height:38px;border-radius:10px;background:#059669;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer">M</div>
+<div style="width:38px;height:38px;border-radius:10px;background:#059669;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer">X</div>
+<div style="width:38px;height:38px;border-radius:10px;background:#059669;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer">J</div>
+<div style="width:38px;height:38px;border-radius:10px;background:#059669;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer">V</div>
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:{{ tMuted }};cursor:pointer">S</div>
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:{{ tMuted }};cursor:pointer">D</div>
+</div>
+<div style="background:{{ tFavYellowBg }};border-radius:12px;padding:12px 16px">
+<div style="font-size:12px;color:#92400E;line-height:1.5">⚠️ Durante los horarios de no molestar, los viajes activos <strong>seguirán funcionando</strong> normalmente.</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- TERMS & PRIVACY -->
+<sc-if value="{{ screen === 'terms' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">Legal</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }};cursor:pointer">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ termsTitle }}</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ termsDate }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }};cursor:pointer">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ privacyPolicy }}</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ privacyDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }};cursor:pointer">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tSub }}" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+</div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ openSource }}</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ openSourceDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- INVITE FRIENDS -->
+<sc-if value="{{ screen === 'invite' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }};align-items:center;justify-content:center;padding:32px">
+<div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg, rgba(5,150,105,0.15), rgba(5,150,105,0.05));display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+<span style="font-size:48px">🎁</span>
+</div>
+<div style="font-size:22px;font-weight:700;color:{{ tText }};text-align:center;margin-bottom:8px">{{ inviteTitle }}</div>
+<div style="font-size:14px;color:{{ tMuted }};text-align:center;line-height:1.5;margin-bottom:28px;max-width:260px">Compartí Bajá con tus amigos que viajan en colectivo. ¡Que nadie se pase de la parada!</div>
+<!-- Share link -->
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;width:100%;display:flex;align-items:center;gap:10px;border:1px solid {{ tBorder }};margin-bottom:20px">
+<div style="flex:1;font-size:13px;color:{{ tMuted }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">https://baja.app/invite/martin23</div>
+<div style="background:#059669;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0">{{ copy }}</div>
+</div>
+<!-- Share buttons -->
+<div style="display:flex;gap:12px;margin-bottom:28px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+<div style="width:52px;height:52px;border-radius:16px;background:#25D366;display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg>
+</div>
+<div style="font-size:10px;font-weight:600;color:{{ tSub }}">WhatsApp</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+<div style="width:52px;height:52px;border-radius:16px;background:#0088cc;display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.98 1.26-5.59 3.7-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.65-2.89 7.99-3.45 3.81-1.6 4.6-1.88 5.12-1.89.11 0 .37.03.54.17.14.12.18.28.2.47-.01.06.01.24 0 .37z"></path></svg>
+</div>
+<div style="font-size:10px;font-weight:600;color:{{ tSub }}">Telegram</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+<div style="width:52px;height:52px;border-radius:16px;background:{{ tInput }};display:flex;align-items:center;justify-content:center">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+</div>
+<div style="font-size:10px;font-weight:600;color:{{ tSub }}">Otro</div>
+</div>
+</div>
+<div style="text-align:center;font-size:13px;color:{{ tMuted }};cursor:pointer;font-weight:600" onClick="{{ goProfile }}">{{ back }}</div>
+</div>
+</sc-if>
+
+<!-- HISTORY SCREEN -->
+<sc-if value="{{ screen === 'history' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goHome }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">{{ tripHistory }}</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:16px 20px">
+<div style="font-size:11px;font-weight:700;color:{{ tMuted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">{{ thisWeek }}</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Av. Colón 4500</div>
+<div style="font-size:11px;font-weight:600;color:#059669;background:{{ tFavGreenBg }};padding:3px 8px;border-radius:6px">{{ arrived }}</div>
+</div>
+<div style="font-size:12px;color:{{ tMuted }}">Hoy 18:30 · 25 min · Línea 10</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Cabildo 1200</div>
+<div style="font-size:11px;font-weight:600;color:#059669;background:{{ tFavGreenBg }};padding:3px 8px;border-radius:6px">{{ arrived }}</div>
+</div>
+<div style="font-size:12px;color:{{ tMuted }}">Ayer 08:15 · 32 min</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Haya de la Torre s/n</div>
+<div style="font-size:11px;font-weight:600;color:#059669;background:{{ tFavGreenBg }};padding:3px 8px;border-radius:6px">{{ arrived }}</div>
+</div>
+<div style="font-size:12px;color:{{ tMuted }}">Lunes 07:45 · 28 min · Línea 13</div>
+</div>
+</div>
+<div style="font-size:11px;font-weight:700;color:{{ tMuted }};text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">{{ lastWeek }}</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Av. Colón 4500</div>
+<div style="font-size:11px;font-weight:600;color:#059669;background:{{ tFavGreenBg }};padding:3px 8px;border-radius:6px">{{ arrived }}</div>
+</div>
+<div style="font-size:12px;color:{{ tMuted }}">Viernes 18:00 · 22 min</div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">Terminal de Ómnibus</div>
+<div style="font-size:11px;font-weight:600;color:#EF4444;background:#FEE2E2;padding:3px 8px;border-radius:6px">{{ cancelled }}</div>
+</div>
+<div style="font-size:12px;color:{{ tMuted }}">Jueves 14:20</div>
+</div>
+</div>
+<div style="background:{{ tFavGreenBg }};border-radius:16px;padding:20px;margin-top:20px;border:1px solid {{ tFavGreenBorder }}">
+<div style="font-size:13px;font-weight:700;color:#065F46;margin-bottom:14px">{{ summary }}</div>
+<div style="display:flex;justify-content:space-around">
+<div style="text-align:center"><div style="font-size:24px;font-weight:800;color:#059669">12</div><div style="font-size:11px;color:{{ tSub }};margin-top:2px">{{ trips }}</div></div>
+<div style="text-align:center"><div style="font-size:24px;font-weight:800;color:#059669">100%</div><div style="font-size:11px;color:{{ tSub }};margin-top:2px">{{ arrivals }}</div></div>
+<div style="text-align:center"><div style="font-size:24px;font-weight:800;color:#059669">27m</div><div style="font-size:11px;color:{{ tSub }};margin-top:2px">{{ average }}</div></div>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- PROFILE SCREEN -->
+<sc-if value="{{ screen === 'profile' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goHome }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">Perfil</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:28px">
+<div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg, #059669, #10B981);display:flex;align-items:center;justify-content:center;margin-bottom:12px;box-shadow:0 8px 24px rgba(5,150,105,0.2)">
+<span style="font-size:32px;font-weight:700;color:#fff">M</span>
+</div>
+<div style="font-size:20px;font-weight:700;color:{{ tText }}">Martín</div>
+<div style="font-size:13px;color:{{ tMuted }};margin-top:2px">martin@email.com</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goAlertConfig }}">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tFavGreenBg }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ configAlertsMenu }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ configAlertsDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goEditFavs }}">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tFavYellowBg }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ favDestinations }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ favDestDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<!-- APARIENCIA -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goApariencia }}">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tFavPurpleBg }};display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
+</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ appearance }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ appearanceDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<!-- Extra profile items -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goLanguage }}">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center"><span style="font-size:18px">🌐</span></div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ language }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ languageDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goNotifPreview }}">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center"><span style="font-size:18px">📱</span></div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ notifications }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ notifDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goInvite }}">
+<div style="width:38px;height:38px;border-radius:10px;background:rgba(5,150,105,0.1);display:flex;align-items:center;justify-content:center"><span style="font-size:18px">🎁</span></div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ inviteFriends }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ inviteDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goRateApp }}">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tFavYellowBg }};display:flex;align-items:center;justify-content:center"><span style="font-size:18px">⭐</span></div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ rateUs }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ rateDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer" onClick="{{ goTerms }}">
+<div style="width:38px;height:38px;border-radius:10px;background:{{ tInput }};display:flex;align-items:center;justify-content:center"><span style="font-size:18px">📋</span></div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ legal }}</div><div style="font-size:12px;color:{{ tMuted }}">{{ legalDesc }}</div></div>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ tBorder }}" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }};cursor:pointer">
+<div style="width:38px;height:38px;border-radius:10px;background:#FEE2E2;display:flex;align-items:center;justify-content:center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+</div>
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:#EF4444">{{ logout }}</div></div>
+</div>
+</div>
+<div style="text-align:center;margin-top:24px;font-size:12px;color:{{ tMuted }}">Bajá v1.0.0</div>
+</div>
+</div>
+</sc-if>
+
+<!-- CONFIGURAR ALERTAS SCREEN -->
+<sc-if value="{{ screen === 'alertConfig' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">Configurar alertas</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<!-- Alertas por distancia -->
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px">{{ alertsByDist }}</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:28px">
+<!-- 2km -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+<div style="width:38px;height:38px;border-radius:10px;background:#FEF9C3;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:18px">🔔</span></div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">2 kilómetros</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ firstAlert }}</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert2kmToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert2km }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert2kmTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:{{ cfgNotifBg2km }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgNotifColor2km }};cursor:pointer;border:1.5px solid {{ cfgNotifBorder2km }}" onClick="{{ toggleCfgNotif2km }}">Notificación</div>
+<div style="flex:1;background:{{ cfgVibBg2km }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgVibColor2km }};cursor:pointer;border:1.5px solid {{ cfgVibBorder2km }}" onClick="{{ toggleCfgVib2km }}">Vibración</div>
+<div style="flex:1;background:{{ cfgSndBg2km }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgSndColor2km }};cursor:pointer;border:1.5px solid {{ cfgSndBorder2km }}" onClick="{{ toggleCfgSnd2km }}">Sonido</div>
+</div>
+</div>
+<!-- 1km -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+<div style="width:38px;height:38px;border-radius:10px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:18px">📳</span></div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">1 kilómetro</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ mediumAlert }}</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert1kmToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert1km }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert1kmTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:{{ cfgNotifBg1km }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgNotifColor1km }};cursor:pointer;border:1.5px solid {{ cfgNotifBorder1km }}" onClick="{{ toggleCfgNotif1km }}">Notificación</div>
+<div style="flex:1;background:{{ cfgVibBg1km }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgVibColor1km }};cursor:pointer;border:1.5px solid {{ cfgVibBorder1km }}" onClick="{{ toggleCfgVib1km }}">Vibración</div>
+<div style="flex:1;background:{{ cfgSndBg1km }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgSndColor1km }};cursor:pointer;border:1.5px solid {{ cfgSndBorder1km }}" onClick="{{ toggleCfgSnd1km }}">Sonido</div>
+</div>
+</div>
+<!-- 500m -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+<div style="width:38px;height:38px;border-radius:10px;background:#FFEDD5;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:18px">📣</span></div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">500 metros</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">Alerta fuerte</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert500mToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert500m }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert500mTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:{{ cfgNotifBg500 }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgNotifColor500 }};cursor:pointer;border:1.5px solid {{ cfgNotifBorder500 }}" onClick="{{ toggleCfgNotif500 }}">Notificación</div>
+<div style="flex:1;background:{{ cfgVibBg500 }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgVibColor500 }};cursor:pointer;border:1.5px solid {{ cfgVibBorder500 }}" onClick="{{ toggleCfgVib500 }}">Vibración</div>
+<div style="flex:1;background:{{ cfgSndBg500 }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgSndColor500 }};cursor:pointer;border:1.5px solid {{ cfgSndBorder500 }}" onClick="{{ toggleCfgSnd500 }}">Sonido</div>
+</div>
+</div>
+<!-- 200m -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+<div style="width:38px;height:38px;border-radius:10px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:18px">🚨</span></div>
+<div style="flex:1"><div style="font-size:15px;font-weight:700;color:{{ tText }}">200 metros</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ maxAlert }}</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:{{ alert200mToggleBg }};cursor:pointer;position:relative;transition:background 0.2s" onClick="{{ toggleAlert200m }}"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:{{ alert200mTogglePos }};transition:left 0.2s"></div></div>
+</div>
+<div style="display:flex;gap:8px">
+<div style="flex:1;background:{{ cfgNotifBg200 }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgNotifColor200 }};cursor:pointer;border:1.5px solid {{ cfgNotifBorder200 }}" onClick="{{ toggleCfgNotif200 }}">Notificación</div>
+<div style="flex:1;background:{{ cfgVibBg200 }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgVibColor200 }};cursor:pointer;border:1.5px solid {{ cfgVibBorder200 }}" onClick="{{ toggleCfgVib200 }}">Vibración</div>
+<div style="flex:1;background:{{ cfgSndBg200 }};border-radius:8px;padding:8px 10px;text-align:center;font-size:11px;font-weight:600;color:{{ cfgSndColor200 }};cursor:pointer;border:1.5px solid {{ cfgSndBorder200 }}" onClick="{{ toggleCfgSnd200 }}">Sonido</div>
+</div>
+</div>
+</div>
+<!-- Tipo de alerta -->
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px">Tipo de alerta</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }};margin-bottom:20px">
+<div style="display:flex;gap:8px;margin-bottom:4px">
+<div style="flex:1;background:{{ alertTypeAlarmBg }};border:2px solid {{ alertTypeAlarmBorder }};border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer" onClick="{{ setAlertTypeAlarm }}">
+<div style="font-size:24px;margin-bottom:6px">🔊</div>
+<div style="font-size:13px;font-weight:700;color:{{ alertTypeAlarmColor }}">Alarma</div>
+<div style="font-size:10px;color:{{ tMuted }};margin-top:2px">{{ loudSound }}</div>
+</div>
+<div style="flex:1;background:{{ alertTypeVibBg }};border:2px solid {{ alertTypeVibBorder }};border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer" onClick="{{ setAlertTypeVib }}">
+<div style="font-size:24px;margin-bottom:6px">📳</div>
+<div style="font-size:13px;font-weight:700;color:{{ alertTypeVibColor }}">Vibración</div>
+<div style="font-size:10px;color:{{ tMuted }};margin-top:2px">{{ vibOnly }}</div>
+</div>
+<div style="flex:1;background:{{ alertTypeBothBg }};border:2px solid {{ alertTypeBothBorder }};border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer" onClick="{{ setAlertTypeBoth }}">
+<div style="font-size:24px;margin-bottom:6px">🔔</div>
+<div style="font-size:13px;font-weight:700;color:{{ alertTypeBothColor }}">Ambos</div>
+<div style="font-size:10px;color:{{ tMuted }};margin-top:2px">{{ soundAndVib }}</div>
+</div>
+</div>
+</div>
+<!-- Volumen -->
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px">Volumen de alarma</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;border:1px solid {{ tBorder }};margin-bottom:28px">
+<div style="display:flex;align-items:center;gap:12px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tMuted }}" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon></svg>
+<div style="flex:1;height:6px;border-radius:3px;background:{{ tInput }};position:relative">
+<div style="width:75%;height:100%;border-radius:3px;background:linear-gradient(90deg, #059669, #10B981)"></div>
+<div style="width:20px;height:20px;border-radius:50%;background:#059669;border:3px solid {{ tCard }};box-shadow:0 2px 6px rgba(0,0,0,0.2);position:absolute;top:-7px;left:calc(75% - 10px)"></div>
+</div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+</div>
+<div style="text-align:center;font-size:12px;color:{{ tMuted }};margin-top:8px">75%</div>
+</div>
+<!-- Opciones extra -->
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px">Opciones</div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }}">
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ vibrateOnSilent }}</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ vibrateOnSilentDesc }}</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:#059669;position:relative"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:20px"></div></div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }}">
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ repeatFinalAlert }}</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ repeatFinalDesc }}</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:#059669;position:relative"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:20px"></div></div>
+</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;border:1px solid {{ tBorder }}">
+<div style="flex:1"><div style="font-size:14px;font-weight:600;color:{{ tText }}">{{ screenFlash }}</div><div style="font-size:12px;color:{{ tMuted }};margin-top:1px">{{ screenFlashDesc }}</div></div>
+<div style="width:42px;height:24px;border-radius:12px;background:#D1D5DB;position:relative"><div style="width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.2);position:absolute;top:2px;left:2px"></div></div>
+</div>
+</div>
+<!-- Test alarm button -->
+<div style="background:linear-gradient(135deg, #059669, #10B981);border-radius:14px;padding:15px;text-align:center;font-size:15px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(5,150,105,0.25);display:flex;align-items:center;justify-content:center;gap:8px;margin-top:4px" onClick="{{ goTestAlarm }}">
+<span style="font-size:18px">🔔</span> Probar alarma
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- APARIENCIA SCREEN -->
+<sc-if value="{{ screen === 'apariencia' }}">
+<div style="display:flex;flex-direction:column;height:100%;background:{{ tBg }}">
+<div style="padding:16px 20px;display:flex;align-items:center;gap:12px;background:{{ tCard }};border-bottom:1px solid {{ tBorder }}">
+<div style="cursor:pointer;padding:4px" onClick="{{ goProfile }}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tText }}" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+</div>
+<div style="font-size:18px;font-weight:700;color:{{ tText }}">Apariencia</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:20px">
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px">Tema</div>
+<!-- Light option -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:2px solid {{ lightBorderActive }};cursor:pointer;margin-bottom:8px" onClick="{{ setLight }}">
+<div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg, #FAFBFC, #E5E7EB);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #E5E7EB">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
+</div>
+<div style="flex:1">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ lightMode }}</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:2px">{{ lightDesc }}</div>
+</div>
+<div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ lightRadioBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ !dark }}"><div style="width:12px;height:12px;border-radius:50%;background:#059669"></div></sc-if>
+</div>
+</div>
+<!-- Dark option -->
+<div style="background:{{ tCard }};border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:2px solid {{ darkBorderActive }};cursor:pointer;margin-bottom:24px" onClick="{{ setDark }}">
+<div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg, #1C1D26, #111218);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid #2D2E3A">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+</div>
+<div style="flex:1">
+<div style="font-size:15px;font-weight:700;color:{{ tText }}">{{ darkMode }}</div>
+<div style="font-size:12px;color:{{ tMuted }};margin-top:2px">{{ darkDesc }}</div>
+</div>
+<div style="width:22px;height:22px;border-radius:50%;border:2px solid {{ darkRadioBorder }};display:flex;align-items:center;justify-content:center">
+<sc-if value="{{ dark }}"><div style="width:12px;height:12px;border-radius:50%;background:#059669"></div></sc-if>
+</div>
+</div>
+<!-- Preview -->
+<div style="font-size:13px;font-weight:700;color:{{ tSub }};margin-bottom:14px;text-transform:uppercase;letter-spacing:0.5px">Vista previa</div>
+<div style="background:{{ tCard }};border-radius:14px;padding:20px;border:1px solid {{ tBorder }}">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg, #059669, #10B981);display:flex;align-items:center;justify-content:center">
+<span style="font-size:14px;font-weight:700;color:#fff">M</span>
+</div>
+<div>
+<div style="font-size:14px;font-weight:700;color:{{ tText }}">{{ previewHello }}</div>
+<div style="font-size:12px;color:{{ tMuted }}">{{ previewSearch }}</div>
+</div>
+</div>
+<div style="background:{{ tInput }};border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:12px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+<span style="font-size:13px;color:{{ tMuted }}">{{ searchPlaceholder }}</span>
+</div>
+<div style="background:linear-gradient(135deg, #059669, #10B981);border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:700;color:#fff">😴 COMENZAR VIAJE</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+</x-import>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 420, &quot;height&quot;: 860 },
+  &quot;simulationSpeed&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 2500, &quot;min&quot;: 500, &quot;max&quot;: 5000, &quot;step&quot;: 500, &quot;unit&quot;: &quot;ms&quot;, &quot;section&quot;: &quot;Simulación&quot; },
+  &quot;userName&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Martín&quot;, &quot;section&quot;: &quot;Usuario&quot; },
+  &quot;darkTrip&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;section&quot;: &quot;Viaje&quot; }
+}">
+
+class Component extends DCLogic {
+  state = {
+    screen: 'splash',
+    lang: 'es',
+    tripPhase: 0,
+    tripTimer: null,
+    a2km: true,
+    a1km: true,
+    a500m: true,
+    a200m: true,
+    dark: false,
+    cfg2km: { notif: true, vib: false, snd: false },
+    cfg1km: { notif: true, vib: true, snd: false },
+    cfg500: { notif: true, vib: true, snd: true },
+    cfg200: { notif: true, vib: true, snd: true },
+    alertType: 'both',
+    showPermDialog: false,
+    testingAlarm: false,
+    selectedBus: null,
+    shareActive: false,
+    ratingDone: false,
+    ratingGood: false,
+    appStars: 0,
+    recoverySent: false
+  };
+  componentDidMount() {
+    setTimeout(() => this.setState({ screen: 'onboard1' }), 2000);
+  }
+  componentWillUnmount() {
+    if (this.state.tripTimer) clearInterval(this.state.tripTimer);
+  }
+  _alertTypeStyles(type, dk) {
+    const on = { bg: 'rgba(5,150,105,0.12)', color: '#059669', border: '#059669' };
+    const off = { bg: dk ? '#24252F' : '#F9FAFB', color: dk ? '#6B7280' : '#9CA3AF', border: dk ? '#2D2E3A' : '#E5E7EB' };
+    const a = type === 'alarm' ? on : off;
+    const v = type === 'vib' ? on : off;
+    const b = type === 'both' ? on : off;
+    return {
+      alertTypeAlarmBg: a.bg, alertTypeAlarmColor: a.color, alertTypeAlarmBorder: a.border,
+      alertTypeVibBg: v.bg, alertTypeVibColor: v.color, alertTypeVibBorder: v.border,
+      alertTypeBothBg: b.bg, alertTypeBothColor: b.color, alertTypeBothBorder: b.border,
+    };
+  }
+  _cfgChips(key, cfg, dk) {
+    const on = { bg: 'rgba(5,150,105,0.12)', color: '#059669', border: 'rgba(5,150,105,0.3)' };
+    const off = { bg: dk ? '#24252F' : '#F3F4F6', color: dk ? '#6B7280' : '#9CA3AF', border: dk ? '#2D2E3A' : '#E5E7EB' };
+    const stateKey = key === '2km' ? 'cfg2km' : key === '1km' ? 'cfg1km' : key === '500' ? 'cfg500' : 'cfg200';
+    const mk = (type) => {
+      const active = cfg[type];
+      const s = active ? on : off;
+      return {
+        [`cfgNotifBg${key}`]: undefined, [`cfgVibBg${key}`]: undefined, [`cfgSndBg${key}`]: undefined,
+        [`cfg${type.charAt(0).toUpperCase()+type.slice(1)}Bg${key}`]: s.bg,
+        [`cfg${type.charAt(0).toUpperCase()+type.slice(1)}Color${key}`]: s.color,
+        [`cfg${type.charAt(0).toUpperCase()+type.slice(1)}Border${key}`]: s.border,
+        [`toggleCfg${type.charAt(0).toUpperCase()+type.slice(1)}${key}`]: () => this.setState(p => ({
+          [stateKey]: { ...p[stateKey], [type]: !p[stateKey][type] }
+        })),
+      };
+    };
+    const notifActive = cfg.notif; const vibActive = cfg.vib; const sndActive = cfg.snd;
+    const n = notifActive ? on : off; const v = vibActive ? on : off; const sd = sndActive ? on : off;
+    return {
+      [`cfgNotifBg${key}`]: n.bg, [`cfgNotifColor${key}`]: n.color, [`cfgNotifBorder${key}`]: n.border,
+      [`toggleCfgNotif${key}`]: () => this.setState(p => ({ [stateKey]: { ...p[stateKey], notif: !p[stateKey].notif } })),
+      [`cfgVibBg${key}`]: v.bg, [`cfgVibColor${key}`]: v.color, [`cfgVibBorder${key}`]: v.border,
+      [`toggleCfgVib${key}`]: () => this.setState(p => ({ [stateKey]: { ...p[stateKey], vib: !p[stateKey].vib } })),
+      [`cfgSndBg${key}`]: sd.bg, [`cfgSndColor${key}`]: sd.color, [`cfgSndBorder${key}`]: sd.border,
+      [`toggleCfgSnd${key}`]: () => this.setState(p => ({ [stateKey]: { ...p[stateKey], snd: !p[stateKey].snd } })),
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const screen = s.screen;
+    const phase = s.tripPhase;
+    const dk = s.dark;
+    // Theme
+    const tBg = dk ? '#111218' : '#FAFBFC';
+    const tCard = dk ? '#1C1D26' : '#ffffff';
+    const tText = dk ? '#F3F4F6' : '#111827';
+    const tSub = dk ? '#9CA3AF' : '#6B7280';
+    const tMuted = dk ? '#6B7280' : '#9CA3AF';
+    const tBorder = dk ? '#2D2E3A' : '#F3F4F6';
+    const tInput = dk ? '#24252F' : '#F3F4F6';
+    const tShadow = dk ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.04)';
+    // Fav card colors (adapted for dark)
+    const tFavGreenBg = dk ? 'rgba(5,150,105,0.12)' : '#ECFDF5';
+    const tFavGreenBorder = dk ? 'rgba(5,150,105,0.2)' : 'rgba(5,150,105,0.15)';
+    const tFavGreenText = dk ? '#FFFFFF' : '#111827';
+    const tFavYellowBg = dk ? 'rgba(245,158,11,0.12)' : '#FEF3C7';
+    const tFavYellowBorder = dk ? 'rgba(245,158,11,0.2)' : 'rgba(245,158,11,0.15)';
+    const tFavYellowText = dk ? '#FFFFFF' : '#111827';
+    const tFavPurpleBg = dk ? 'rgba(124,58,237,0.12)' : '#EDE9FE';
+    const tFavPurpleBorder = dk ? 'rgba(124,58,237,0.2)' : 'rgba(124,58,237,0.15)';
+    const tFavPurpleText = dk ? '#FFFFFF' : '#111827';
+    // Map
+    const tMapBg = dk ? '#1a2332' : '#E8F5E9';
+    const tMapGradient = dk ? 'linear-gradient(180deg, #1a2332 0%, #0f1923 100%)' : 'linear-gradient(180deg, #C8E6C9 0%, #A5D6A7 50%, #81C784 100%)';
+    // Alert stages
+    const activeStage = (idx) => phase >= idx;
+    const stageBg = (idx) => activeStage(idx) ? '#059669' : (dk ? '#2D2E3A' : '#F3F4F6');
+    const stageColor = (idx) => activeStage(idx) ? '#059669' : tMuted;
+    const phases = [
+      { emoji: '😴', text: 'Viajando tranquilo...', dist: '4.2 km', color: '#059669', progress: '15%', bg: dk ? 'rgba(5,150,105,0.15)' : '#ECFDF5' },
+      { emoji: '😴', text: 'Viajando tranquilo...', dist: '2.8 km', color: '#059669', progress: '35%', bg: dk ? 'rgba(5,150,105,0.15)' : '#ECFDF5' },
+      { emoji: '🔔', text: '¡A menos de 2 km!', dist: '1.8 km', color: '#F59E0B', progress: '50%', bg: dk ? 'rgba(245,158,11,0.15)' : '#FEF3C7' },
+      { emoji: '📳', text: '¡Preparate para bajar!', dist: '900 m', color: '#F59E0B', progress: '70%', bg: dk ? 'rgba(245,158,11,0.15)' : '#FEF3C7' },
+      { emoji: '📣', text: '¡Ya casi llegás!', dist: '450 m', color: '#EF4444', progress: '85%', bg: dk ? 'rgba(239,68,68,0.15)' : '#FEE2E2' },
+      { emoji: '🚨', text: '¡BAJÁ AHORA!', dist: '180 m', color: '#EF4444', progress: '93%', bg: dk ? 'rgba(239,68,68,0.15)' : '#FEE2E2' },
+    ];
+    const p = phases[Math.min(phase, phases.length - 1)];
+    return {
+      screen, dark: dk,
+      showHome: screen === 'onboard1',
+      searchText: 'Av. Colón',
+      // Theme tokens
+      tBg, tCard, tText, tSub, tMuted, tBorder, tInput, tShadow,
+      tFavGreenBg, tFavGreenBorder, tFavGreenText,
+      tFavYellowBg, tFavYellowBorder, tFavYellowText,
+      tFavPurpleBg, tFavPurpleBorder, tFavPurpleText,
+      tMapBg, tMapGradient,
+      // Apariencia
+      lightBorderActive: !dk ? '#059669' : tBorder,
+      darkBorderActive: dk ? '#059669' : tBorder,
+      lightRadioBorder: !dk ? '#059669' : (dk ? '#4B5563' : '#D1D5DB'),
+      darkRadioBorder: dk ? '#059669' : (!dk ? '#D1D5DB' : '#4B5563'),
+      setLight: () => this.setState({ dark: false }),
+      setDark: () => this.setState({ dark: true }),
+      goApariencia: () => this.setState({ screen: 'apariencia' }),
+      goAlertConfig: () => this.setState({ screen: 'alertConfig' }),
+      goMapPick: () => this.setState({ screen: 'mapPick' }),
+      confirmMapPick: () => this.setState({ screen: 'confirm' }),
+      // Error states
+      goNoSignal: () => this.setState({ screen: 'noSignal' }),
+      goBatteryLow: () => this.setState({ screen: 'batteryLow' }),
+      noSignalIconBg: dk ? 'rgba(239,68,68,0.15)' : '#FEE2E2',
+      noSignalIconColor: '#EF4444',
+      startTripAnyway: () => {
+        this.setState({ screen: 'trip', tripPhase: 0 });
+        const timer = setInterval(() => {
+          this.setState(prev => {
+            if (prev.tripPhase >= 5) { clearInterval(prev.tripTimer); return { screen: 'arrived', tripTimer: null }; }
+            return { tripPhase: prev.tripPhase + 1 };
+          });
+        }, 2500);
+        this.setState({ tripTimer: timer });
+      },
+      // Favorites
+      goEditFavs: () => this.setState({ screen: 'editFavs' }),
+      addNewFav: () => this.setState({ screen: 'addFav' }),
+      // Bus line
+      goSelectBus: () => this.setState({ screen: 'selectBus' }),
+      selectBusLine: () => this.setState({ screen: 'confirm', selectedBus: '10' }),
+      goConfirmFromBus: () => this.setState({ screen: 'confirm' }),
+      // Share trip
+      goShareTrip: () => this.setState({ screen: 'shareTrip' }),
+      goTripFromShare: () => this.setState({ screen: 'trip' }),
+      shareWithContact: () => this.setState({ screen: 'trip', shareActive: true }),
+      // Test alarm
+      goTestAlarm: () => this.setState({ screen: 'testAlarm', testingAlarm: false }),
+      toggleTestAlarm: () => this.setState(p => ({ testingAlarm: !p.testingAlarm })),
+      testingAlarm: s.testingAlarm,
+      testAlarmBg: s.testingAlarm ? (dk ? 'rgba(239,68,68,0.2)' : '#FEE2E2') : (dk ? 'rgba(5,150,105,0.15)' : '#ECFDF5'),
+      testAlarmAnim: s.testingAlarm ? 'pulse 0.5s ease-in-out infinite' : 'none',
+      testAlarmShadow: s.testingAlarm ? '0 0 40px rgba(239,68,68,0.4)' : '0 8px 30px rgba(0,0,0,0.08)',
+      testAlarmIcon: s.testingAlarm ? '🔊' : '🔔',
+      testAlarmTitle: s.testingAlarm ? '¡Alarma sonando!' : 'Probar alarma',
+      testAlarmDesc: s.testingAlarm ? 'Así sonaría tu alarma cuando llegues al destino.' : 'Tocá el botón para escuchar cómo suena la alarma y sentir la vibración.',
+      testAlarmBtnBg: s.testingAlarm ? '#EF4444' : '#059669',
+      testAlarmBtnColor: '#fff',
+      testAlarmBtnText: s.testingAlarm ? 'Detener' : 'Probar ahora',
+      // Splash
+      goSplash: () => { this.setState({ screen: 'splash' }); setTimeout(() => this.setState({ screen: 'onboard1' }), 2000); },
+      // Forgot password
+      goForgotPass: () => this.setState({ screen: 'forgotPass', recoverySent: false }),
+      goLoginScreen: () => this.setState({ screen: 'login' }),
+      sendRecovery: () => this.setState({ recoverySent: true }),
+      recoverySent: s.recoverySent,
+      // Notification preview
+      goNotifPreview: () => this.setState({ screen: 'notifPreview' }),
+      // Rating post-trip
+      ratingDone: s.ratingDone,
+      ratingGoodBg: s.ratingGood === true ? 'rgba(5,150,105,0.15)' : (dk ? '#24252F' : '#F3F4F6'),
+      ratingGoodBorder: s.ratingGood === true ? '#059669' : 'transparent',
+      ratingBadBg: s.ratingGood === false && s.ratingDone ? 'rgba(239,68,68,0.15)' : (dk ? '#24252F' : '#F3F4F6'),
+      ratingBadBorder: s.ratingGood === false && s.ratingDone ? '#EF4444' : 'transparent',
+      rateGood: () => this.setState({ ratingGood: true, ratingDone: true }),
+      rateBad: () => this.setState({ ratingGood: false, ratingDone: true }),
+      // Rate app
+      goRateApp: () => this.setState({ screen: 'rateApp', appStars: 0 }),
+      appStars: s.appStars,
+      star1Filter: s.appStars >= 1 ? 'none' : 'grayscale(1) opacity(0.4)',
+      star2Filter: s.appStars >= 2 ? 'none' : 'grayscale(1) opacity(0.4)',
+      star3Filter: s.appStars >= 3 ? 'none' : 'grayscale(1) opacity(0.4)',
+      star4Filter: s.appStars >= 4 ? 'none' : 'grayscale(1) opacity(0.4)',
+      star5Filter: s.appStars >= 5 ? 'none' : 'grayscale(1) opacity(0.4)',
+      rateStar1: () => this.setState({ appStars: 1 }),
+      rateStar2: () => this.setState({ appStars: 2 }),
+      rateStar3: () => this.setState({ appStars: 3 }),
+      rateStar4: () => this.setState({ appStars: 4 }),
+      rateStar5: () => this.setState({ appStars: 5 }),
+      submitRating: () => this.setState({ screen: 'home' }),
+      // Language
+      goLanguage: () => this.setState({ screen: 'language' }),
+      setLangEs: () => this.setState({ lang: 'es' }),
+      setLangEn: () => this.setState({ lang: 'en' }),
+      setLangPt: () => this.setState({ lang: 'pt' }),
+      langEsBorder: s.lang === 'es' ? '#059669' : tBorder,
+      langEnBorder: s.lang === 'en' ? '#059669' : tBorder,
+      langPtBorder: s.lang === 'pt' ? '#059669' : tBorder,
+      langEsRadio: s.lang === 'es',
+      langEnRadio: s.lang === 'en',
+      langPtRadio: s.lang === 'pt',
+      // DND
+      goDnd: () => this.setState({ screen: 'dnd' }),
+      // Terms
+      goTerms: () => this.setState({ screen: 'terms' }),
+      // Invite
+      goInvite: () => this.setState({ screen: 'invite' }),
+      // Translations - spread all strings
+      ...((window.BAJA_TRANSLATIONS || {})[s.lang] || {}),
+      // Alert type selector
+      setAlertTypeAlarm: () => this.setState({ alertType: 'alarm' }),
+      setAlertTypeVib: () => this.setState({ alertType: 'vib' }),
+      setAlertTypeBoth: () => this.setState({ alertType: 'both' }),
+      ...this._alertTypeStyles(s.alertType, dk),
+      // Nav
+      nextOnboard: () => this.setState({ screen: 'onboard2' }),
+      nextOnboard2: () => this.setState({ screen: 'onboard3' }),
+      skipOnboard: () => this.setState({ screen: 'login' }),
+      showPermDialog: s.showPermDialog,
+      grantGPS: () => this.setState({ showPermDialog: true }),
+      acceptPermAlways: () => this.setState({ screen: 'home', showPermDialog: false }),
+      goHome: () => { if (s.tripTimer) clearInterval(s.tripTimer); this.setState({ screen: 'home', tripPhase: 0, tripTimer: null, showPermDialog: false }); },
+      goLogin: () => this.setState({ screen: 'gpsPermission' }),
+      goSearch: () => this.setState({ screen: 'search' }),
+      goHistory: () => this.setState({ screen: 'history' }),
+      goProfile: () => this.setState({ screen: 'profile' }),
+      goSettings: () => this.setState({ screen: 'profile' }),
+      selectFav1: () => this.setState({ screen: 'confirm' }),
+      selectFav2: () => this.setState({ screen: 'confirm' }),
+      selectResult1: () => this.setState({ screen: 'confirm' }),
+      // Alert toggles
+      toggleAlert2km: () => this.setState(p => ({ a2km: !p.a2km })),
+      toggleAlert1km: () => this.setState(p => ({ a1km: !p.a1km })),
+      toggleAlert500m: () => this.setState(p => ({ a500m: !p.a500m })),
+      toggleAlert200m: () => this.setState(p => ({ a200m: !p.a200m })),
+      alert2kmToggleBg: s.a2km ? '#059669' : '#D1D5DB',
+      alert2kmTogglePos: s.a2km ? '20px' : '2px',
+      alert1kmToggleBg: s.a1km ? '#059669' : '#D1D5DB',
+      alert1kmTogglePos: s.a1km ? '20px' : '2px',
+      alert500mToggleBg: s.a500m ? '#059669' : '#D1D5DB',
+      alert500mTogglePos: s.a500m ? '20px' : '2px',
+      alert200mToggleBg: s.a200m ? '#059669' : '#D1D5DB',
+      alert200mTogglePos: s.a200m ? '20px' : '2px',
+      // Alert config chips
+      ...this._cfgChips('2km', s.cfg2km, dk),
+      ...this._cfgChips('1km', s.cfg1km, dk),
+      ...this._cfgChips('500', s.cfg500, dk),
+      ...this._cfgChips('200', s.cfg200, dk),
+      // Trip
+      startTrip: () => {
+        this.setState({ screen: 'trip', tripPhase: 0 });
+        const timer = setInterval(() => {
+          this.setState(prev => {
+            if (prev.tripPhase >= 5) {
+              clearInterval(prev.tripTimer);
+              return { screen: 'arrived', tripTimer: null };
+            }
+            return { tripPhase: prev.tripPhase + 1 };
+          });
+        }, 2500);
+        this.setState({ tripTimer: timer });
+      },
+      cancelTrip: () => { if (s.tripTimer) clearInterval(s.tripTimer); this.setState({ screen: 'home', tripPhase: 0, tripTimer: null }); },
+      tripEmoji: p.emoji, tripStatusText: p.text, tripDistText: p.dist,
+      tripDistColor: p.color, tripProgress: p.progress,
+      tripProgressColor: phase >= 4 ? '#EF4444' : phase >= 2 ? '#F59E0B' : '#10B981',
+      tripStatusBg: p.bg,
+      tripPulseAnim: phase >= 4 ? 'pulse 0.8s ease-in-out infinite' : phase >= 2 ? 'pulse 1.5s ease-in-out infinite' : 'none',
+      alert2kmBg: stageBg(2), alert2kmColor: stageColor(2),
+      alert1kmBg: stageBg(3), alert1kmColor: stageColor(3),
+      alert500Bg: stageBg(4), alert500Color: stageColor(4),
+      alert200Bg: stageBg(5), alert200Color: stageColor(5),
+      alertDestBg: dk ? '#2D2E3A' : '#F3F4F6', alertDestColor: tMuted,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "_comment": "Datos del titular que se insertan en la política de privacidad, los términos y la página de eliminación de cuenta. Después de editar, correr: node scripts/build-legal.js",
+  "appName": "Bajá",
+  "owner": "Juan Ignacio Diaz",
+  "address": "Pozo de la Loma 7972, Arguello, Córdoba, Argentina",
+  "contactEmail": "ignadiazcab1905@gmail.com",
+  "jurisdiction": "la Ciudad de Córdoba, Argentina",
+  "dataRegion": "West US (Oregon), us-west-2",
+  "minAge": "13",
+  "lastUpdated": {
+    "es": "7 de octubre de 2026",
+    "en": "October 7, 2026",
+    "pt": "7 de outubro de 2026"
+  }
+}

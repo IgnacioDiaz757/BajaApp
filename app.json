@@ -1,25 +1,102 @@
 {
   "expo": {
-    "name": "baja-app",
+    "name": "Bajá",
     "slug": "baja-app",
+    "scheme": "baja",
     "version": "1.0.0",
+    "backgroundColor": "#09090b",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.bajaapp.mobile",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Bajá usa tu ubicación para calcular la distancia hasta tu destino durante el viaje.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Bajá necesita tu ubicación mientras viajás para avisarte cuando estés cerca de tu destino, incluso con la pantalla apagada.",
+        "NSLocationAlwaysUsageDescription": "Bajá necesita tu ubicación mientras viajás para avisarte cuando estés cerca de tu destino.",
+        "UIBackgroundModes": [
+          "location"
+        ]
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "buildNumber": "1"
     },
     "android": {
+      "package": "com.bajaapp.mobile",
+      "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#10b981",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "versionCode": 1,
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 140,
+          "resizeMode": "contain",
+          "backgroundColor": "#f5f6f8",
+          "dark": {
+            "image": "./assets/splash-icon.png",
+            "backgroundColor": "#09090b"
+          }
+        }
+      ],
+      "expo-status-bar",
+      "expo-system-ui",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false,
+          "enableBackgroundRecording": false
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Bajá necesita tu ubicación mientras viajás para avisarte cuando estés cerca de tu destino.",
+          "locationWhenInUsePermission": "Bajá usa tu ubicación para calcular la distancia hasta tu destino.",
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true,
+          "motionUsagePermission": false
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "sounds": [
+            "./assets/sounds/alarm_notification.wav"
+          ],
+          "icon": "./assets/notification-icon.png",
+          "color": "#10b981"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7fcf9aa1-a697-4bc8-ac44-ddbf375c0aa7"
+      }
     }
   }
 }

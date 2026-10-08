@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eliminar tu cuenta y tus datos · Bajá</title><style>
+  :root { color-scheme: light dark; --bg:#f5f6f8; --fg:#18181b; --muted:#52525b; --accent:#059669; --card:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#09090b; --fg:#fafafa; --muted:#a1a1aa; --accent:#10b981; --card:#18181b; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 20px 64px; }
+  nav { display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 24px; }
+  nav button { border:1px solid var(--muted); background:var(--card); color:var(--fg); padding:6px 14px; border-radius:999px; cursor:pointer; font:inherit; }
+  nav button[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; } h2 { font-size: 1.1rem; margin: 28px 0 6px; }
+  .intro { color: var(--muted); } p, li { color: var(--fg); } ul { padding-left: 1.2rem; }
+  .doc[hidden] { display:none; } footer { margin-top:48px; color:var(--muted); font-size:.9rem; } a { color: var(--accent); }
+</style></head>
+<body><main><nav aria-label="Language"><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="en" aria-pressed="false">English</button><button type="button" data-lang="pt" aria-pressed="false">Português</button></nav>
+<article class="doc" data-lang="es" lang="es" hidden><h1>Eliminar tu cuenta y tus datos</h1>
+<p class="intro">Podés eliminar tu cuenta de Bajá y los datos asociados en cualquier momento.</p>
+<h2>Desde la app</h2>
+<ul><li>Abrí Bajá e ingresá a la pestaña Perfil.</li><li>Tocá “Eliminar cuenta” y confirmá.</li><li>Tu cuenta y tus datos se eliminan en el momento.</li></ul>
+<h2>Si no podés acceder a la app</h2>
+<p>Escribí a ignadiazcab1905@gmail.com desde el email de tu cuenta con el asunto “Eliminar cuenta”. Vamos a eliminarla y confirmarte por el mismo medio.</p>
+<h2>Qué se elimina</h2>
+<ul><li>Tu cuenta (email, nombre y foto si los había) o tu identificador de invitado.</li><li>Tus viajes y los avisos asociados.</li><li>Tus lugares favoritos y tus preferencias de alertas.</li></ul>
+<h2>Qué puede quedar</h2>
+<p>Las copias de seguridad del proveedor de base de datos pueden conservarse por un período limitado hasta que se renuevan. Los datos que solo están en tu teléfono (idioma, tema, canción de alarma) se borran al desinstalar la app.</p></article>
+<article class="doc" data-lang="en" lang="en" hidden><h1>Delete your account and data</h1>
+<p class="intro">You can delete your Bajá account and associated data at any time.</p>
+<h2>From the app</h2>
+<ul><li>Open Bajá and go to the Profile tab.</li><li>Tap “Delete account” and confirm.</li><li>Your account and data are deleted immediately.</li></ul>
+<h2>If you cannot access the app</h2>
+<p>Write to ignadiazcab1905@gmail.com from your account email with the subject “Delete account”. We will delete it and confirm by the same means.</p>
+<h2>What is deleted</h2>
+<ul><li>Your account (email, name and photo if any) or your guest identifier.</li><li>Your trips and associated alerts.</li><li>Your favorite places and alert preferences.</li></ul>
+<h2>What may remain</h2>
+<p>Database provider backups may be kept for a limited period until they are rotated. Data that is only on your phone (language, theme, alarm song) is removed when you uninstall the app.</p></article>
+<article class="doc" data-lang="pt" lang="pt" hidden><h1>Excluir sua conta e seus dados</h1>
+<p class="intro">Você pode excluir sua conta do Bajá e os dados associados a qualquer momento.</p>
+<h2>Pelo app</h2>
+<ul><li>Abra o Bajá e vá para a aba Perfil.</li><li>Toque em “Excluir conta” e confirme.</li><li>Sua conta e seus dados são excluídos na hora.</li></ul>
+<h2>Se você não consegue acessar o app</h2>
+<p>Escreva para ignadiazcab1905@gmail.com a partir do e-mail da sua conta com o assunto “Excluir conta”. Vamos excluí-la e confirmar pelo mesmo meio.</p>
+<h2>O que é excluído</h2>
+<ul><li>Sua conta (e-mail, nome e foto, se houver) ou seu identificador de convidado.</li><li>Suas viagens e os avisos associados.</li><li>Seus lugares favoritos e suas preferências de alertas.</li></ul>
+<h2>O que pode permanecer</h2>
+<p>Backups do provedor de banco de dados podem ser mantidos por um período limitado até serem renovados. Os dados que ficam só no seu celular (idioma, tema, música de alarme) são removidos ao desinstalar o app.</p></article>
+<footer>Bajá · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="delete-account.html">Delete account</a></footer>
+</main><script>
+  const buttons = [...document.querySelectorAll('nav button')];
+  const docs = [...document.querySelectorAll('.doc')];
+  function show(code) {
+    docs.forEach((d) => { d.hidden = d.dataset.lang !== code; });
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === code)));
+    document.documentElement.lang = code;
+  }
+  const wanted = (new URLSearchParams(location.search).get('lang') || navigator.language || 'es').slice(0, 2);
+  show(['es', 'en', 'pt'].includes(wanted) ? wanted : 'es');
+  buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.lang)));
+</script></body></html>
